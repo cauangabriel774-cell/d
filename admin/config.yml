@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "Imagens/uploads"
+public_folder: "/Imagens/uploads"
+
+collections:
+  - name: "reviews_2026_1"
+    label: "Reviews 2026 (Jan-Jul)"
+    folder: "2026/1"
+    create: true
+    slug: "{{slug}}"
+    extension: "html"
+    format: "frontmatter"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Capa do Álbum", name: "featured_image", widget: "image" }
+      - { label: "Nota", name: "rating", widget: "number" }
+      - { label: "Conteúdo da Review", name: "body", widget: "markdown" }
+
+  - name: "artistas"
+    label: "Catálogo de Artistas"
+    folder: "artistas"
+    create: true
+    slug: "{{slug}}"
+    extension: "html"
+    fields:
+      - { label: "Nome do Artista", name: "title", widget: "string" }
+      - { label: "Foto", name: "image", widget: "image" }
+      - { label: "Bio", name: "body", widget: "markdown" }

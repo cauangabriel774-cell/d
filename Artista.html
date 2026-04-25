@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../Imagens/favicon.png">
+    
+    <title>Artistas Analisados • Catálogo DiscoAvaliadoBR</title>
+    <meta name="description" content="Explore nossa lista completa de artistas brasileiros. De Luísa Sonza a Caetano Veloso, veja todas as nossas notas e críticas.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Catálogo de Artistas • DiscoAvaliadoBR">
+    <meta property="og:description" content="Encontre a review do seu artista favorito em nossa lista completa de A a Z.">
+    <meta property="og:image" content="https://discoavaliadobr.com.br/Imagens/capas-artistas.jpg">
+    <meta property="og:url" content="https://discoavaliadobr.com.br/artistas.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f8f6f2;
+            color: #111;
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 50px;
+            border-bottom: 1px solid #e5e2d9;
+            background: white;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        nav a {
+            margin-left: 28px;
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        nav a:hover { opacity: 0.7; }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .alphabet {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 60px;
+            font-size: 18px;
+        }
+
+        .alphabet a {
+            padding: 8px 14px;
+            text-decoration: none;
+            color: #111;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .alphabet a:hover {
+            background: #111;
+            color: white;
+        }
+
+        /* Seções por letra */
+        .letter-section {
+            margin-bottom: 80px;
+        }
+
+        .letter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .artist-card {
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s;
+        }
+
+        .artist-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .artist-card img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .artist-card p {
+            margin-top: 12px;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-top: 1px solid #e5e2d9;
+            color: #777;
+            font-size: 13.5px;
+            background: white;
+            margin-top: 100px;
+        }
+
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111;
+            color: #fff;
+            padding: 15px 25px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .cookie-banner button {
+            background: #fff;
+            color: #111;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo" onclick="window.location.href='index.html'">DiscoAvaliadoBR</div>
+    <nav>
+        <a href="index.html">Página Inicial</a>
+        <a href="sobre.html">Sobre</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <h1>Artistas</h1>
+
+    <div class="alphabet" id="alphabet"></div>
+
+    <section id="section-G" class="letter-section">
+        <h2 class="letter-title">G</h2>
+        <div class="artists-grid">
+            <a href="/artistas/G/guriassis-artista.html" class="artist-card">
+                <img src="ArtistaFotos/guribrasilfotoartista.png" alt="Guri Assis Brasil">
+                <p>Guri Assis</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="section-J" class="letter-section">
+        <h2 class="letter-title">J</h2>
+        <div class="artists-grid">
+            <a href="/artistas/J/jao-artista.html" class="artist-card">
+                <img src="ArtistaFotos/JãoFotoArtista.jpg" alt="Jão">
+                <p>Jão</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="section-L" class="letter-section">
+        <h2 class="letter-title">L</h2>
+        <div class="artists-grid">
+            <a href="/artistas/L/luisasonza-artista.html" class="artist-card">
+                <img src="ArtistaFotos/luisa-sonza-bossa-nova.jpg" alt="Luísa Sonza">
+                <p>Luísa Sonza</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="section-M" class="letter-section">
+        <h2 class="letter-title">M</h2>
+        <div class="artists-grid">
+            <a href="/artistas/M/mombojo-artista.html" class="artist-card">
+                <img src="ArtistaFotos/MombojoFotoArtista.jpg" alt="Mombojo">
+                <p>Mombojó</p>
+            </a>
+        </div>
+    </section>
+
+    <section id="section-U" class="letter-section">
+        <h2 class="letter-title">U</h2>
+        <div class="artists-grid">
+            <a href="/artistas/U/urias-artista.html" class="artist-card">
+                <img src="ArtistaFotos/UriasFotoArtista.jpg" alt="Urias">
+                <p>Urias</p>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<div id="cookie-banner" class="cookie-banner">
+    <div>Este site usa cookies para melhorar sua experiência.</div>
+    <button onclick="acceptCookies()">Aceitar</button>
+</div>
+
+<footer>
+    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
+    Todos os direitos reservados.
+</footer>
+
+<script>
+    // Gerador do Alfabeto A-Z
+    const alphabetDiv = document.getElementById('alphabet');
+    for (let i = 65; i <= 90; i++) {
+        const letter = String.fromCharCode(i);
+        const link = document.createElement('a');
+        link.href = `#section-${letter}`;
+        link.textContent = letter;
+        alphabetDiv.appendChild(link);
+    }
+
+    // Lógica do Cookie Banner
+    function acceptCookies() {
+        document.getElementById("cookie-banner").style.display = "none";
+        localStorage.setItem("cookiesAccepted", "true");
+    }
+
+    window.addEventListener("load", function() {
+        if (!localStorage.getItem("cookiesAccepted")) {
+            document.getElementById("cookie-banner").style.display = "flex";
+        }
+    });
+</script>
+
+</body>
+</html>

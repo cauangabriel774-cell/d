@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Imagens/favicon.png">
+    
+    <title>DiscoAvaliadoBR • Críticas e Análises de Música Brasileira</title>
+    <meta name="description" content="O destino principal para quem busca análises profundas, notas e opiniões sobre os maiores lançamentos da música brasileira.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DiscoAvaliadoBR • Críticas de Música Brasileira">
+    <meta property="og:description" content="Análises reais sobre os discos que estão moldando a música no Brasil.">
+    <meta property="og:image" content="https://discoavaliadobr.com.br/Imagens/banner-home.jpg"> 
+    <meta property="og:url" content="https://discoavaliadobr.com.br/">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #f8f6f2;
+        color: #111;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 50px;
+        border-bottom: 1px solid #e5e2d9;
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    nav a {
+        margin-left: 28px;
+        text-decoration: none;
+        color: #222;
+        font-weight: 500;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+
+    nav a:hover {
+        opacity: 0.7;
+    }
+
+    .container {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 50px 20px;
+    }
+
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        margin: 50px 0 25px;
+        border-left: 5px solid #111;
+        padding-left: 15px;
+    }
+
+    .carousel {
+        display: flex;
+        gap: 30px;
+        overflow-x: auto;
+        padding: 20px 5px 40px;
+        scroll-behavior: smooth;
+    }
+
+    .carousel::-webkit-scrollbar {
+        height: 8px;
+    }
+    .carousel::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+
+    .album-card {
+        min-width: 180px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .album-card img {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        transition: 0.3s;
+    }
+
+    .album-card img:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+    }
+
+    .album-title {
+        display: block;
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-top: 15px;
+        color: #111;
+        text-decoration: none;
+        line-height: 1.2;
+    }
+
+    .album-title:hover {
+        text-decoration: underline;
+    }
+
+    .artist-name {
+        display: block;
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+        text-decoration: none;
+    }
+
+    .artist-name:hover {
+        color: #111;
+        text-decoration: underline;
+    }
+
+    .old-list ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .old-list li {
+        padding: 16px 0;
+        border-bottom: 1px solid #e5e2d9;
+    }
+
+    .old-list a {
+        text-decoration: none;
+        color: #111;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .old-list a:hover {
+        opacity: 0.7;
+    }
+
+    footer {
+        text-align: center;
+        padding: 60px 20px;
+        border-top: 1px solid #e5e2d9;
+        color: #777;
+        font-size: 13.5px;
+        background: white;
+    }
+
+    .cookie-banner {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        max-width: 500px;
+        background: #1a1a1a;
+        color: #fff;
+        padding: 18px 30px;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 9999;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .cookie-banner button {
+        background: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        header { padding: 15px 20px; }
+        .logo { font-size: 22px; }
+    }
+
+    .album-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .release-date {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 5px; 
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo" onclick="window.location.href='index.html'">DiscoAvaliadoBR</div>
+    <nav>
+        <a href="Artista.html">Artistas</a>
+        <a href="sobre.html">Sobre</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <h2 class="section-title">Avaliados da Semana</h2>
+
+<div class="carousel">
+
+    <div class="album-card">
+        <a href="2026/1/animalinvisivel-guriassis.html">
+            <img src="Imagens/animalinvisivelguri.jpg" alt="Capa Animal Invisível">
+        </a>
+
+        <div class="release-date">25 de abril de 2026</div>
+
+        <a href="2026/1/animalinvisivel-guriassis.html" class="album-title">
+            Animal Invisível
+        </a>
+
+        <a href="artistas/G/guriassis-artista.html" class="artist-name">
+            Guri Assis Brasil
+        </a>
+    </div>
+
+    <div class="album-card">
+        <a href="2026/1/solar-mombojo.html">
+            <img src="Imagens/MombojoSolar.png" alt="Capa Solar">
+        </a>
+
+        <div class="release-date">24 de abril de 2026</div>
+
+        <a href="2026/1/solar-mombojo.html" class="album-title">
+            Solar
+        </a>
+
+        <a href="artistas/M/mombojo-artista.html" class="artist-name">
+            Mombojó
+        </a>
+    </div>
+
+    <div class="album-card">
+        <a href="2025/2/carranca-urias.html">
+            <img src="Imagens/UriasCarranca.jpg" alt="Capa Carranca">
+        </a>
+
+        <div class="release-date">23 de abril de 2026</div>
+
+        <a href="2025/2/carranca-urias.html" class="album-title">
+            Carranca
+        </a>
+
+        <a href="artistas/U/urias-artista.html" class="artist-name">
+            Urias
+        </a>
+    </div>
+
+    <div class="album-card">
+        <a href="2021/2/pirata-jao.html">
+            <img src="Imagens/JãoPirata.jpg" alt="Capa Pirata">
+        </a>
+
+        <div class="release-date">24 de abril de 2026</div>
+
+        <a href="2021/2/pirata-jao.html" class="album-title">
+            Pirata
+        </a>
+
+        <a href="artistas/J/jao-artista.html" class="artist-name">
+            Jão
+        </a>
+    </div>
+
+    <div class="album-card">
+        <a href="2026/1/brutalparaiso-luisasoza.html">
+            <img src="Imagens/luisasonzacapabrutalparaiso.jpg" alt="Capa Brutal Paraíso">
+        </a>
+
+        <div class="release-date">7 de Abril de 2026</div>
+
+        <a href="2026/1/brutalparaiso-luisasoza.html" class="album-title">
+            Brutal Paraíso
+        </a>
+
+        <a href="artistas/L/luisasonza-artista.html" class="artist-name">
+            Luísa Sonza
+        </a>
+    </div>
+
+    <div class="album-card">
+        <a href="2023/2/escandaioIntimo-luisasonza.html">
+            <img src="Imagens/EscandaloIntimo.jpg" alt="Capa Escândalo Íntimo">
+        </a>
+
+        <div class="release-date">2 de abril de 2026</div>
+
+        <a href="2023/2/escandaioIntimo-luisasonza.html" class="album-title">
+            Escândalo Íntimo
+        </a>
+
+        <a href="artistas/L/luisasonza-artista.html" class="artist-name">
+            Luísa Sonza
+        </a>
+    </div>
+
+</div>
+    <div class="old-list">
+        <h2 class="section-title">Avaliações Anteriores</h2>
+        
+    </div>
+
+</div>
+
+<div id="cookie-banner" class="cookie-banner">
+    <div>Este site usa cookies para melhorar sua experiência.</div>
+    <button onclick="acceptCookies()">Aceitar</button>
+</div>
+
+<footer>
+    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
+    Todos os direitos reservados.
+</footer>
+
+<script>
+function acceptCookies() {
+    document.getElementById("cookie-banner").style.display = "none";
+    localStorage.setItem("cookiesAccepted", "true");
+}
+
+window.onload = function() {
+    if (!localStorage.getItem("cookiesAccepted")) {
+        document.getElementById("cookie-banner").style.display = "flex";
+    }
+};
+</script>
+
+</body>
+</html>
