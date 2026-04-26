@@ -1,1 +1,68 @@
-<p>Total de discos: {{ collections.meusDiscos.length }}</p>
+<main class="container">
+
+    <h2 style="font-family: 'Playfair Display'; margin-bottom: 30px;">
+        Últimas Avaliações
+    </h2>
+
+    <!-- 🔥 TOP 5 (COM CAPA) -->
+    <div class="album-grid">
+        {% for disco in collections.meusDiscos | slice(0, 5) %}
+
+            {% if disco.data and disco.data.album %}
+
+                <a href="{{ disco.url }}" class="album-card">
+
+                    {% if disco.data.imagem %}
+                        <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
+                    {% endif %}
+
+                    <h3>{{ disco.data.album }}</h3>
+
+                    <p>
+                        {{ disco.data.artista or "Artista desconhecido" }}
+                    </p>
+
+                </a>
+
+            {% endif %}
+
+        {% endfor %}
+    </div>
+
+
+    <!-- ⚪ ANTIGAS (LISTA SIMPLES) -->
+    <h2 style="font-family: 'Playfair Display'; margin: 50px 0 20px;">
+        Avaliações Antigas
+    </h2>
+
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+
+        {% for disco in collections.meusDiscos | slice(5) %}
+
+            {% if disco.data and disco.data.album %}
+
+                <a href="{{ disco.url }}" style="
+                    padding: 10px 14px;
+                    background: #fff;
+                    border: 1px solid #eee;
+                    border-radius: 8px;
+                    font-family: Inter, sans-serif;
+                    font-size: 14px;
+                    transition: 0.2s;
+                    display: block;
+                ">
+
+                    <strong>{{ disco.data.album }}</strong>
+                    <span style="color:#777;">
+                        — {{ disco.data.artista or "Artista desconhecido" }}
+                    </span>
+
+                </a>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</main>
