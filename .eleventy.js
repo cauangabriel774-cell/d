@@ -12,13 +12,19 @@ module.exports = function(eleventyConfig) {
   });
 
   // COLEÇÃO CORRETA (ordenada por data)
-  eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-    return collectionApi.getAll()
-      .filter(item => item.data.album && item.data.date)
-      .sort((a, b) => {
-        return new Date(b.data.date) - new Date(a.data.date);
-      });
-  });
+  eleventyConfig.addCollection("buscaDiscos", function(collectionApi) {
+  return collectionApi.getAll()
+    .filter(item => item.data.album)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .map(item => {
+      return {
+        title: item.data.album,
+        artist: item.data.artista,
+        url: item.url,
+        img: item.data.imagem
+      };
+    });
+});
 
   return {
     dir: {
