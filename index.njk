@@ -73,13 +73,13 @@ title: "DiscoAvaliadoBR • Acervo"
     <h2 style="font-family: 'Playfair Display'; margin-bottom: 30px;">Últimas Avaliações</h2>
 
     <div class="album-grid">
-    {% for disco in collections.meusDiscos %}
-        <a href="{{ disco.url }}" class="album-card">
-            <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
-            <h3>{{ disco.data.album }}</h3>
-            <p>{{ disco.data.artista }}</p>
-        </a>
-    {% endfor %}
+    {% for disco in collections.meusDiscos | slice(0, 10) %}
+    <a href="{{ disco.url }}" class="album-card">
+        <img src="{{ disco.data.imagem }}">
+        <h3>{{ disco.data.album }}</h3>
+        <p>{{ disco.data.artista }}</p>
+    </a>
+{% endfor %}
 </div>
 </main>
 
