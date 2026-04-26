@@ -10,15 +10,16 @@ collections:
     label: "Reviews 2026 (Jan-Jul)"
     folder: "2026/1"
     create: true
-    slug: "{{album | slugify}}" # É recomendável usar slugify aqui também para evitar espaços na URL
+    slug: "{{album | slugify}}"
     extension: "md"
     format: "frontmatter"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Data da Postagem", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
       - { label: "Álbum", name: "album", widget: "string" }
       - { label: "Artista", name: "artista", widget: "string" }
       - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
-      - { label: "Data de Lançamento", name: "data_lancamento", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
       - { label: "Gênero", name: "genero", widget: "string" }
       - { label: "Duração", name: "duracao", widget: "string" }
       - { label: "Nota (0-100)", name: "nota", widget: "number" }
@@ -26,19 +27,16 @@ collections:
       - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
       - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
       - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
-       - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
-      - { label: "Data da Postagem", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
-      - { label: "Álbum", name: "album", widget: "string" }
 
   - name: "artistas"
     label: "Artistas"
     folder: "artistas"
-    filter: {field: "artista", value: ".*"} # Ajuda o CMS a identificar arquivos válidos
+    filter: {field: "artista", value: ".*"}
     nested:
       depth: 2
     create: true
-    slug: "{{slug}}" # No modo aninhado, o slug costuma ser herdado do nome do arquivo
-    path: "{{artista | slugify}}/index" # Ou "{{title}}/{{title}}" dependendo da sua organização
+    slug: "{{slug}}"
+    path: "{{artista | slugify}}/index"
     extension: "md"
     format: "frontmatter"
     fields:
