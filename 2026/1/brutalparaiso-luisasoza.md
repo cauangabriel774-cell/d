@@ -6,7 +6,7 @@ frase_impacto: "\"O álbum é, sem sombra de dúvidas, uma verdadeira jornada, c
 data_lancamento: "7 de Abril de 2026"
 genero: "Pop / Rock / Funk"
 duracao: "1h 07min (23 faixas)"
-nota: 7.3
+nota: 73
 imagem: "/Imagens/luisasonzacapabrutalparaiso.jpg"
 tags: [avaliação, nota, review, album, luisa sonza, 2026, lançamento, pop, brutal paraíso]
 introducao: |-
