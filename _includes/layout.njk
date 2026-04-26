@@ -397,7 +397,6 @@ templateEngineOverride: njk, md
     <span class="tag">{{ genero }}</span>
     </div>
     </article>
-
 </main>
 
 <footer>
@@ -408,7 +407,8 @@ templateEngineOverride: njk, md
 <script>
     window.addEventListener('load', function() {
         const shareText = encodeURIComponent(document.title + " " + window.location.href);
-        document.getElementById('share-wa').href = "https://wa.me/?text=" + shareText;
+        const waBtn = document.getElementById('share-wa');
+        if(waBtn) waBtn.href = "https://wa.me/?text=" + shareText;
     });
 </script>
 
@@ -438,9 +438,12 @@ templateEngineOverride: njk, md
     "@type": "Organization",
     "name": "DiscoAvaliadoBR"
   },
-  "datePublished": "{{ page.date.toISOString().split('T')[0] }}"
+  "datePublished": "{{ page.date.toISOString() }}"
 }
-    // Criamos um "banco de dados" simples com o que o Eleventy já tem
+</script>
+
+<script>
+    // Geramos o "banco de dados" via Eleventy
     const searchData = [
         {% for item in collections.all %}
             {% if item.data.artista %}
@@ -456,8 +459,10 @@ templateEngineOverride: njk, md
 
     function searchSite() {
         const input = document.getElementById('global-search');
-        const filter = input.value.toLowerCase();
         const resultsBox = document.getElementById('search-results-box');
+        if (!input || !resultsBox) return;
+
+        const filter = input.value.toLowerCase();
         
         if (filter.length < 2) {
             resultsBox.style.display = 'none';
@@ -467,12 +472,12 @@ templateEngineOverride: njk, md
         const filtered = searchData.filter(item => 
             item.title.toLowerCase().includes(filter) || 
             item.subtitle.toLowerCase().includes(filter)
-        ).slice(0, 10); // Mostra apenas os 10 primeiros
+        ).slice(0, 10);
 
         if (filtered.length > 0) {
             resultsBox.innerHTML = filtered.map(item => `
                 <a href="${item.url}" class="search-item-result">
-                    <img src="${item.img}" alt="">
+                    <img src="${item.img || '/Imagens/default.png'}" alt="">
                     <div>
                         <strong>${item.title}</strong>
                         <span>${item.subtitle}</span>
@@ -485,10 +490,12 @@ templateEngineOverride: njk, md
         }
     }
 
-    // Fecha a busca se clicar fora dela
+    // Fecha a busca se clicar fora
     document.addEventListener('click', function(e) {
-        if (!document.querySelector('.search-container').contains(e.target)) {
-            document.getElementById('search-results-box').style.display = 'none';
+        const container = document.querySelector('.search-container');
+        const resultsBox = document.getElementById('search-results-box');
+        if (container && !container.contains(e.target)) {
+            resultsBox.style.display = 'none';
         }
     });
 </script>
