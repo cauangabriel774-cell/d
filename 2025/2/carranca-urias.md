@@ -6,7 +6,7 @@ frase_impacto: "\"Carranca\", embarcamos numa busca profunda, marcada pela forç
 data_lancamento: 7 de outubro de 2025
 genero: MPB
 duracao: 41min (14 faixas)
-nota: 90
+nota: 9.0
 imagem: /Imagens/UriasCarranca.jpg
 ---
 layout: layout.njk
