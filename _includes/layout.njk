@@ -278,17 +278,15 @@ templateEngineOverride: njk, md
     <article>
         <h1>{{ album }} – <span class="artist-link">{{ artista }}</span></h1>
         
-        <span class="subtitle">"{{ frase_impacto }}"</span>
-        
-        <div class="share-buttons">
-            <a href="#" id="share-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
-        </div>
+       <span class="subtitle">"{{ frase_impacto }}"</span>
 
-        <div class="meta-info">
-    Por Gabriel Silva • {{ page.date | date: "%d de %B de %Y" }}
-    </div>
+<div class="share-buttons">
+    <a href="#" id="share-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
+</div> <div class="meta-info">
+    Por Gabriel Silva • {{ page.date.toLocaleDateString('pt-BR') }}
+</div>
 
        <div class="review-content">
     <h2>Contexto e Expectativa</h2>
