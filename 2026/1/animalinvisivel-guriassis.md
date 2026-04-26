@@ -6,7 +6,7 @@ frase_impacto: "O \"Animal Invisível\" é uma obra em que se utiliza do jazz-so
 data_lancamento: 17 de abril de 2026
 genero: MPB
 duracao: 30min (9 faixas)
-nota: 8.3
+nota: 83
 imagem: /Imagens/animalinvisivelguri.jpg
 introducao: |-
   <p>Guri Assis Brasil, não me era um nome desconhecido. Ao pesquisar sobre, me deparei com <span class="highlight-album">Ressaca</span>, seu álbum de 2016 e me veio à cabeça na hora. Um cantor que não ouvia falar há muito tempo. Porém, recentemente, descobri seu novo álbum intitulado <span class="highlight-album">"Animal Invisível"</span>, fiquei animado, pois estava há tanto tempo sem conhecer mais desse artista que precisei fazer essa crítica.
