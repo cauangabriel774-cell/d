@@ -6,7 +6,7 @@ frase_impacto: "Em \"Solar\", Mombojó nos oferece um disco que vibra intensamen
 data_lancamento: 24 de abril de 2026
 genero: psicodelia
 duracao: 30min (9 faixas)
-nota: 7.8
+nota: 78
 imagem: /Imagens/MombojoSolar.png
 introducao: |-
   <p>O Mombojó, banda pernambucana que surgiu no cenário musical em 2001, sempre se destacou por sua proposta minimalista e por criar álbuns que seguem uma arquitetura própria e regular. O seu novo álbum <span class="highlight-album">Solar</span> chega após o lançamento de <span class="highlight-album">Carne de Caju</span> (2024) e do debut <span class="highlight-album">Nadadenovo</span> (2004). Em mais de 20 anos de carreira, a banda parece ter consolidado uma identidade sonora única. Como eu nunca ouvi nada deles antes, minha expectativa é que <span class="highlight-album">Solar</span> traga algo surpreendente, que me coloque em um clima psicodélico e afirme que eu estou perdendo mais uma banda brasileira com personalidade.
