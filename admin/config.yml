@@ -1,4 +1,19 @@
-fields:
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "Imagens"
+public_folder: "/Imagens"
+
+collections:
+  - name: "reviews_2026_1"
+    label: "Reviews 2026 (Jan-Jul)"
+    folder: "2026/1"
+    create: true
+    slug: "{{album}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
       - { label: "Álbum", name: "album", widget: "string" }
       - { label: "Artista", name: "artista", widget: "string" }
