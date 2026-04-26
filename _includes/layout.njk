@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">    
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="DiscoAvaliadoBR">
-    <meta property="article:published_time" content="{{ date | dateToRfc3339 }}">
+    <meta property="article:published_time" content="2026-04-23T12:00:00-03:00">
     <meta property="article:author" content="Gabriel Silva">
     <meta property="og:locale" content="pt_BR">
 
@@ -173,14 +173,6 @@
             color: #111;
         }
 
-        .highlight-album {
-            color: #111;
-            font-weight: 600;
-            background: #e3e0d8;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
         .share-buttons {
             margin: 30px 0;
             display: flex;
@@ -228,25 +220,6 @@
         }
 
         .tag:hover { background: var(--accent-color); color: #fff; }
-
-        .cookie-banner {
-            position: fixed;
-            bottom: 20px; left: 20px; right: 20px;
-            background: #111; color: #fff;
-            padding: 15px 25px;
-            display: none;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 9999;
-            border-radius: 8px;
-            max-width: 500px;
-        }
-
-        .cookie-banner button {
-            background: #fff; border: none;
-            padding: 8px 20px; border-radius: 5px;
-            cursor: pointer; font-weight: 600;
-        }
 
         footer {
             margin-top: 100px;
@@ -311,7 +284,7 @@
         </div>
 
         <div class="meta-info">
-            Por {{ autor if autor else "Gabriel Silva" }} • {{ date | postDate }}
+            Por {{ autor if autor else "Gabriel Silva" }} • {{ date }}
         </div>
 
         <div class="review-content">
@@ -328,27 +301,13 @@
 
 </main>
 
-<div id="cookie-banner" class="cookie-banner">
-    <div>Este site usa cookies para melhorar sua experiência.</div>
-    <button onclick="acceptCookies()">Aceitar</button>
-</div>
-
 <footer>
     DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
     Todos os direitos reservados.
 </footer>
 
 <script>
-    function acceptCookies() {
-        document.getElementById("cookie-banner").style.display = "none";
-        localStorage.setItem("cookiesAccepted", "true");
-    }
-
     window.addEventListener('load', function() {
-        if (!localStorage.getItem("cookiesAccepted")) {
-            document.getElementById("cookie-banner").style.display = "flex";
-        }
-        
         const shareText = encodeURIComponent(document.title + " " + window.location.href);
         document.getElementById('share-wa').href = "https://wa.me/?text=" + shareText;
     });
@@ -380,7 +339,7 @@
     "@type": "Organization",
     "name": "DiscoAvaliadoBR"
   },
-  "datePublished": "{{ date | dateToRfc3339 }}"
+  "datePublished": "2026-04-23"
 }
 </script>
 
