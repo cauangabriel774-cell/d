@@ -1,70 +1,84 @@
 ---
-layout: layout.njk
+layout: null
 title: "DiscoAvaliadoBR • Críticas e Análises de Música Brasileira"
 ---
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #f8f6f2; color: #111; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 22px 50px; border-bottom: 1px solid #e5e2d9; background: white; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; cursor: pointer; text-decoration: none; color: #111; }
+        .container { max-width: 1180px; margin: 0 auto; padding: 50px 20px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 32px; margin: 50px 0 25px; border-left: 5px solid #111; padding-left: 15px; }
+        .carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px 5px 40px; scroll-behavior: smooth; }
+        .album-card { min-width: 180px; display: flex; flex-direction: column; text-align: center; }
+        .album-card img { width: 180px; height: 180px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); transition: 0.3s; }
+        .album-card img:hover { transform: translateY(-6px); }
+        .album-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-top: 15px; text-decoration: none; color: #111; }
+        .artist-name { font-size: 14px; color: #666; text-decoration: none; }
+        .search-container { position: relative; width: 250px; }
+        #global-search { width: 100%; padding: 10px 15px; border-radius: 25px; border: 1px solid #ccc; outline: none; }
+        #search-results-box { position: absolute; top: 50px; left: 0; right: 0; background: white; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-height: 300px; overflow-y: auto; display: none; z-index: 10000; }
+        .search-item-result { padding: 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; text-align: left; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+    <div class="search-container">
+        <input type="text" id="global-search" placeholder="Buscar artista ou álbum..." onkeyup="searchSite()">
+        <div id="search-results-box"></div>
+    </div>
+    <nav>
+        <a href="/sobre" style="text-decoration: none; color: #333; font-weight: 500;">Sobre</a>
+    </nav>
+</header>
 
 <div class="container">
-
     <h2 class="section-title">Avaliados da Semana</h2>
-
     <div class="carousel">
-        {# O Loop abaixo pega as últimas 6 reviews postadas automaticamente #}
         {% for item in collections.all | reverse %}
-            {% if item.data.artista and item.data.album %}
-            {% if loop.index0 < 6 %}
+            {% if item.data.artista and loop.index0 < 6 %}
             <div class="album-card">
-                <a href="{{ item.url }}">
-                    <img src="{{ item.data.imagem }}" alt="Capa {{ item.data.album }}">
-                </a>
-
-                <div class="release-date">{{ item.date.toLocaleDateString('pt-BR', {day: '2-digit', month: 'long', year: 'numeric'}) }}</div>
-
-                <a href="{{ item.url }}" class="album-title">
-                    {{ item.data.album }}
-                </a>
-
-                {# Aqui o link vai para a página do artista que o Eleventy gera #}
-                {% set artista_slug = item.data.artista | slugify %}
-                <a href="/artistas/{{ artista_slug }}" class="artist-name">
-                    {{ item.data.artista }}
-                </a>
+                <a href="{{ item.url }}"><img src="{{ item.data.imagem }}" alt="{{ item.data.album }}"></a>
+                <a href="{{ item.url }}" class="album-title">{{ item.data.album }}</a>
+                <span class="artist-name">{{ item.data.artista }}</span>
             </div>
-            {% endif %}
             {% endif %}
         {% endfor %}
     </div>
-
-    <div class="old-list">
-        <h2 class="section-title">Avaliações Anteriores</h2>
-        <ul>
-            {# Aqui listamos o resto dos álbuns (do 7º em diante) em formato de lista simples #}
-            {% for item in collections.all | reverse %}
-                {% if item.data.artista and item.data.album %}
-                {% if loop.index0 >= 6 %}
-                <li>
-                    <a href="{{ item.url }}">
-                        <span><strong>{{ item.data.album }}</strong> — {{ item.data.artista }}</span>
-                        <span style="color: #888;">{{ item.date.toLocaleDateString('pt-BR') }}</span>
-                    </a>
-                </li>
-                {% endif %}
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-
 </div>
 
-{# Script do Netlify Identity para o Admin continuar funcionando #}
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script>
-    if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-            if (!user) {
-                window.netlifyIdentity.on("login", () => {
-                    document.location.href = "/admin/";
-                });
-            }
-        });
+    const searchData = [
+        {% for item in collections.all %}
+            {% if item.data.artista %}
+            { title: "{{ item.data.album }}", subtitle: "{{ item.data.artista }}", url: "{{ item.url }}", img: "{{ item.data.imagem }}" },
+            {% endif %}
+        {% endfor %}
+    ];
+
+    function searchSite() {
+        const input = document.getElementById('global-search');
+        const resultsBox = document.getElementById('search-results-box');
+        const filter = input.value.toLowerCase();
+        if (filter.length < 2) { resultsBox.style.display = 'none'; return; }
+        const filtered = searchData.filter(item => item.title.toLowerCase().includes(filter) || item.subtitle.toLowerCase().includes(filter));
+        if (filtered.length > 0) {
+            resultsBox.innerHTML = filtered.map(item => `
+                <a href="${item.url}" class="search-item-result">
+                    <img src="${item.img}" style="width:40px; height:40px; border-radius:4px;">
+                    <div><strong>${item.title}</strong><br><small>${item.subtitle}</small></div>
+                </a>`).join('');
+            resultsBox.style.display = 'block';
+        } else { resultsBox.style.display = 'none'; }
     }
 </script>
+</body>
+</html>
