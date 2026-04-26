@@ -15,7 +15,7 @@ collections:
     format: "frontmatter"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
-      - { label: "Data da Postagem", name: "data_postagem", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Data da Postagem", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
       - { label: "Álbum", name: "album", widget: "string" }
       - { label: "Artista", name: "artista", widget: "string" }
       - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
