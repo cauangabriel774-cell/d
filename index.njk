@@ -70,18 +70,47 @@ title: "DiscoAvaliadoBR • Acervo"
 </header>
 
 <main class="container">
-    <h2 style="font-family: 'Playfair Display'; margin-bottom: 30px;">Últimas Avaliações</h2>
-    
+
+    <h2 style="font-family: 'Playfair Display'; margin-bottom: 30px;">
+        Últimas Avaliações
+    </h2>
+
+    <!-- 🔥 TOP 5 COM CAPA -->
     <div class="album-grid">
-        {% for disco in collections.meusDiscos %}
+        {% for disco in collections.meusDiscos | slice(0, 5) %}
             <a href="{{ disco.url }}" class="album-card">
                 <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
                 <h3>{{ disco.data.album }}</h3>
                 <p>{{ disco.data.artista }}</p>
-                {# Nota escondida com sucesso! #}
             </a>
         {% endfor %}
     </div>
+
+
+    <!-- ⚪ ANTIGAS (LISTA SIMPLES) -->
+    <h2 style="font-family: 'Playfair Display'; margin: 50px 0 20px;">
+        Avaliações Antigas
+    </h2>
+
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+
+        {% for disco in collections.meusDiscos | slice(5) %}
+            <a href="{{ disco.url }}" style="
+                padding: 10px 14px;
+                background: #fff;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                font-family: Inter, sans-serif;
+                font-size: 14px;
+                transition: 0.2s;
+            ">
+                <strong>{{ disco.data.album }}</strong>
+                <span style="color:#777;"> — {{ disco.data.artista }}</span>
+            </a>
+        {% endfor %}
+
+    </div>
+
 </main>
 
 <script>
