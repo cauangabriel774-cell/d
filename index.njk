@@ -97,3 +97,44 @@ title: "DiscoAvaliadoBR • Acervo"
             {% endif %}
         {% endfor %}
     ];
+
+    function doSearch() {
+        const searchQuery = document.getElementById("top-search").value.toLowerCase();
+        const searchResults = document.getElementById("search-results");
+
+        // Se a pesquisa for muito curta, esconde os resultados
+        if (searchQuery.length < 3) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        // Limpar resultados antigos
+        searchResults.innerHTML = '';
+
+        // Filtrando os álbuns que correspondem ao termo de pesquisa
+        const filteredResults = database.filter(item => 
+            item.title.toLowerCase().includes(searchQuery) || 
+            item.artist.toLowerCase().includes(searchQuery)
+        );
+
+        if (filteredResults.length > 0) {
+            searchResults.style.display = 'block';
+            filteredResults.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item');
+                resultItem.innerHTML = `
+                    <a href="${item.url}">
+                        <img src="${item.img}" alt="${item.title}">
+                        <div>
+                            <h4>${item.title}</h4>
+                            <p>${item.artist}</p>
+                        </div>
+                    </a>
+                `;
+                searchResults.appendChild(resultItem);
+            });
+        } else {
+            searchResults.style.display = 'none'; // Nenhum resultado encontrado
+        }
+    }
+</script>
