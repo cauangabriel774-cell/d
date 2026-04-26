@@ -85,15 +85,12 @@ title: "DiscoAvaliadoBR • Acervo"
 
 <script>
     // Banco de dados completo para a busca (mostra TUDO que existir)
-    const database = [
-        {% for item in collections.all %}
-            {% if item.data.album %}
-            {
-                title: "{{ item.data.album }}",
-                artist: "{{ item.data.artista }}",
-                url: "{{ item.url }}",
-                img: "{{ item.data.imagem }}"
-            },
-            {% endif %}
-        {% endfor %}
-    ];
+const database = {{ collections.all
+  | filter(item => item.data.album)
+  | map(item => ({
+      title: item.data.album,
+      artist: item.data.artista,
+      url: item.url,
+      img: item.data.imagem
+  }))
+  | dump | safe }};
