@@ -233,6 +233,26 @@ templateEngineOverride: njk, md
             color: #888;
             font-size: 13px;
         }
+.highlight-album {
+            background: linear-gradient(120deg, #ffeb3b 0%, #ffeb3b 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.3em;
+            background-position: 0 88%;
+            font-weight: 600;
+            padding: 0 2px;
+        }
+
+        .highlight-song {
+            color: #d32f2f; /* Um vermelho elegante para músicas */
+            font-weight: 600;
+            font-style: italic;
+        }
+        
+        /* Ajuste para garantir que o conteúdo da review aceite os estilos */
+        .review-content .highlight-album, 
+        .review-content .highlight-song {
+            display: inline;
+        }
 
         @media (max-width: 768px) {
             .review-header { grid-template-columns: 1fr; text-align: center; gap: 20px; }
@@ -285,7 +305,7 @@ templateEngineOverride: njk, md
     <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
     <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
 </div> <div class="meta-info">
-    Por Gabriel Silva • {{ page.date.toLocaleDateString('pt-BR') }}
+    Por Gabriel Silva • {{ page.date.toLocaleDateString('pt-BR') }} às {{ page.date.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}) }}
 </div>
 
        <div class="review-content">
@@ -301,11 +321,13 @@ templateEngineOverride: njk, md
 </div>
 
         <div class="tags-container">
-            <span class="tag">review</span>
-            <span class="tag">album</span>
-            <span class="tag">{{ artista }}</span>
-            <span class="tag">{{ genero }}</span>
-        </div>
+    <span class="tag">review</span>
+    <span class="tag">crítica</span>
+    <span class="tag">album</span>
+    <span class="tag">{{ page.date.getFullYear() }}</span> <span class="tag">{{ artista }}</span>
+    <span class="tag">{{ album }}</span>
+    <span class="tag">{{ genero }}</span>
+    </div>
     </article>
 
 </main>
@@ -348,7 +370,7 @@ templateEngineOverride: njk, md
     "@type": "Organization",
     "name": "DiscoAvaliadoBR"
   },
-  "datePublished": "2026-04-23"
+  "datePublished": "{{ page.date.toISOString().split('T')[0] }}"
 }
 </script>
 
