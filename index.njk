@@ -10,21 +10,35 @@ title: "DiscoAvaliadoBR • Críticas e Análises de Música Brasileira"
     <title>{{ title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; font-family: 'Inter', sans-serif; background: #f8f6f2; color: #111; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #f8f6f2; color: #111; line-height: 1.6; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 22px 50px; border-bottom: 1px solid #e5e2d9; background: white; position: sticky; top: 0; z-index: 1000; }
         .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; cursor: pointer; text-decoration: none; color: #111; }
         .container { max-width: 1180px; margin: 0 auto; padding: 50px 20px; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 32px; margin: 50px 0 25px; border-left: 5px solid #111; padding-left: 15px; }
+        
+        /* Estilos do Carrossel (Home) */
         .carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px 5px 40px; scroll-behavior: smooth; }
         .album-card { min-width: 180px; display: flex; flex-direction: column; text-align: center; }
         .album-card img { width: 180px; height: 180px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); transition: 0.3s; }
         .album-card img:hover { transform: translateY(-6px); }
         .album-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-top: 15px; text-decoration: none; color: #111; }
         .artist-name { font-size: 14px; color: #666; text-decoration: none; }
+
+        /* Estilo do Conteúdo da Review */
+        .review-content { background: white; padding: 60px; border-radius: 15px; box-shadow: 0 4px 30px rgba(0,0,0,0.05); margin-top: 20px; }
+        .review-content h1, .review-content h2 { font-family: 'Playfair Display', serif; }
+        .review-content img { max-width: 100%; border-radius: 8px; }
+
+        /* Busca */
         .search-container { position: relative; width: 250px; }
         #global-search { width: 100%; padding: 10px 15px; border-radius: 25px; border: 1px solid #ccc; outline: none; }
         #search-results-box { position: absolute; top: 50px; left: 0; right: 0; background: white; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-height: 300px; overflow-y: auto; display: none; z-index: 10000; }
         .search-item-result { padding: 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; text-align: left; }
+        
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .review-content { padding: 30px 20px; }
+        }
     </style>
 </head>
 <body>
@@ -40,20 +54,26 @@ title: "DiscoAvaliadoBR • Críticas e Análises de Música Brasileira"
     </nav>
 </header>
 
-<div class="container">
-    <h2 class="section-title">Avaliados da Semana</h2>
-    <div class="carousel">
-        {% for item in collections.all | reverse %}
-            {% if item.data.artista and loop.index0 < 6 %}
-            <div class="album-card">
-                <a href="{{ item.url }}"><img src="{{ item.data.imagem }}" alt="{{ item.data.album }}"></a>
-                <a href="{{ item.url }}" class="album-title">{{ item.data.album }}</a>
-                <span class="artist-name">{{ item.data.artista }}</span>
-            </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-</div>
+<main class="container">
+    {% if url == "/" %}
+        <h2 class="section-title">Avaliados da Semana</h2>
+        <div class="carousel">
+            {% for item in collections.all | reverse %}
+                {% if item.data.artista and loop.index0 < 10 %}
+                <div class="album-card">
+                    <a href="{{ item.url }}"><img src="{{ item.data.imagem }}" alt="{{ item.data.album }}"></a>
+                    <a href="{{ item.url }}" class="album-title">{{ item.data.album }}</a>
+                    <span class="artist-name">{{ item.data.artista }}</span>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <article class="review-content">
+            {{ content | safe }}
+        </article>
+    {% endif %}
+</main>
 
 <script>
     const searchData = [
@@ -80,5 +100,10 @@ title: "DiscoAvaliadoBR • Críticas e Análises de Música Brasileira"
         } else { resultsBox.style.display = 'none'; }
     }
 </script>
+
+<footer style="text-align: center; padding: 40px; color: #888; font-size: 14px;">
+    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira
+</footer>
+
 </body>
 </html>
