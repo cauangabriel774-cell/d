@@ -10,7 +10,7 @@ collections:
     label: "Reviews 2026 (Jan-Jul)"
     folder: "2026/1"
     create: true
-    slug: "{{album}}"
+    slug: "{{album | slugify}}" # É recomendável usar slugify aqui também para evitar espaços na URL
     extension: "md"
     format: "frontmatter"
     fields:
@@ -26,13 +26,16 @@ collections:
       - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
       - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
       - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
-      - name: "artistas"
+
+  - name: "artistas"
     label: "Artistas"
     folder: "artistas"
+    filter: {field: "artista", value: ".*"} # Ajuda o CMS a identificar arquivos válidos
     nested:
-      depth: 2 # Isso permite que ele leia dentro das pastas A, B, C...
+      depth: 2
     create: true
-    slug: "{{artista | slugify}}"
+    slug: "{{slug}}" # No modo aninhado, o slug costuma ser herdado do nome do arquivo
+    path: "{{artista | slugify}}/index" # Ou "{{title}}/{{title}}" dependendo da sua organização
     extension: "md"
     format: "frontmatter"
     fields:
