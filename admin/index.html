@@ -1,27 +1,28 @@
-backend:
-  name: git-gateway
-  branch: master
-
-media_folder: "Imagens"
-public_folder: "/Imagens"
-
-collections:
-  - name: "reviews_2026_1"
-    label: "Reviews 2026 (Jan-Jul)"
-    folder: "2026/1"
-    create: true
-    slug: "{{slug}}"
-    extension: "html"
-    format: "frontmatter"
-    fields:
-      - { label: "Álbum", name: "album", widget: "string" }
-      - { label: "Artista", name: "artista", widget: "string" }
-      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
-      - { label: "Data de Lançamento", name: "data_lancamento", widget: "string" }
-      - { label: "Gênero", name: "genero", widget: "string" }
-      - { label: "Duração (ex: 45 min)", name: "duracao", widget: "string" }
-      - { label: "Nota (0-100)", name: "nota", widget: "number" }
-      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
-      - { label: "Contexto e Expectativa", name: "introducao", widget: "markdown" }
-      - { label: "Análise Faixa a Faixa", name: "analise", widget: "markdown" }
-      - { label: "Conclusão", name: "conclusao", widget: "markdown" }
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel DiscoAvaliadoBR</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
+    <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+    // O radar para o e-mail:
+    window.netlifyIdentity.on("recovery", (user) => {
+      window.netlifyIdentity.open("recovery");
+    });
+  }
+</script>
+  </body>
+</html>
