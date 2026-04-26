@@ -1,23 +1,18 @@
 module.exports = function(eleventyConfig) {
   
-  // 1. Cópia de arquivos estáticos (Imagens, Admin, etc.)
+  // 1. COPIAR APENAS PASTAS DE MÍDIA E SISTEMA
+  // Removemos o PassthroughCopy das pastas de anos (2021, 2023, etc.)
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("Imagens");
   eleventyConfig.addPassthroughCopy("ArtistaFotos");
   
-  // Importante: Se você guarda as capas dentro das pastas de ano, 
-  // essas linhas garantem que elas apareçam no site final.
-  eleventyConfig.addPassthroughCopy("2021");
-  eleventyConfig.addPassthroughCopy("2023");
-  eleventyConfig.addPassthroughCopy("2025");
-  eleventyConfig.addPassthroughCopy("2026");
-
-  // 2. A Mágica: Criando a coleção que coloca o álbum NOVO na frente
+  // 2. A COLEÇÃO QUE ORGANIZA DE VERDADE
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-    return collectionApi.getAll()
-      .filter(item => item.data.album) // Só pega arquivos que têm o campo "album"
+    // Pegamos todos os arquivos .md dentro das pastas de anos
+    return collectionApi.getFilteredByGlob(["2021/**/*.md", "2023/**/*.md", "2025/**/*.md", "2026/**/*.md"])
+      .filter(item => item.data.album) // Garante que só pegue álbuns
       .sort((a, b) => {
-        // Compara as datas: o mais recente ganha a primeira posição
+        // Usa a data do arquivo (campo 'date' no topo do .md)
         return (b.date || 0) - (a.date || 0);
       });
   });
