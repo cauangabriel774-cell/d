@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: master
 
-media_folder: "Imagens/uploads"
-public_folder: "/Imagens/uploads"
+media_folder: "Imagens"
+public_folder: "/Imagens"
 
 collections:
   - name: "reviews_2026_1"
@@ -14,19 +14,14 @@ collections:
     extension: "html"
     format: "frontmatter"
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Capa do Álbum", name: "featured_image", widget: "image" }
-      - { label: "Nota", name: "rating", widget: "number" }
-      - { label: "Conteúdo da Review", name: "body", widget: "markdown" }
-
-  - name: "artistas"
-    label: "Catálogo de Artistas"
-    folder: "artistas"
-    create: true
-    slug: "{{slug}}"
-    extension: "html"
-    fields:
-      - { label: "Nome do Artista", name: "title", widget: "string" }
-      - { label: "Foto", name: "image", widget: "image" }
-      - { label: "Bio", name: "body", widget: "markdown" }
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração (ex: 45 min)", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "Conclusão", name: "conclusao", widget: "markdown" }
