@@ -4,25 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel DiscoAvaliadoBR</title>
+    
+    <link href="config.yml" type="text/yaml" rel="cms-config-url">
+
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     
     <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+        window.netlifyIdentity.on("recovery", (user) => {
+          window.netlifyIdentity.open("recovery");
         });
       }
-    });
-    // O radar para o e-mail:
-    window.netlifyIdentity.on("recovery", (user) => {
-      window.netlifyIdentity.open("recovery");
-    });
-  }
-</script>
+    </script>
   </body>
 </html>
