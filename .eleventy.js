@@ -1,19 +1,21 @@
 module.exports = function(eleventyConfig) {
   
-  // 1. COPIAR APENAS PASTAS DE MÍDIA E SISTEMA
-  // Removemos o PassthroughCopy das pastas de anos (2021, 2023, etc.)
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("Imagens");
   eleventyConfig.addPassthroughCopy("ArtistaFotos");
   
-  // 2. A COLEÇÃO QUE ORGANIZA DE VERDADE
+  // Forçar o Eleventy a ler as pastas de anos, mas sem tratar como arquivo estático
+  // Isso garante que ele processe o conteúdo dentro delas
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-    // Pegamos todos os arquivos .md dentro das pastas de anos
-    return collectionApi.getFilteredByGlob(["2021/**/*.md", "2023/**/*.md", "2025/**/*.md", "2026/**/*.md"])
-      .filter(item => item.data.album) // Garante que só pegue álbuns
+    return collectionApi.getAll()
+      .filter(item => item.data.album) // Só o que tem campo 'album'
       .sort((a, b) => {
-        // Usa a data do arquivo (campo 'date' no topo do .md)
-        return (b.date || 0) - (a.date || 0);
+        // A MÁGICA: Tentamos pegar a data do Admin (a.data.date) 
+        // Se não existir, pegamos a data do arquivo (a.date)
+        const dataA = a.data.date ? new Date(a.data.date) : a.date;
+        const dataB = b.data.date ? new Date(b.data.date) : b.date;
+        
+        return dataB - dataA; // Novo na frente
       });
   });
 
