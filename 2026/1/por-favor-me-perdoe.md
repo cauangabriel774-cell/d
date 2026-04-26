@@ -8,7 +8,7 @@ genero: Alternativo
 duracao: 30 MIN (9 faixas)
 nota: 68
 imagem: /Imagens/porfavormeperdoecrise.jpg
-introducao: bla
+introducao: O disco <span class="highlight-album">Po favor</span>
 analise: bla
 conclusao: bla
 ---
