@@ -1,0 +1,98 @@
+---
+title: "DiscoAvaliadoBR • Críticas e Análises"
+---
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reutilizando seu CSS da Home */
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #f8f6f2; color: #111; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 22px 50px; border-bottom: 1px solid #e5e2d9; background: white; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; cursor: pointer; text-decoration: none; color: #111; }
+        .container { max-width: 1180px; margin: 0 auto; padding: 50px 20px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 32px; margin: 50px 0 25px; border-left: 5px solid #111; padding-left: 15px; }
+        
+        /* Estilo da Barra de Pesquisa */
+        .search-box { width: 100%; max-width: 600px; padding: 15px 25px; border-radius: 30px; border: 1px solid #e5e2d9; outline: none; font-size: 16px; display: block; margin: 40px auto; }
+
+        /* Estilo do Carrossel */
+        .carousel { display: flex; gap: 30px; overflow-x: auto; padding-bottom: 30px; scroll-behavior: smooth; }
+        .album-card { min-width: 180px; text-align: center; }
+        .album-card img { width: 180px; height: 180px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; }
+        .album-card img:hover { transform: translateY(-5px); }
+        .album-link { display: block; font-family: 'Playfair Display', serif; font-weight: 700; text-decoration: none; color: #111; margin-top: 10px; }
+        
+        /* Lista Anterior */
+        .old-list ul { list-style: none; padding: 0; }
+        .old-review-item { padding: 15px 0; border-bottom: 1px solid #e5e2d9; }
+        .old-review-item a { text-decoration: none; color: #111; display: flex; justify-content: space-between; }
+        footer { text-align: center; padding: 40px; color: #888; font-size: 13px; }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+    <nav>
+        <a href="/artistas" style="margin-left: 20px; text-decoration: none; color: #111;">Artistas</a>
+        <a href="/sobre" style="margin-left: 20px; text-decoration: none; color: #111;">Sobre</a>
+    </nav>
+</header>
+
+<div class="container">
+    <input type="text" id="main-search" placeholder="Pesquisar álbum ou artista..." onkeyup="searchHome()" class="search-box">
+
+    <h2 class="section-title">Avaliados da Semana</h2>
+    <div class="carousel" id="carousel-home">
+        {% for item in collections.all | reverse %}
+            {% if item.data.album and item.data.imagem %}
+                <div class="album-card review-node">
+                    <a href="{{ item.url }}"><img src="{{ item.data.imagem }}" alt="{{ item.data.album }}"></a>
+                    <a href="{{ item.url }}" class="album-link">{{ item.data.album }}</a>
+                    <span style="font-size: 14px; color: #666;">{{ item.data.artista }}</span>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="old-list">
+        <h2 class="section-title">Todas as Avaliações</h2>
+        <ul id="list-home">
+            {% for item in collections.all | reverse %}
+                {% if item.data.album %}
+                <li class="old-review-item review-node">
+                    <a href="{{ item.url }}">
+                        <span><strong>{{ item.data.album }}</strong> — {{ item.data.artista }}</span>
+                        <span style="font-size: 13px; color: #888;">{{ item.data.data_lancamento }}</span>
+                    </a>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<footer>
+    DiscoAvaliadoBR © 2026 • Projeto Independente
+</footer>
+
+<script>
+function searchHome() {
+    const filter = document.getElementById('main-search').value.toLowerCase();
+    const nodes = document.querySelectorAll('.review-node');
+    
+    nodes.forEach(node => {
+        const text = node.innerText.toLowerCase();
+        node.style.display = text.includes(filter) ? "" : "none";
+    });
+}
+</script>
+
+</body>
+</html>
