@@ -9,20 +9,18 @@
 
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
-  <body>
+  <body><body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     
     <script>
       if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
+        // Quando o usuário faz login, recarrega a página para abrir o CMS
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
         });
-        window.netlifyIdentity.on("recovery", (user) => {
-          window.netlifyIdentity.open("recovery");
+        // Se o usuário fizer logout, volta para a home ou limpa a sessão
+        window.netlifyIdentity.on("logout", () => {
+          document.location.href = "/admin/";
         });
       }
     </script>
