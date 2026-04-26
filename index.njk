@@ -1,5 +1,5 @@
 ---
-title: "DiscoAvaliadoBR • Acervo de Críticas"
+title: "DiscoAvaliadoBR • Acervo"
 ---
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,24 +10,24 @@ title: "DiscoAvaliadoBR • Acervo de Críticas"
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        :root { --bg: #f8f6f2; --text: #111; --border: #ddd; }
+        :root { --bg: #f8f6f2; --text: #111; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
         
-        /* HEADER */
+        /* HEADER COM BUSCA */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 15px 5%; background: #fff; border-bottom: 1px solid var(--border); 
+            padding: 12px 5%; background: #fff; border-bottom: 1px solid #ddd; 
             position: sticky; top: 0; z-index: 9999; 
         }
 
-        .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; text-decoration: none; color: var(--text); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; text-decoration: none; color: var(--text); }
         
-        /* BUSCA (DROP-DOWN IGUAL À FOTO) */
-        .search-wrapper { position: relative; width: 400px; margin: 0 20px; }
+        .search-wrapper { position: relative; width: 350px; }
         #top-search {
             width: 100%; padding: 10px 20px; border-radius: 25px; 
             border: 1px solid #ccc; outline: none; font-size: 14px;
         }
+
         #search-results {
             position: absolute; top: 45px; left: 0; right: 0;
             background: white; border-radius: 12px;
@@ -35,70 +35,58 @@ title: "DiscoAvaliadoBR • Acervo de Críticas"
             max-height: 400px; overflow-y: auto; display: none;
         }
 
-        /* LINKS SEM AZUL */
+        /* REMOVENDO O AZUL DOS LINKS */
         a { text-decoration: none; color: inherit; }
 
         .result-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
-        .result-item:hover { background: #f9f9f9; }
         .result-item img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; margin-right: 12px; }
-        .result-info strong { display: block; font-size: 14px; color: var(--text); }
-        .result-info span { font-size: 12px; color: #666; }
 
         /* GRID DE ÁLBUNS */
-        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
-        .section-title { font-family: 'Playfair Display'; font-size: 28px; margin-bottom: 30px; text-align: center; }
-        
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .album-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-            gap: 30px; 
+            gap: 25px; 
         }
-        .album-card { text-align: center; transition: 0.3s; }
-        .album-card:hover { transform: translateY(-5px); }
-        .album-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-        .album-card h3 { font-family: 'Playfair Display'; font-size: 18px; margin: 15px 0 5px; color: var(--text); }
-        .album-card p { margin: 0; font-size: 14px; color: #666; }
 
-        @media (max-width: 768px) {
-            .search-wrapper { width: 100%; margin: 10px 0; }
-            header { flex-direction: column; }
-        }
+        .album-card { text-align: center; transition: 0.3s; margin-bottom: 20px; }
+        .album-card:hover { transform: translateY(-5px); }
+        .album-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .album-card h3 { font-family: 'Playfair Display'; font-size: 17px; margin: 12px 0 4px; color: var(--text); }
+        .album-card p { margin: 0; font-size: 13px; color: #666; }
+
+        nav a { font-weight: 600; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <header>
     <a href="/" class="logo">DiscoAvaliadoBR</a>
-    
     <div class="search-wrapper">
-        <input type="text" id="top-search" placeholder="Buscar no acervo..." onkeyup="doSearch()">
+        <input type="text" id="top-search" placeholder="Pesquisar disco ou artista..." onkeyup="doSearch()">
         <div id="search-results"></div>
     </div>
-
-    <nav><a href="/sobre" style="font-weight: 600;">Sobre</a></nav>
+    <nav><a href="/sobre">Sobre</a></nav>
 </header>
 
 <main class="container">
-    <h2 class="section-title">Últimas Avaliações</h2>
+    <h2 style="font-family: 'Playfair Display'; margin-bottom: 30px;">Últimas Avaliações</h2>
     
     <div class="album-grid">
-        {# O filtro 'reverse' garante que o mais recente apareça primeiro #}
-        {% for post in collections.all | reverse %}
-            {% if post.data.album %}
-            <a href="{{ post.url }}" class="album-card">
-                <img src="{{ post.data.imagem }}" alt="{{ post.data.album }}">
-                <h3>{{ post.data.album }}</h3>
-                <p>{{ post.data.artista }}</p>
-                {# Nota removida daqui conforme pedido #}
+        {% for disco in collections.meusDiscos %}
+            <a href="{{ disco.url }}" class="album-card">
+                <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
+                <h3>{{ disco.data.album }}</h3>
+                <p>{{ disco.data.artista }}</p>
+                {# Nota escondida com sucesso! #}
             </a>
-            {% endif %}
         {% endfor %}
     </div>
 </main>
 
 <script>
-    // Banco de dados para a busca (inclui TUDO, até o que não está no grid principal)
-    const db = [
+    // Banco de dados completo para a busca (mostra TUDO que existir)
+    const database = [
         {% for item in collections.all %}
             {% if item.data.album %}
             {
@@ -118,7 +106,10 @@ title: "DiscoAvaliadoBR • Acervo de Críticas"
 
         if (val.length < 1) { res.style.display = 'none'; return; }
 
-        const filtered = db.filter(a => a.title.toLowerCase().includes(val) || a.artist.toLowerCase().includes(val));
+        const filtered = database.filter(a => 
+            a.title.toLowerCase().includes(val) || 
+            a.artist.toLowerCase().includes(val)
+        );
 
         if (filtered.length > 0) {
             res.innerHTML = filtered.map(a => `
@@ -126,7 +117,7 @@ title: "DiscoAvaliadoBR • Acervo de Críticas"
                     <img src="${a.img}" alt="">
                     <div class="result-info">
                         <strong>${a.title}</strong>
-                        <span>${a.artist}</span>
+                        <span style="font-size:12px; color:#666; display:block;">${a.artist}</span>
                     </div>
                 </a>
             `).join('');
