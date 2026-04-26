@@ -10,8 +10,11 @@ nota: 68
 imagem: /Imagens/porfavormeperdoecrise.jpg
 introducao: |-
   <p>O disco <span class="highlight-album">Po favor</span> qque transforma.\
-  <p>blabka.
-analise: bla
+  <p>blabka.<p>blabla
+analise: >-
+  <p>O disco <span class="highlight-album">Po favor</span> qque transforma.
+
+  <p>blabka.<p>O disco <span class="highlight-album">Po favor</span> qque transforma.
 conclusao: |-
   bla
 
