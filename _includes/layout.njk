@@ -358,9 +358,9 @@ templateEngineOverride: njk, md
             <p><strong>DURAÇÃO:</strong> {{ duracao }}</p>
         </div>
 
-        <div class="score-box">
-           <div class="score-circle">{{ nota / 10 }}</div>
-        </div>
+        <div class="score-circle">
+    {{ nota / 10 if nota else "0.0" }}
+</div>
     </div>
 
     <article>
@@ -432,8 +432,9 @@ templateEngineOverride: njk, md
   },
   "reviewRating": {
     "@type": "Rating",
-    "ratingValue": "{{ nota }}",
-    "bestRating": "10"
+    "ratingValue": "{{ nota / 10 if nota else 0 }}",
+    "bestRating": "10",
+    "worstRating": "0"
   },
   "publisher": {
     "@type": "Organization",
