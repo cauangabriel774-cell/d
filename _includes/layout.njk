@@ -419,7 +419,7 @@ templateEngineOverride: njk, md
 </div> <div class="meta-info">
     Por Gabriel Silva • 
     {% if page.date %}
-        {{ page.date | dateFilter }} 
+        {{ page.date.toLocaleDateString('pt-BR') }}
     {% else %}
         Data indisponível
     {% endif %}
