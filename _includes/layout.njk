@@ -7,348 +7,62 @@ templateEngineOverride: njk, md
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/Imagens/favicon.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
     <title>{{ album }} - {{ artista }} | Review e crítica do Álbum</title>
-    <meta name="description" content="Análise detalhada do álbum {{ album }} de {{ artista }}. Notas, destaques e críticas sobre a nova era da artista.">
-
+    
+    <meta name="description" content="Análise detalhada do álbum {{ album }} de {{ artista }}.">
     <meta property="og:title" content="Review: {{ album }} - {{ artista }} • DiscoAvaliadoBR">
-    <meta property="og:description" content="Análise completa do álbum {{ album }} de {{ artista }}, faixa a faixa, com crítica e contexto emocional.">    
-    <meta property="og:image" content="https://discoavaliadobr.com.br{{ imagem }}">    
-    <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">    
+    <meta property="og:image" content="https://discoavaliadobr.com.br{{ imagem }}">
     <meta property="og:type" content="article">
-    <meta property="og:site_name" content="DiscoAvaliadoBR">
-    <meta property="article:published_time" content="2026-04-23T12:00:00-03:00">
-    <meta property="article:author" content="Gabriel Silva">
-    <meta property="og:locale" content="pt_BR">
-
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Review: {{ album }} - {{ artista }} • DiscoAvaliadoBR">
-    <meta name="twitter:description" content="Análise completa do álbum {{ album }} do {{ artista }}.">
-    <meta name="twitter:image" content="https://discoavaliadobr.com.br{{ imagem }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="canonical" href="https://discoavaliadobr.com.br{{ page.url }}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-   <style>
-        :root {
-            --primary-bg: #f8f6f2;
-            --accent-color: #111;
-            --score-high: #111;
-            --border-color: #e5e2d9;
-            --text-color: #222;
-        }
+    <style>
+        :root { --primary-bg: #f8f6f2; --accent-color: #111; --border-color: #e5e2d9; --text-color: #222; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--primary-bg); color: var(--text-color); line-height: 1.8; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; text-decoration: none; color: #111; }
+        .container { max-width: 850px; margin: 60px auto; padding: 0 25px; }
+        .review-header { display: grid; grid-template-columns: 280px 1fr auto; gap: 40px; align-items: center; margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
+        .album-cover img { width: 100%; border-radius: 12px; box-shadow: 0 15px 45px rgba(0,0,0,0.1); }
+        .score-circle { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 700; color: var(--accent-color); border-bottom: 5px solid var(--accent-color); line-height: 1; }
+        .subtitle { font-size: 22px; color: #666; font-style: italic; display: block; margin-bottom: 30px; }
+        .review-content h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin: 45px 0 20px; border-top: 1px solid var(--border-color); padding-top: 30px; }
+        .tags-container { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px; border-top: 1px dashed var(--border-color); padding-top: 20px; }
+        .tag { background: #eeebe6; padding: 5px 15px; border-radius: 20px; font-size: 13px; text-transform: uppercase; }
+        .share-buttons { margin: 30px 0; display: flex; gap: 12px; }
+        .share-buttons a { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white; text-decoration: none; }
+        footer { margin-top: 100px; padding: 60px 20px; text-align: center; background: white; border-top: 1px solid var(--border-color); color: #888; font-size: 13px; }
+        
+        /* Search Styles */
+        .search-container { position: relative; width: 250px; }
+        #global-search { width: 100%; padding: 10px 15px; border-radius: 25px; border: 1px solid #ccc; outline: none; }
+        #search-results-box { position: absolute; top: 50px; left: 0; right: 0; background: white; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-height: 400px; overflow-y: auto; display: none; z-index: 10000; }
+        .search-item-result { padding: 10px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; }
 
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: var(--primary-bg);
-            color: var(--text-color);
-            line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 22px 50px;
-            border-bottom: 1px solid var(--border-color);
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            font-weight: 700;
-            cursor: pointer;
-            user-select: none;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        nav a {
-            margin-left: 28px;
-            text-decoration: none;
-            color: #222;
-            font-weight: 500;
-            font-size: 15px;
-            transition: 0.2s;
-        }
-
-        nav a:hover { opacity: 0.6; }
-
-        .container {
-            max-width: 850px;
-            margin: 60px auto;
-            padding: 0 25px;
-        }
-
-        .review-header {
-            display: grid;
-            grid-template-columns: 280px 1fr auto;
-            gap: 40px;
-            align-items: center;
-            margin-bottom: 50px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .album-cover img {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
-        }
-
-        .album-data {
-            font-size: 14px;
-            color: #555;
-        }
-
-        .album-data p { margin: 5px 0; }
-        .album-data strong { color: #000; }
-
-        .score-box { text-align: center; }
-
-        .score-circle {
-            font-family: 'Playfair Display', serif;
-            font-size: 72px;
-            font-weight: 700;
-            color: var(--score-high);
-            border-bottom: 5px solid var(--score-high);
-            line-height: 1;
-            padding-bottom: 5px;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            margin: 0 0 15px 0;
-            line-height: 1.1;
-        }
-
-        .artist-link {
-            text-decoration: none;
-            color: inherit;
-            border-bottom: 2px solid transparent;
-            transition: 0.3s;
-        }
-
-        .artist-link:hover { border-bottom-color: #111; }
-
-        .subtitle {
-            font-size: 22px;
-            color: #666;
-            font-style: italic;
-            margin-bottom: 30px;
-            display: block;
-            line-height: 1.4;
-        }
-
-        .meta-info {
-            font-size: 12px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 50px;
-        }
-
-        .review-content p {
-            margin-bottom: 28px;
-            font-size: 18px;
-            text-align: justify;
-            hyphens: auto;
-        }
-
-        .review-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            margin: 45px 0 20px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-            color: #111;
-        }
-
-        .highlight-album {
-            color: #111;
-            font-weight: 600;
-            background: #e3e0d8;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .highlight-song {
-            color: #111;
-            font-weight: 600;
-            background: #eeebe6;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .share-buttons {
-            margin: 30px 0;
-            display: flex;
-            gap: 12px;
-        }
-
-        .share-buttons a {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            transition: 0.2s;
-        }
-
-        .share-buttons a:hover { transform: scale(1.1); }
-        .share-buttons a:nth-child(1) { background: #25D366; } 
-        .share-buttons a:nth-child(2) { background: #1877F2; }
-        .share-buttons a:nth-child(3) { background: #000000; }
-
-        .tags-container {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--border-color);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            background: #eeebe6;
-            color: #555;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: 0.3s;
-            cursor: default;
-        }
-
-        .tag:hover { background: var(--accent-color); color: #fff; }
-
-        .cookie-banner {
-            position: fixed;
-            bottom: 20px; left: 20px; right: 20px;
-            background: #111; color: #fff;
-            padding: 15px 25px;
-            display: none;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 9999;
-            border-radius: 8px;
-            max-width: 500px;
-        }
-
-        .cookie-banner button {
-            background: #fff; border: none;
-            padding: 8px 20px; border-radius: 5px;
-            cursor: pointer; font-weight: 600;
-        }
-
-        footer {
-            margin-top: 100px;
-            padding: 60px 20px;
-            text-align: center;
-            background: white;
-            border-top: 1px solid var(--border-color);
-            color: #888;
-            font-size: 13px;
-        }
-.search-container {
-    position: relative;
-    width: 300px;
-}
-
-#global-search {
-    width: 100%;
-    padding: 8px 15px;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    font-family: 'Inter', sans-serif;
-    outline: none;
-}
-
-#search-results-box {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    right: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    max-height: 400px;
-    overflow-y: auto;
-    z-index: 9999;
-    display: none; /* Escondido por padrão */
-}
-
-.search-item-result {
-    padding: 10px 15px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: #333;
-}
-
-.search-item-result:hover { background: #f9f9f9; }
-
-.search-item-result img {
-    width: 40px; height: 40px; border-radius: 4px; object-fit: cover;
-}
-
-.search-item-result div { font-size: 13px; line-height: 1.2; }
-.search-item-result strong { display: block; font-size: 14px; }
-
-
-
-        @media (max-width: 768px) {
-            .review-header { grid-template-columns: 1fr; text-align: center; gap: 20px; }
-            .album-cover { max-width: 200px; margin: 0 auto; }
-            h1 { font-size: 34px; }
-            .score-circle { font-size: 60px; }
-            header { padding: 15px 25px; }
-        }
+        @media (max-width: 768px) { .review-header { grid-template-columns: 1fr; text-align: center; } .album-cover { max-width: 200px; margin: 0 auto; } }
     </style>
 </head>
-
 <body>
 
-<header style="display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 9999;">
-    <a href="/" class="logo" style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; text-decoration: none; color: #111;">DiscoAvaliadoBR</a>
-    
-    <div class="search-container" style="position: relative; flex-grow: 0; margin: 0 20px;">
-        <input type="text" id="global-search" placeholder="Buscar artista ou álbum..." onkeyup="searchSite()" style="width: 250px; padding: 10px 15px; border-radius: 25px; border: 1px solid #ccc; outline: none; font-size: 14px;">
-        <div id="search-results-box" style="position: absolute; top: 50px; left: 0; right: 0; background: white; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-height: 400px; overflow-y: auto; display: none; z-index: 10000;"></div>
+<header>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+    <div class="search-container">
+        <input type="text" id="global-search" placeholder="Buscar artista ou álbum..." onkeyup="searchSite()">
+        <div id="search-results-box"></div>
     </div>
-
-    <nav style="display: flex; gap: 20px;">
-        <a href="/" style="text-decoration: none; color: #333; font-weight: 500;">Início</a>
-        <a href="/sobre" style="text-decoration: none; color: #333; font-weight: 500;">Sobre</a>
+    <nav>
+        <a href="/" style="text-decoration: none; color: #333; margin-right: 15px;">Início</a>
+        <a href="/sobre" style="text-decoration: none; color: #333;">Sobre</a>
     </nav>
 </header>
 
 <main class="container">
     {% if artista %}
-        {# SE FOR UM ÁLBUM, MOSTRA O HEADER DE REVIEW #}
         <div class="review-header">
             <div class="album-cover">
-                <img src="{{ imagem }}" alt="Análise e Review do álbum {{ album }} de {{ artista }}">
+                <img src="{{ imagem }}" alt="{{ album }} - {{ artista }}">
             </div>
             <div class="album-data">
                 <p><strong>ARTISTA:</strong> {{ artista }}</p>
@@ -358,194 +72,67 @@ templateEngineOverride: njk, md
                 <p><strong>DURAÇÃO:</strong> {{ duracao }}</p>
             </div>
             <div class="score-box">
-               <div class="score-circle">{% if nota %}{{ nota / 10 }}{% else %}0{% endif %}</div>
+                <div class="score-circle">{% if nota %}{{ nota / 10 }}{% else %}0{% endif %}</div>
             </div>
         </div>
 
         <article>
             {% set artista_slug = artista | slugify %}
-            <h1>{{ album }} – <a href="/artistas/{{ artista_slug }}" class="artist-link">{{ artista }}</a></h1>
+            <h1>{{ album }} – <a href="/artistas/{{ artista_slug }}" style="color: inherit; text-decoration: none; border-bottom: 2px solid #eee;">{{ artista }}</a></h1>
             <span class="subtitle">"{{ frase_impacto }}"</span>
-            
-            {# ... botões de share e meta-info aqui ... #}
+
+            <div class="share-buttons">
+                <a href="#" id="share-wa" style="background: #25D366;"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" style="background: #1877F2;" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" style="background: #000;" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            </div>
 
             <div class="review-content">
                 <h2>Contexto e Expectativa</h2>
                 <p>{{ introducao | safe }}</p>
-                <h2>Análise Crítica: Faixa a Faixa</h2>
+                <h2>Análise Crítica</h2>
                 <p>{{ analise | safe }}</p>
-                <h2>Conclusão e Veredito</h2>
+                <h2>Conclusão</h2>
                 <p>{{ conclusao | safe }}</p>
             </div>
-        </article>
 
+            <div class="tags-container">
+                <span class="tag">review</span>
+                <span class="tag">{{ artista }}</span>
+                <span class="tag">{{ genero }}</span>
+            </div>
+        </article>
     {% else %}
-        {# SE NÃO FOR ÁLBUM (EX: HOME OU SOBRE), MOSTRA APENAS O CONTEÚDO #}
         {{ content | safe }}
     {% endif %}
 </main>
 
-        <div class="album-data">
-            <p><strong>ARTISTA:</strong> {{ artista }}</p>
-            <p><strong>ÁLBUM:</strong> {{ album }}</p>
-            <p><strong>LANÇAMENTO:</strong> {{ data_lancamento }}</p>
-            <p><strong>GÊNERO:</strong> {{ genero }}</p>
-            <p><strong>DURAÇÃO:</strong> {{ duracao }}</p>
-        </div>
-
-        <div class="score-box">
-           <div class="score-box">
-    <div class="score-circle">
-        {% if nota %}
-            {{ nota / 10 }}
-        {% else %}
-            0
-        {% endif %}
-    </div>
-</div>
-        </div>
-    </div>
-
-    <article>
-        {% set artista_slug = artista | slugify %}
-<h1>{{ album }} – <a href="/artistas/{{ artista_slug }}" class="artist-link">{{ artista }}</a></h1>
-        
-       <span class="subtitle">"{{ frase_impacto }}"</span>
-
-<div class="share-buttons">
-    <a href="#" id="share-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
-</div> <div class="meta-info">
-    Por Gabriel Silva • 
-    {% if page.date %}
-        {{ page.date.toLocaleDateString('pt-BR') }}
-    {% else %}
-        Data indisponível
-    {% endif %}
-</div>
-
-       <div class="review-content">
-    <h2>Contexto e Expectativa</h2>
-    <p>{{ introducao | safe }}</p>
-
-    <h2>Análise Crítica: Faixa a Faixa</h2>
-    <p>Sem enrolação, vamos ver o que achei.</p>
-    <p>{{ analise | safe }}</p>
-
-    <h2>Conclusão e Veredito</h2>
-    <p>{{ conclusao | safe }}</p>
-</div>
-
-        <div class="tags-container">
-    <span class="tag">review</span>
-    <span class="tag">crítica</span>
-    <span class="tag">album</span>
-    <span class="tag">{{ page.date.getFullYear() }}</span> <span class="tag">{{ artista }}</span>
-    <span class="tag">{{ album }}</span>
-    <span class="tag">{{ genero }}</span>
-    </div>
-    </article>
-</main>
-
 <footer>
-    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
-    Todos os direitos reservados.
+    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira
 </footer>
 
 <script>
-    window.addEventListener('load', function() {
-        const shareText = encodeURIComponent(document.title + " " + window.location.href);
-        const waBtn = document.getElementById('share-wa');
-        if(waBtn) waBtn.href = "https://wa.me/?text=" + shareText;
-    });
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Review",
-  "image": "https://discoavaliadobr.com.br{{ imagem }}",
-  "itemReviewed": {
-    "@type": "MusicAlbum",
-    "name": "{{ album }}",
-    "byArtist": {
-      "@type": "Person",
-      "name": "{{ artista }}"
-    }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Gabriel Silva"
-  },
-  "reviewRating": {
-    "@type": "Rating",
-    "ratingValue": "{{ nota }}",
-    "bestRating": "10"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "DiscoAvaliadoBR"
-  },
-  "datePublished": "{{ page.date.toISOString() }}"
-}
-</script>
-
-<script>
-    // Geramos o "banco de dados" via Eleventy
+    // Sistema de Busca
     const searchData = [
-        {% for item in collections.all %}
-            {% if item.data.artista %}
-            {
-                title: "{{ item.data.album or item.data.artista }}",
-                subtitle: "{{ item.data.artista if item.data.album else 'Página do Artista' }}",
-                url: "{{ item.url }}",
-                img: "{{ item.data.imagem or item.data.foto_artista }}"
-            },
-            {% endif %}
-        {% endfor %}
+        {% for item in collections.all %}{% if item.data.artista %}
+        { title: "{{ item.data.album or item.data.artista }}", subtitle: "{{ item.data.artista }}", url: "{{ item.url }}", img: "{{ item.data.imagem }}" },
+        {% endif %}{% endfor %}
     ];
 
     function searchSite() {
         const input = document.getElementById('global-search');
-        const resultsBox = document.getElementById('search-results-box');
-        if (!input || !resultsBox) return;
-
-        const filter = input.value.toLowerCase();
-        
-        if (filter.length < 2) {
-            resultsBox.style.display = 'none';
-            return;
-        }
-
-        const filtered = searchData.filter(item => 
-            item.title.toLowerCase().includes(filter) || 
-            item.subtitle.toLowerCase().includes(filter)
-        ).slice(0, 10);
-
-        if (filtered.length > 0) {
-            resultsBox.innerHTML = filtered.map(item => `
-                <a href="${item.url}" class="search-item-result">
-                    <img src="${item.img || '/Imagens/default.png'}" alt="">
-                    <div>
-                        <strong>${item.title}</strong>
-                        <span>${item.subtitle}</span>
-                    </div>
-                </a>
-            `).join('');
-            resultsBox.style.display = 'block';
-        } else {
-            resultsBox.style.display = 'none';
-        }
+        const box = document.getElementById('search-results-box');
+        const val = input.value.toLowerCase();
+        if (val.length < 2) { box.style.display = 'none'; return; }
+        const filtered = searchData.filter(i => i.title.toLowerCase().includes(val) || i.subtitle.toLowerCase().includes(val)).slice(0, 5);
+        box.innerHTML = filtered.map(i => `<a href="${i.url}" class="search-item-result"><img src="${i.img}" width="40"><div><strong>${i.title}</strong><br><small>${i.subtitle}</small></div></a>`).join('');
+        box.style.display = filtered.length ? 'block' : 'none';
     }
 
-    // Fecha a busca se clicar fora
-    document.addEventListener('click', function(e) {
-        const container = document.querySelector('.search-container');
-        const resultsBox = document.getElementById('search-results-box');
-        if (container && !container.contains(e.target)) {
-            resultsBox.style.display = 'none';
-        }
+    // Botão WhatsApp
+    window.addEventListener('load', () => {
+        const btn = document.getElementById('share-wa');
+        if(btn) btn.href = "https://wa.me/?text=" + encodeURIComponent(document.title + " " + window.location.href);
     });
 </script>
 
