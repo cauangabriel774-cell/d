@@ -268,7 +268,7 @@
         </div>
 
         <div class="score-box">
-            <div class="score-circle">{{ nota / 10 }}</div>
+            <div class="score-circle">{{ nota / 10 | float }}</div>
         </div>
     </div>
 
@@ -287,7 +287,7 @@
     Por Gabriel Silva • {{ page.date | date: "%d de %B de %Y" }}
     </div>
 
-        <div class="review-content">
+       <div class="review-content">
     <h2>Contexto e Expectativa</h2>
     <p>{{ introducao | safe }}</p>
 
@@ -297,7 +297,7 @@
 
     <h2>Conclusão e Veredito</h2>
     <p>{{ conclusao | safe }}</p>
-    </div>
+</div>
 
         <div class="tags-container">
             <span class="tag">review</span>
