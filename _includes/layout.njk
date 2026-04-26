@@ -18,7 +18,7 @@ templateEngineOverride: njk, md
     <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">    
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="DiscoAvaliadoBR">
-    <meta property="article:published_time" content="2026-04-23T12:00:00-03:00">
+    <meta property="article:published_time" content="{{ page.date.toISOString() }}">
     <meta property="article:author" content="Gabriel Silva">
     <meta property="og:locale" content="pt_BR">
 
@@ -374,7 +374,7 @@ templateEngineOverride: njk, md
     <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
     <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
 </div> <div class="meta-info">
-    Por Gabriel Silva • {{ page.date.toLocaleDateString('pt-BR') }} às {{ page.date.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}) }}
+    Por Gabriel Silva • {{ date | htmlDateString if date else page.date | htmlDateString }}
 </div>
 
        <div class="review-content">
