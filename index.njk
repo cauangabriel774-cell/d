@@ -1,82 +1,133 @@
 ---
-title: "DiscoAvaliadoBR • Críticas e Análises"
+title: "DiscoAvaliadoBR • Críticas de Música Brasileira"
 ---
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/Imagens/favicon.png">
+    
+    <title>{{ title }}</title>
+    <meta name="description" content="Análises reais sobre os discos que estão moldando a música no Brasil.">
 
-<div class="search-container-home" style="margin: 20px auto; max-width: 600px; padding: 0 20px;">
-    <input type="text" id="home-search" placeholder="Pesquisar disco ou artista..." 
-           onkeyup="searchHome()"
-           style="width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid #e5e2d9; outline: none; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
-</div>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #f8f6f2; color: #111; }
+        
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 22px 50px; border-bottom: 1px solid #e5e2d9; background: white; 
+            position: sticky; top: 0; z-index: 1000; 
+        }
+
+        .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; cursor: pointer; text-decoration: none; color: #111; }
+        
+        nav a { margin-left: 28px; text-decoration: none; color: #222; font-weight: 500; font-size: 15px; }
+
+        .container { max-width: 1180px; margin: 0 auto; padding: 50px 20px; }
+
+        /* BARRA DE PESQUISA ESTILIZADA */
+        .search-section { text-align: center; margin-bottom: 50px; }
+        #home-search {
+            width: 100%; max-width: 600px; padding: 15px 25px; 
+            border-radius: 30px; border: 1px solid #e5e2d9; 
+            outline: none; font-size: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-title { font-family: 'Playfair Display', serif; font-size: 32px; margin: 50px 0 25px; border-left: 5px solid #111; padding-left: 15px; }
+
+        /* CARROSSEL DINÂMICO */
+        .carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px 5px 40px; scroll-behavior: smooth; }
+        .album-card { min-width: 180px; display: flex; flex-direction: column; align-items: center; }
+        .album-card img { width: 180px; height: 180px; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); transition: 0.3s; }
+        .album-card img:hover { transform: translateY(-6px); }
+
+        .album-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; margin-top: 15px; color: #111; text-decoration: none; text-align: center; }
+        .artist-name { font-size: 14px; color: #666; margin-top: 5px; text-decoration: none; }
+
+        /* LISTA DE ANTERIORES */
+        .old-list ul { list-style: none; padding: 0; }
+        .old-list li { padding: 16px 0; border-bottom: 1px solid #e5e2d9; }
+        .old-list a { text-decoration: none; color: #111; display: flex; justify-content: space-between; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid #e5e2d9; color: #777; font-size: 13.5px; background: white; }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            .logo { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+    <nav>
+        <a href="/artistas">Artistas</a>
+        <a href="/sobre">Sobre</a>
+    </nav>
+</header>
 
 <div class="container">
+    
+    <div class="search-section">
+        <input type="text" id="home-search" placeholder="O que vamos ouvir hoje? Pesquise álbuns ou artistas..." onkeyup="searchSite()">
+    </div>
 
     <h2 class="section-title">Avaliados da Semana</h2>
-
     <div class="carousel" id="carousel-home">
-        {# Pegamos todos os arquivos das pastas 2021, 2023, 2025, 2026 #}
-        {% set reviews = collections.all | reverse %}
-        {% set count = 0 %}
-        
-        {% for item in reviews %}
-            {# Mostra apenas os 6 primeiros com imagem no carrossel #}
-            {% if item.data.album and count < 6 %}
-                <div class="album-card">
-                    <div class="release-date">{{ item.data.data_lancamento }}</div>
-                    <a href="{{ item.url }}">
-                        <img src="{{ item.data.imagem }}" alt="Capa {{ item.data.album }}">
-                    </a>
-                    <a href="{{ item.url }}" class="album-title">{{ item.data.album }}</a>
-                    <a href="/artistas/{{ item.data.artista | slugify }}" class="artist-name">{{ item.data.artista }}</a>
-                </div>
-                {% set count = count + 1 %}
+        {% for item in collections.all | reverse %}
+            {% if item.data.album %}
+            <div class="album-card search-item">
+                <a href="{{ item.url }}">
+                    <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
+                </a>
+                <a href="{{ item.url }}" class="album-title">{{ item.data.album }}</a>
+                <a href="/artistas/{{ item.data.artista | slugify }}" class="artist-name">{{ item.data.artista }}</a>
+            </div>
             {% endif %}
         {% endfor %}
     </div>
 
     <div class="old-list">
-        <h2 class="section-title">Avaliações Anteriores</h2>
-        <ul id="list-home">
-            {% set totalSkipped = 0 %}
-            {% for item in reviews %}
+        <h2 class="section-title">Todas as Avaliações</h2>
+        <ul id="full-list">
+            {% for item in collections.all | reverse %}
                 {% if item.data.album %}
-                    {# Pula os 6 que já estão no carrossel e lista o resto #}
-                    {% if totalSkipped < 6 %}
-                        {% set totalSkipped = totalSkipped + 1 %}
-                    {% else %}
-                        <li class="old-review-item">
-                            <a href="{{ item.url }}">
-                                <span><strong>{{ item.data.album }}</strong> — {{ item.data.artista }}</span>
-                                <span style="font-size: 13px; color: #888;">{{ item.data.data_lancamento }}</span>
-                            </a>
-                        </li>
-                    {% endif %}
+                <li class="search-item">
+                    <a href="{{ item.url }}">
+                        <span><strong>{{ item.data.album }}</strong> — {{ item.data.artista }}</span>
+                        <span style="color: #888; font-size: 13px;">{{ item.data.data_lancamento }}</span>
+                    </a>
+                </li>
                 {% endif %}
             {% endfor %}
         </ul>
     </div>
-
 </div>
 
-<script>
-    /**
-     * FUNÇÃO DE BUSCA VIVA
-     * Esconde cards e itens da lista que não batem com o texto
-     */
-    function searchHome() {
-        const query = document.getElementById('home-search').value.toLowerCase();
-        
-        // Filtrar Carrossel
-        const cards = document.querySelectorAll('.album-card');
-        cards.forEach(card => {
-            const text = card.innerText.toLowerCase();
-            card.style.display = text.includes(query) ? "flex" : "none";
-        });
+<footer>
+    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira
+</footer>
 
-        // Filtrar Lista
-        const listItems = document.querySelectorAll('.old-review-item');
-        listItems.forEach(item => {
+<script>
+    function searchSite() {
+        const input = document.getElementById('home-search');
+        const filter = input.value.toLowerCase();
+        const items = document.querySelectorAll('.search-item');
+
+        items.forEach(item => {
             const text = item.innerText.toLowerCase();
-            item.style.display = text.includes(query) ? "block" : "none";
+            if (text.includes(filter)) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
         });
     }
 </script>
+
+</body>
+</html>
