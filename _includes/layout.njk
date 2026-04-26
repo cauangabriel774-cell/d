@@ -344,11 +344,46 @@ templateEngineOverride: njk, md
 </header>
 
 <main class="container">
-
-    <div class="review-header">
-        <div class="album-cover">
-            <img src="{{ imagem }}" alt="Análise e Review do álbum {{ album }} de {{ artista }}">
+    {% if artista %}
+        {# SE FOR UM ÁLBUM, MOSTRA O HEADER DE REVIEW #}
+        <div class="review-header">
+            <div class="album-cover">
+                <img src="{{ imagem }}" alt="Análise e Review do álbum {{ album }} de {{ artista }}">
+            </div>
+            <div class="album-data">
+                <p><strong>ARTISTA:</strong> {{ artista }}</p>
+                <p><strong>ÁLBUM:</strong> {{ album }}</p>
+                <p><strong>LANÇAMENTO:</strong> {{ data_lancamento }}</p>
+                <p><strong>GÊNERO:</strong> {{ genero }}</p>
+                <p><strong>DURAÇÃO:</strong> {{ duracao }}</p>
+            </div>
+            <div class="score-box">
+               <div class="score-circle">{% if nota %}{{ nota / 10 }}{% else %}0{% endif %}</div>
+            </div>
         </div>
+
+        <article>
+            {% set artista_slug = artista | slugify %}
+            <h1>{{ album }} – <a href="/artistas/{{ artista_slug }}" class="artist-link">{{ artista }}</a></h1>
+            <span class="subtitle">"{{ frase_impacto }}"</span>
+            
+            {# ... botões de share e meta-info aqui ... #}
+
+            <div class="review-content">
+                <h2>Contexto e Expectativa</h2>
+                <p>{{ introducao | safe }}</p>
+                <h2>Análise Crítica: Faixa a Faixa</h2>
+                <p>{{ analise | safe }}</p>
+                <h2>Conclusão e Veredito</h2>
+                <p>{{ conclusao | safe }}</p>
+            </div>
+        </article>
+
+    {% else %}
+        {# SE NÃO FOR ÁLBUM (EX: HOME OU SOBRE), MOSTRA APENAS O CONTEÚDO #}
+        {{ content | safe }}
+    {% endif %}
+</main>
 
         <div class="album-data">
             <p><strong>ARTISTA:</strong> {{ artista }}</p>
@@ -359,7 +394,15 @@ templateEngineOverride: njk, md
         </div>
 
         <div class="score-box">
-           <div class="score-circle">{{ nota / 10 }}</div>
+           <div class="score-box">
+    <div class="score-circle">
+        {% if nota %}
+            {{ nota / 10 }}
+        {% else %}
+            0
+        {% endif %}
+    </div>
+</div>
         </div>
     </div>
 
@@ -374,7 +417,12 @@ templateEngineOverride: njk, md
     <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
     <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
 </div> <div class="meta-info">
-    Por Gabriel Silva • {{ page.date.toLocaleDateString('pt-BR') }} às {{ page.date.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}) }}
+    Por Gabriel Silva • 
+    {% if page.date %}
+        {{ page.date | dateFilter }} 
+    {% else %}
+        Data indisponível
+    {% endif %}
 </div>
 
        <div class="review-content">
