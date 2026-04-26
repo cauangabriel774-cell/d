@@ -1,0 +1,70 @@
+---
+layout: layout.njk
+title: "DiscoAvaliadoBR • Críticas e Análises de Música Brasileira"
+---
+
+<div class="container">
+
+    <h2 class="section-title">Avaliados da Semana</h2>
+
+    <div class="carousel">
+        {# O Loop abaixo pega as últimas 6 reviews postadas automaticamente #}
+        {% for item in collections.all | reverse %}
+            {% if item.data.artista and item.data.album %}
+            {% if loop.index0 < 6 %}
+            <div class="album-card">
+                <a href="{{ item.url }}">
+                    <img src="{{ item.data.imagem }}" alt="Capa {{ item.data.album }}">
+                </a>
+
+                <div class="release-date">{{ item.date.toLocaleDateString('pt-BR', {day: '2-digit', month: 'long', year: 'numeric'}) }}</div>
+
+                <a href="{{ item.url }}" class="album-title">
+                    {{ item.data.album }}
+                </a>
+
+                {# Aqui o link vai para a página do artista que o Eleventy gera #}
+                {% set artista_slug = item.data.artista | slugify %}
+                <a href="/artistas/{{ artista_slug }}" class="artist-name">
+                    {{ item.data.artista }}
+                </a>
+            </div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="old-list">
+        <h2 class="section-title">Avaliações Anteriores</h2>
+        <ul>
+            {# Aqui listamos o resto dos álbuns (do 7º em diante) em formato de lista simples #}
+            {% for item in collections.all | reverse %}
+                {% if item.data.artista and item.data.album %}
+                {% if loop.index0 >= 6 %}
+                <li>
+                    <a href="{{ item.url }}">
+                        <span><strong>{{ item.data.album }}</strong> — {{ item.data.artista }}</span>
+                        <span style="color: #888;">{{ item.date.toLocaleDateString('pt-BR') }}</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+{# Script do Netlify Identity para o Admin continuar funcionando #}
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+    if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+            if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                });
+            }
+        });
+    }
+</script>
