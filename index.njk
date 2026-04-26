@@ -1,70 +1,83 @@
 ---
-layout: layout.njk
-title: "DiscoAvaliadoBR • Críticas e Análises de Música Brasileira"
+layout: null
 ---
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiscoAvaliadoBR • Críticas de Música Brasileira</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS BÁSICO PARA A HOME NÃO FICAR FEIA */
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #f8f6f2; color: #111; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: white; border-bottom: 1px solid #e5e2d9; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; text-decoration: none; color: #111; }
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 30px; border-left: 5px solid #111; padding-left: 15px; }
+        .carousel { display: flex; gap: 25px; overflow-x: auto; padding-bottom: 30px; }
+        .album-card { min-width: 200px; text-align: center; }
+        .album-card img { width: 200px; height: 200px; object-fit: cover; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .album-title { display: block; font-weight: 700; margin-top: 10px; text-decoration: none; color: #111; }
+        .artist-name { font-size: 14px; color: #666; }
+        .search-container { position: relative; }
+        #global-search { padding: 8px 15px; border-radius: 20px; border: 1px solid #ddd; width: 250px; }
+        #search-results-box { position: absolute; top: 45px; background: white; width: 100%; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; z-index: 1000; }
+        .search-item-result { padding: 10px; display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
+        footer { text-align: center; padding: 50px; color: #888; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+    <div class="search-container">
+        <input type="text" id="global-search" placeholder="Buscar..." onkeyup="searchSite()">
+        <div id="search-results-box"></div>
+    </div>
+    <nav>
+        <a href="/sobre" style="text-decoration:none; color:#111;">Sobre</a>
+    </nav>
+</header>
 
 <div class="container">
-
     <h2 class="section-title">Avaliados da Semana</h2>
-
     <div class="carousel">
-        {# O Loop abaixo pega as últimas 6 reviews postadas automaticamente #}
         {% for item in collections.all | reverse %}
-            {% if item.data.artista and item.data.album %}
-            {% if loop.index0 < 6 %}
+            {% if item.data.artista and loop.index0 < 6 %}
             <div class="album-card">
-                <a href="{{ item.url }}">
-                    <img src="{{ item.data.imagem }}" alt="Capa {{ item.data.album }}">
-                </a>
-
-                <div class="release-date">{{ item.date.toLocaleDateString('pt-BR', {day: '2-digit', month: 'long', year: 'numeric'}) }}</div>
-
-                <a href="{{ item.url }}" class="album-title">
-                    {{ item.data.album }}
-                </a>
-
-                {# Aqui o link vai para a página do artista que o Eleventy gera #}
-                {% set artista_slug = item.data.artista | slugify %}
-                <a href="/artistas/{{ artista_slug }}" class="artist-name">
-                    {{ item.data.artista }}
-                </a>
+                <a href="{{ item.url }}"><img src="{{ item.data.imagem }}" alt="{{ item.data.album }}"></a>
+                <a href="{{ item.url }}" class="album-title">{{ item.data.album }}</a>
+                <span class="artist-name">{{ item.data.artista }}</span>
             </div>
-            {% endif %}
             {% endif %}
         {% endfor %}
     </div>
-
-    <div class="old-list">
-        <h2 class="section-title">Avaliações Anteriores</h2>
-        <ul>
-            {# Aqui listamos o resto dos álbuns (do 7º em diante) em formato de lista simples #}
-            {% for item in collections.all | reverse %}
-                {% if item.data.artista and item.data.album %}
-                {% if loop.index0 >= 6 %}
-                <li>
-                    <a href="{{ item.url }}">
-                        <span><strong>{{ item.data.album }}</strong> — {{ item.data.artista }}</span>
-                        <span style="color: #888;">{{ item.date.toLocaleDateString('pt-BR') }}</span>
-                    </a>
-                </li>
-                {% endif %}
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-
 </div>
 
-{# Script do Netlify Identity para o Admin continuar funcionando #}
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<footer>DiscoAvaliadoBR © 2026</footer>
+
 <script>
-    if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-            if (!user) {
-                window.netlifyIdentity.on("login", () => {
-                    document.location.href = "/admin/";
-                });
-            }
-        });
+    // SCRIPT DE BUSCA (A Mágica)
+    const searchData = [
+        {% for item in collections.all %}
+            {% if item.data.artista %}
+            { title: "{{ item.data.album }}", subtitle: "{{ item.data.artista }}", url: "{{ item.url }}", img: "{{ item.data.imagem }}" },
+            {% endif %}
+        {% endfor %}
+    ];
+
+    function searchSite() {
+        const input = document.getElementById('global-search');
+        const resultsBox = document.getElementById('search-results-box');
+        const filter = input.value.toLowerCase();
+        if (filter.length < 2) { resultsBox.style.display = 'none'; return; }
+        const filtered = searchData.filter(item => item.title.toLowerCase().includes(filter) || item.subtitle.toLowerCase().includes(filter));
+        if (filtered.length > 0) {
+            resultsBox.innerHTML = filtered.map(item => `<a href="${item.url}" class="search-item-result"><strong>${item.title}</strong><span>${item.subtitle}</span></a>`).join('');
+            resultsBox.style.display = 'block';
+        } else { resultsBox.style.display = 'none'; }
     }
 </script>
+</body>
+</html>
