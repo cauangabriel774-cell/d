@@ -1,5 +1,32 @@
 ---
 layout: null
 ---
-<h1>Teste de Emergência</h1>
-<p>Se você está lendo isso, o site atualizou.</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>DiscoAvaliadoBR</title>
+    <style>
+        body { font-family: sans-serif; background: #f8f6f2; text-align: center; padding: 50px; }
+        .logo { font-size: 30px; font-weight: bold; text-decoration: none; color: #111; }
+    </style>
+</head>
+<body>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+    <h1>O site está voltando...</h1>
+    <p>Estamos atualizando o sistema de reviews para ficar automático.</p>
+    
+    <div style="margin-top: 50px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        {% for item in collections.all %}
+            {% if item.data.album %}
+                <div style="background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <img src="{{ item.data.imagem }}" width="150"><br>
+                    <strong>{{ item.data.album }}</strong><br>
+                    <span>{{ item.data.artista }}</span><br>
+                    <a href="{{ item.url }}">Ler Review</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+</html>
