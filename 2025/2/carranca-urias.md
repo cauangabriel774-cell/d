@@ -1,24 +1,14 @@
 ---
 layout: layout.njk
-album: Carranca
-artista: Urias
-frase_impacto: "\"Carranca\", embarcamos numa busca profunda, marcada pela força e superação. Cada música surge como voz ativa, transformando e dando novo sentido à história, unindo o ontem e o hoje numa única essência.
-data_lancamento: 7 de outubro de 2025
-genero: MPB
-duracao: 41min (14 faixas)
-nota: 90
-imagem: /Imagens/UriasCarranca.jpg
-
-layout: layout.njk
-album: Carranca
-artista: Urias
+album: "Carranca"
+artista: "Urias"
 frase_impacto: "\"Carranca\", embarcamos numa busca profunda, marcada pela força e superação. Cada música surge como voz ativa, transformando e dando novo sentido à história, unindo o ontem e o hoje numa única essência."
-data_lancamento: 7 de outubro de 2025
-genero: MPB
-duracao: 41min (14 faixas)
-nota: 9.0
-imagem: /Imagens/UriasCarranca.jpg
-introducao: |-
+data_lancamento: "7 de outubro de 2025"
+genero: "MPB"
+duracao: "41min (14 faixas)"
+nota: 90
+imagem: "/Imagens/UriasCarranca.jpg"
+introducao: |
   <p>Logo no começo de sua jornada musical, Urias já mostrava ser uma artista que não se prendia a um único estilo. Em <span class="highlight-album">Fúria</span> em 2022, seu primeiro álbum, ela trouxe um R&B influenciado pelo trap e pop, criando algo que soava familiar, mas com muita personalidade. O álbum atraiu olhares não só pela sua beleza visual, mas também porque a cantora participou ativamente da sua criação, mostrando uma personalidade forte, cheia de símbolos e, às vezes, até desafiadora. Segundo a própria artista, tudo ali fala sobre essa "fúria" — uma força que une expressão pessoal, posicionamento e história.
   <p>Um ano depois, em 2023, ela expandiu ainda mais sua criatividade com <span class="highlight-album">HER MIND</span>, um trabalho ambicioso que se jogou no electropop, hyperpop e house, explorando diferentes línguas e formas de som. O álbum funciona quase como um pedaço da sua mente: experimental, sempre mudando e surpreendente. Aqui, Urias não só acompanha o que está bombando no pop, mas transforma tudo ao seu jeito, criando algo com uma identidade visual e conceitual muito forte, firmando seu lugar como uma das artistas mais criativas do Brasil nos últimos tempos.
   <p>Em 2025, a cantora volta com <span class="highlight-album">Carranca</span>, seu terceiro álbum, lançado em 7 de outubro. Desta vez, Urias parece que voltou a algumas coisas que marcaram o início da sua carreira, pegando o R&B como base de novo, agora junto com influências de trap e um MPB mais elegante. Ao mesmo tempo, o projeto se aprofunda em temas como a história dos seus antepassados, liberdade e quem ela é, conversando diretamente com coisas da cultura afro-brasileira e mostrando que ela está mais madura como artista.
