@@ -311,7 +311,8 @@ templateEngineOverride: njk, md
     </div>
 
     <article>
-        <h1>{{ album }} – <span class="artist-link">{{ artista }}</span></h1>
+        {% set artista_slug = artista | slugify %}
+<h1>{{ album }} – <a href="/artistas/{{ artista_slug }}" class="artist-link">{{ artista }}</a></h1>
         
        <span class="subtitle">"{{ frase_impacto }}"</span>
 
