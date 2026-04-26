@@ -23,4 +23,3 @@ collections:
       - { label: "Duração (ex: 45 min)", name: "duracao", widget: "string" }
       - { label: "Nota (0-100)", name: "nota", widget: "number" }
       - { label: "Capa do Álbum", name: "imagem", widget: "image" }
-      - { label: "Corpo da Review", name: "body", widget: "markdown" } # Dica: Use "body" para o conteúdo principal
