@@ -9,8 +9,8 @@ duracao: 30 MIN (9 faixas)
 nota: 68
 imagem: /Imagens/porfavormeperdoecrise.jpg
 introducao: |-
-  <p>O disco <span class="highlight-album">Po favor</span> qque transforma.<p>\
-  <p>blabka.</p>
+  <p>O disco <span class="highlight-album">Po favor</span> qque transforma.\
+  <p>blabka.
 analise: bla
 conclusao: |-
   bla
