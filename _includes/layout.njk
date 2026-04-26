@@ -234,25 +234,24 @@ templateEngineOverride: njk, md
             font-size: 13px;
         }
 .highlight-album {
-            background: linear-gradient(120deg, #ffeb3b 0%, #ffeb3b 100%);
-            background-repeat: no-repeat;
-            background-size: 100% 0.3em;
-            background-position: 0 88%;
-            font-weight: 600;
-            padding: 0 2px;
-        }
+    background: linear-gradient(120deg, #ffeb3b 0%, #ffeb3b 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.3em;
+    background-position: 0 88%;
+    font-weight: 600;
+    padding: 0 2px;
+}
 
-        .highlight-song {
-            color: #d32f2f; /* Um vermelho elegante para músicas */
-            font-weight: 600;
-            font-style: italic;
-        }
-        
-        /* Ajuste para garantir que o conteúdo da review aceite os estilos */
-        .review-content .highlight-album, 
-        .review-content .highlight-song {
-            display: inline;
-        }
+.highlight-song {
+    color: #d32f2f; 
+    font-weight: 600;
+    font-style: italic;
+}
+
+.review-content .highlight-album, 
+.review-content .highlight-song {
+    display: inline;
+}
 
         @media (max-width: 768px) {
             .review-header { grid-template-columns: 1fr; text-align: center; gap: 20px; }
