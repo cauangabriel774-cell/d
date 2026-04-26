@@ -268,6 +268,54 @@ templateEngineOverride: njk, md
             color: #888;
             font-size: 13px;
         }
+.search-container {
+    position: relative;
+    width: 300px;
+}
+
+#global-search {
+    width: 100%;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+}
+
+#search-results-box {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 9999;
+    display: none; /* Escondido por padrão */
+}
+
+.search-item-result {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.search-item-result:hover { background: #f9f9f9; }
+
+.search-item-result img {
+    width: 40px; height: 40px; border-radius: 4px; object-fit: cover;
+}
+
+.search-item-result div { font-size: 13px; line-height: 1.2; }
+.search-item-result strong { display: block; font-size: 14px; }
+
+
 
         @media (max-width: 768px) {
             .review-header { grid-template-columns: 1fr; text-align: center; gap: 20px; }
@@ -283,9 +331,13 @@ templateEngineOverride: njk, md
 
 <header>
     <a href="/" class="logo">DiscoAvaliadoBR</a>
+    
+    <div class="search-container">
+        <input type="text" id="global-search" placeholder="Buscar artista ou álbum..." onkeyup="searchSite()">
+        <div id="search-results-box"></div> </div>
+
     <nav>
-        <a href="/Artista">Artistas</a>
-        <a href="/">Página Inicial</a>
+        <a href="/">Início</a>
         <a href="/sobre">Sobre</a>
     </nav>
 </header>
@@ -388,6 +440,57 @@ templateEngineOverride: njk, md
   },
   "datePublished": "{{ page.date.toISOString().split('T')[0] }}"
 }
+    // Criamos um "banco de dados" simples com o que o Eleventy já tem
+    const searchData = [
+        {% for item in collections.all %}
+            {% if item.data.artista %}
+            {
+                title: "{{ item.data.album or item.data.artista }}",
+                subtitle: "{{ item.data.artista if item.data.album else 'Página do Artista' }}",
+                url: "{{ item.url }}",
+                img: "{{ item.data.imagem or item.data.foto_artista }}"
+            },
+            {% endif %}
+        {% endfor %}
+    ];
+
+    function searchSite() {
+        const input = document.getElementById('global-search');
+        const filter = input.value.toLowerCase();
+        const resultsBox = document.getElementById('search-results-box');
+        
+        if (filter.length < 2) {
+            resultsBox.style.display = 'none';
+            return;
+        }
+
+        const filtered = searchData.filter(item => 
+            item.title.toLowerCase().includes(filter) || 
+            item.subtitle.toLowerCase().includes(filter)
+        ).slice(0, 10); // Mostra apenas os 10 primeiros
+
+        if (filtered.length > 0) {
+            resultsBox.innerHTML = filtered.map(item => `
+                <a href="${item.url}" class="search-item-result">
+                    <img src="${item.img}" alt="">
+                    <div>
+                        <strong>${item.title}</strong>
+                        <span>${item.subtitle}</span>
+                    </div>
+                </a>
+            `).join('');
+            resultsBox.style.display = 'block';
+        } else {
+            resultsBox.style.display = 'none';
+        }
+    }
+
+    // Fecha a busca se clicar fora dela
+    document.addEventListener('click', function(e) {
+        if (!document.querySelector('.search-container').contains(e.target)) {
+            document.getElementById('search-results-box').style.display = 'none';
+        }
+    });
 </script>
 
 </body>
