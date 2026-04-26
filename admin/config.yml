@@ -26,6 +26,9 @@ collections:
       - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
       - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
       - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+       - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Data da Postagem", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { label: "Álbum", name: "album", widget: "string" }
 
   - name: "artistas"
     label: "Artistas"
