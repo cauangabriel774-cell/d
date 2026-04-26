@@ -85,12 +85,56 @@ title: "DiscoAvaliadoBR • Acervo"
 
 <script>
     // Banco de dados completo para a busca (mostra TUDO que existir)
-const database = {{ collections.all
-  | filter(item => item.data.album)
-  | map(item => ({
-      title: item.data.album,
-      artist: item.data.artista,
-      url: item.url,
-      img: item.data.imagem
-  }))
-  | dump | safe }};
+    const database = {{ collections.all
+      | filter(item => item.data.album)
+      | map(item => ({
+          title: item.data.album,
+          artist: item.data.artista,
+          url: item.url,
+          img: item.data.imagem
+      }))
+      | dump | safe }};
+
+    // Função de busca
+    function doSearch() {
+        const query = document.getElementById('top-search').value.toLowerCase();
+        const results = document.getElementById('search-results');
+        results.innerHTML = ''; // Limpa resultados anteriores
+        if (query) {
+            const filteredData = database.filter(item => {
+                return item.title.toLowerCase().includes(query) || item.artist.toLowerCase().includes(query);
+            });
+
+            // Mostra resultados
+            filteredData.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-item');
+
+                resultItem.innerHTML = `
+                    <img src="${item.img}" alt="${item.title}">
+                    <div>
+                        <strong>${item.title}</strong><br>
+                        <span>${item.artist}</span>
+                    </div>
+                `;
+
+                resultItem.onclick = () => {
+                    window.location.href = item.url;
+                };
+
+                results.appendChild(resultItem);
+            });
+
+            if (filteredData.length === 0) {
+                results.innerHTML = '<div class="result-item">Nenhum resultado encontrado</div>';
+            }
+
+            results.style.display = 'block';
+        } else {
+            results.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
