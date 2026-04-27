@@ -9,55 +9,130 @@ title: "DiscoAvaliadoBR • Acervo"
     <title>{{ title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-    <style>
-        :root { --bg: #f8f6f2; --text: #111; }
-        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
-        
-        /* HEADER COM BUSCA */
-        header { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 12px 5%; background: #fff; border-bottom: 1px solid #ddd; 
-            position: sticky; top: 0; z-index: 9999; 
-        }
+<style>
+    :root { --bg: #f8f6f2; --text: #111; }
+    body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+    
+    /* HEADER COM BUSCA */
+    header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 22px 50px;  /* Ajuste de padding */
+        background: #fff; 
+        border-bottom: 1px solid var(--border-color); /* Ajuste da borda */
+        position: sticky; 
+        top: 0; 
+        z-index: 9999; 
+    }
 
-        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; text-decoration: none; color: var(--text); }
-        
-        .search-wrapper { position: relative; width: 350px; }
-        #top-search {
-            width: 100%; padding: 10px 20px; border-radius: 25px; 
-            border: 1px solid #ccc; outline: none; font-size: 14px;
-        }
+    .logo { 
+        font-family: 'Playfair Display', serif; 
+        font-size: 26px;  /* Ajuste do tamanho da fonte */
+        font-weight: 700; 
+        text-decoration: none; 
+        color: var(--text); 
+    }
+    
+    .search-wrapper { 
+        position: relative; 
+        width: 300px;  /* Ajuste do tamanho do campo de busca */
+    }
 
-        #search-results {
-            position: absolute; top: 45px; left: 0; right: 0;
-            background: white; border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            max-height: 400px; overflow-y: auto; display: none;
-        }
+    #top-search {
+        width: 100%; 
+        padding: 8px 15px; /* Ajuste de padding */
+        border-radius: 20px;  /* Ajuste do raio da borda */
+        border: 1px solid #ddd; 
+        outline: none; 
+        font-size: 14px;
+    }
 
-        /* REMOVENDO O AZUL DOS LINKS */
-        a { text-decoration: none; color: inherit; }
+    #search-results {
+        position: absolute; 
+        top: 45px; 
+        left: 0; 
+        right: 0;
+        background: white; 
+        border-radius: 8px; /* Ajuste do raio da borda */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        max-height: 400px; 
+        overflow-y: auto; 
+        display: none;
+    }
 
-        .result-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
-        .result-item img { width: 40px; height: 40px; border-radius: 4px; object-fit: cover; margin-right: 12px; }
+    /* REMOVENDO O AZUL DOS LINKS */
+    a { 
+        text-decoration: none; 
+        color: inherit; 
+    }
 
-        /* GRID DE ÁLBUNS */
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .album-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-            gap: 25px; 
-        }
+    .result-item { 
+        display: flex; 
+        align-items: center; 
+        padding: 10px; 
+        border-bottom: 1px solid #eee; 
+    }
 
-        .album-card { text-align: center; transition: 0.3s; margin-bottom: 20px; }
-        .album-card:hover { transform: translateY(-5px); }
-        .album-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
-        .album-card h3 { font-family: 'Playfair Display'; font-size: 17px; margin: 12px 0 4px; color: var(--text); }
-        .album-card p { margin: 0; font-size: 13px; color: #666; }
+    .result-item img { 
+        width: 40px; 
+        height: 40px; 
+        border-radius: 4px; 
+        object-fit: cover; 
+        margin-right: 12px; 
+    }
 
-        nav a { font-weight: 600; font-size: 14px; }
-    </style>
+    /* GRID DE ÁLBUNS */
+    .container { 
+        max-width: 1100px; 
+        margin: 60px auto; 
+        padding: 0 20px; 
+    }
+
+    .album-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+        gap: 25px; 
+    }
+
+    .album-card { 
+        text-align: center; 
+        transition: 0.3s; 
+        margin-bottom: 20px; 
+    }
+
+    .album-card:hover { 
+        transform: translateY(-5px); 
+    }
+
+    .album-card img { 
+        width: 100%; 
+        height: 200px;  /* Ajuste de altura */
+        object-fit: cover; 
+        border-radius: 10px; 
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
+    }
+
+    .album-card h3 { 
+        font-family: 'Playfair Display'; 
+        font-size: 17px; 
+        margin: 12px 0 4px; 
+        color: var(--text); 
+    }
+
+    .album-card p { 
+        margin: 0; 
+        font-size: 13px; 
+        color: #666; 
+    }
+
+    nav a { 
+        font-weight: 600; 
+        font-size: 14px; 
+    }
+</style>
 </head>
+
 <body>
 
 <header>
