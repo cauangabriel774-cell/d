@@ -27,21 +27,20 @@ collections:
       - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
       - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
       - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
-
-  - name: "artistas"
-label: "Artistas"
-folder: "src/artistas"
-filter: {field: "artista", value: ".*"}
-nested:
-  depth: 2
-create: true
-slug: "{{slug}}"  # Usando slug para criar a URL amigável
-path: "{{artista | slugify}}/index.md"  # Caminho para criar as pastas por letra
-extension: "md"
-format: "frontmatter"
-fields:
-  - { label: "Layout", name: "layout", widget: "hidden", default: "artista-layout.njk" }
-  - { label: "Nome do Artista", name: "artista", widget: "string" }
-  - { label: "Gênero Principal", name: "genero_principal", widget: "string" }
-  - { label: "Foto do Banner", name: "foto_artista", widget: "image" }
-  - { label: "Biografia/Texto", name: "body", widget: "markdown" }
+- name: "artistas"
+    label: "Artistas"
+    folder: "src/artistas"
+    filter: { field: "artista", value: ".*" }
+    nested:
+      depth: 2
+    create: true
+    slug: "{{slug}}"
+    path: "{{artista | slugify}}/index.md"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "artista-layout.njk" }
+      - { label: "Nome do Artista", name: "artista", widget: "string" }
+      - { label: "Gênero Principal", name: "genero_principal", widget: "string" }
+      - { label: "Foto do Banner", name: "foto_artista", widget: "image" }
+      - { label: "Biografia/Texto", name: "body", widget: "markdown" }
