@@ -1,1 +1,22 @@
+---
+pagination:
+  data: collections.artistas
+  size: 1
+  alias: artista
+permalink: "/artistas/{{ artista.slug }}/index.html"
+---
 
+<h1>{{ artista.nome }}</h1>
+
+<p>{{ artista.discos.length }} álbuns avaliados</p>
+
+<div class="album-grid">
+
+{% for disco in artista.discos %}
+  <a href="{{ disco.url }}">
+    <img src="{{ disco.data.imagem }}">
+    <p>{{ disco.data.album }}</p>
+  </a>
+{% endfor %}
+
+</div>
