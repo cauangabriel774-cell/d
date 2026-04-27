@@ -159,57 +159,57 @@ title: "DiscoAvaliadoBR • Acervo"
 </main>
 
 <script>
-    // Banco de dados completo para a busca (mostra TUDO que existir)
-    const database = [
+    const searchData = [
         {% for item in collections.all %}
-            {% if item.data.album %}
+            {% if item.data.artista %}
             {
-                title: "{{ item.data.album }}",
-                artist: "{{ item.data.artista }}",
+                title: "{{ item.data.album or item.data.artista }}",
+                subtitle: "{{ item.data.artista if item.data.album else 'Página do Artista' }}",
                 url: "{{ item.url }}",
-                img: "{{ item.data.imagem }}"
+                img: "{{ item.data.imagem or item.data.foto_artista }}"
             },
             {% endif %}
         {% endfor %}
     ];
 
-    function doSearch() {
-        const searchQuery = document.getElementById("top-search").value.toLowerCase();
-        const searchResults = document.getElementById("search-results");
+    function searchSite() {
+        const input = document.getElementById('global-search');
+        const resultsBox = document.getElementById('search-results-box');
+        if (!input || !resultsBox) return;
 
-        // Se a pesquisa for muito curta, esconde os resultados
-        if (searchQuery.length < 3) {
-            searchResults.style.display = 'none';
+        const filter = input.value.toLowerCase();
+        
+        if (filter.length < 2) {
+            resultsBox.style.display = 'none';
             return;
         }
 
-        // Limpar resultados antigos
-        searchResults.innerHTML = '';
+        const filtered = searchData.filter(item => 
+            item.title.toLowerCase().includes(filter) || 
+            item.subtitle.toLowerCase().includes(filter)
+        ).slice(0, 10);
 
-        // Filtrando os álbuns que correspondem ao termo de pesquisa
-        const filteredResults = database.filter(item => 
-            item.title.toLowerCase().includes(searchQuery) || 
-            item.artist.toLowerCase().includes(searchQuery)
-        );
-
-        if (filteredResults.length > 0) {
-            searchResults.style.display = 'block';
-            filteredResults.forEach(item => {
-                const resultItem = document.createElement('div');
-                resultItem.classList.add('result-item');
-                resultItem.innerHTML = `
-                    <a href="${item.url}">
-                        <img src="${item.img}" alt="${item.title}">
-                        <div>
-                            <h4>${item.title}</h4>
-                            <p>${item.artist}</p>
-                        </div>
-                    </a>
-                `;
-                searchResults.appendChild(resultItem);
-            });
+        if (filtered.length > 0) {
+            resultsBox.innerHTML = filtered.map(item => `
+                <a href="${item.url}" class="search-item-result">
+                    <img src="${item.img || '/Imagens/default.png'}" alt="">
+                    <div>
+                        <strong>${item.title}</strong>
+                        <span>${item.subtitle}</span>
+                    </div>
+                </a>
+            `).join('');
+            resultsBox.style.display = 'block';
         } else {
-            searchResults.style.display = 'none'; // Nenhum resultado encontrado
+            resultsBox.style.display = 'none';
         }
     }
+
+    // Fecha a busca se clicar fora
+    document.addEventListener('click', function(e) {
+        const container = document.querySelector('.search-container');
+        const resultsBox = document.getElementById('search-results-box');
+        if (container && !container.contains(e.target)) {
+            resultsBox.style.display = 'none';
+        }
 </script>
