@@ -353,7 +353,7 @@ templateEngineOverride: njk, md
         <div class="album-data">
             <p><strong>ARTISTA:</strong> {{ artista }}</p>
             <p><strong>ÁLBUM:</strong> {{ album }}</p>
-            <p><strong>LANÇAMENTO:</strong> {{ data_lancamento }}</p>
+            <p><strong>LANÇAMENTO DO ÁLBUM:</strong> {{ data_lancamento }}</p>
             <p><strong>GÊNERO:</strong> {{ genero }}</p>
             <p><strong>DURAÇÃO:</strong> {{ duracao }}</p>
         </div>
@@ -378,8 +378,11 @@ templateEngineOverride: njk, md
     <a href="#" id="share-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
     <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
     <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
-</div> <div class="meta-info">
-    Por Gabriel Silva • {{ date | htmlDateString if date else page.date | htmlDateString }}
+<div class="meta-info">
+  Por Gabriel Silva • 
+  <time datetime="{{ page.date.toISOString() }}">
+    {{ date | htmlDateString if date else page.date | htmlDateString }}
+  </time>
 </div>
 
        <div class="review-content">
