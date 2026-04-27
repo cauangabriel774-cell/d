@@ -329,17 +329,17 @@ templateEngineOverride: njk, md
 
 <body>
 
-<header style="display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #fff; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 9999;">
-    <a href="/" class="logo" style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; text-decoration: none; color: #111;">DiscoAvaliadoBR</a>
-    
-    <div class="search-container" style="position: relative; flex-grow: 0; margin: 0 20px;">
-        <input type="text" id="global-search" placeholder="Buscar artista ou álbum..." onkeyup="searchSite()" style="width: 250px; padding: 10px 15px; border-radius: 25px; border: 1px solid #ccc; outline: none; font-size: 14px;">
-        <div id="search-results-box" style="position: absolute; top: 50px; left: 0; right: 0; background: white; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-height: 400px; overflow-y: auto; display: none; z-index: 10000;"></div>
+<header>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+
+    <div class="search-container">
+        <input type="text" id="global-search" placeholder="Buscar..." onkeyup="searchSite()">
+        <div id="search-results-box"></div>
     </div>
 
-    <nav style="display: flex; gap: 20px;">
-        <a href="/" style="text-decoration: none; color: #333; font-weight: 500;">Início</a>
-        <a href="/sobre" style="text-decoration: none; color: #333; font-weight: 500;">Sobre</a>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/sobre">Sobre</a>
     </nav>
 </header>
 
