@@ -93,8 +93,19 @@ url('{{ artista.foto_artista }}');
 <body>
 
 <header>
-    <div class="logo" onclick="window.location.href='/'">DiscoAvaliadoBR</div>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+
+    <div class="search-container">
+        <input type="text" id="global-search" placeholder="Buscar..." onkeyup="searchSite()">
+        <div id="search-results-box"></div>
+    </div>
+
+    <nav>
+        <a href="/">Início</a>
+        <a href="/sobre">Sobre</a>
+    </nav>
 </header>
+
 
 <div class="artist-banner">
     <div class="artist-content">
@@ -122,6 +133,62 @@ url('{{ artista.foto_artista }}');
 </div>
 
 </main>
+<script>
+    // Geramos o "banco de dados" via Eleventy
+    const searchData = [
+        {% for item in collections.all %}
+            {% if item.data.artista %}
+            {
+                title: "{{ item.data.album or item.data.artista }}",
+                subtitle: "{{ item.data.artista if item.data.album else 'Página do Artista' }}",
+                url: "{{ item.url }}",
+                img: "{{ item.data.imagem or item.data.foto_artista }}"
+            },
+            {% endif %}
+        {% endfor %}
+    ];
 
+    function searchSite() {
+        const input = document.getElementById('global-search');
+        const resultsBox = document.getElementById('search-results-box');
+        if (!input || !resultsBox) return;
+
+        const filter = input.value.toLowerCase();
+        
+        if (filter.length < 2) {
+            resultsBox.style.display = 'none';
+            return;
+        }
+
+        const filtered = searchData.filter(item => 
+            item.title.toLowerCase().includes(filter) || 
+            item.subtitle.toLowerCase().includes(filter)
+        ).slice(0, 10);
+
+        if (filtered.length > 0) {
+            resultsBox.innerHTML = filtered.map(item => `
+                <a href="${item.url}" class="search-item-result">
+                    <img src="${item.img || '/Imagens/default.png'}" alt="">
+                    <div>
+                        <strong>${item.title}</strong>
+                        <span>${item.subtitle}</span>
+                    </div>
+                </a>
+            `).join('');
+            resultsBox.style.display = 'block';
+        } else {
+            resultsBox.style.display = 'none';
+        }
+    }
+
+    // Fecha a busca se clicar fora
+    document.addEventListener('click', function(e) {
+        const container = document.querySelector('.search-container');
+        const resultsBox = document.getElementById('search-results-box');
+        if (container && !container.contains(e.target)) {
+            resultsBox.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>
