@@ -1,21 +1,26 @@
-eleventyConfig.addCollection("artistas", function(collectionApi) {
-  const discos = collectionApi.getAll().filter(item => item.data.artista);
+module.exports = function(eleventyConfig) {
 
-  const artistasMap = {};
+  eleventyConfig.addPassthroughCopy("admin");
+  eleventyConfig.addPassthroughCopy("Imagens");
+  eleventyConfig.addPassthroughCopy("ArtistaFotos");
 
-  discos.forEach(disco => {
-    const nome = disco.data.artista;
-
-    if (!artistasMap[nome]) {
-      artistasMap[nome] = {
-        nome,
-        slug: nome.toLowerCase().replace(/\s+/g, '-'),
-        discos: []
-      };
-    }
-
-    artistasMap[nome].discos.push(disco);
+  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
+    if (!dateObj) return "";
+    return new Date(dateObj).toLocaleDateString("pt-BR");
   });
 
-  return Object.values(artistasMap);
-});
+  eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
+    return collectionApi.getAll()
+      .filter(item => item.data.album)
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
+
+  return {
+    dir: {
+      input: ".",
+      output: "_site",
+      includes: "_includes"
+    }
+  };
+
+};
