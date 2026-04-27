@@ -27,7 +27,8 @@ collections:
       - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
       - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
       - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
-- name: "artistas"
+
+  - name: "artistas"
     label: "Artistas"
     folder: "src/artistas"
     filter: { field: "artista", value: ".*" }
