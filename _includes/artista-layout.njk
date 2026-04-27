@@ -204,7 +204,7 @@
                 <div class="album-card">
                     <img src="{{ post.data.imagem }}" alt="{{ post.data.album }}">
                     <div class="album-info">
-                        <h3>{{ post.data.album }}</h3>
+                        <h3>{{ date | htmlDateString if date else page.date | htmlDateString }}</h3>
                         <div class="score">Ver review</div>
                         <div class="meta">{{ post.data.date }} • {{ post.data.genero }}</div>
                     </div>
