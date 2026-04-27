@@ -3,6 +3,7 @@ layout: layout.njk
 date: 2026-04-27
 album: Por favor, me perdoe. as más notícias finalmente chegaram
 artista: Crise
+foto_artista: /ArtistaFotos/crise.jpg
 frase_impacto: Em "Por favor, me perdoe...", a banda Crise expressa o tormento
   da juventude numa imersão intensa que combina o rock alternativo com o Dream
   pop, onde a turbulência emocional encontra a serenidade forte de um novo
