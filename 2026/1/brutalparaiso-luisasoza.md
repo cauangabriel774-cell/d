@@ -3,9 +3,10 @@ layout: layout.njk
 artista: "Luísa Sonza"
 album: "Brutal Paraíso"
 date: 2026-04-08
+foto_artista: /ArtistaFotos/luisa-sonza.jpg
 frase_impacto: "\"O álbum é, sem sombra de dúvidas, uma verdadeira jornada, com seus momentos de glória e também de decepção.\""
 data_lancamento: "7 de Abril de 2026"
-genero: "Pop / Rock / Funk"
+genero: "Pop"
 duracao: "1h 07min (23 faixas)"
 nota: 73
 imagem: "/Imagens/luisasonzacapabrutalparaiso.jpg"
