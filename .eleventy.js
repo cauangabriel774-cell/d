@@ -9,6 +9,7 @@ module.exports = function(eleventyConfig) {
     return new Date(dateObj).toLocaleDateString("pt-BR");
   });
 
+  // 🔥 COLEÇÃO ARTISTAS (CORRIGIDA)
   eleventyConfig.addCollection("artistas", function(collectionApi) {
     const discos = collectionApi.getAll().filter(i => i.data.artista);
 
@@ -17,10 +18,17 @@ module.exports = function(eleventyConfig) {
     discos.forEach(disco => {
       const nome = disco.data.artista;
 
+      // slug seguro (sem acento, sem espaço, sem erro)
+      const slug = nome
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+
       if (!map[nome]) {
         map[nome] = {
           nome,
-          slug: nome.toLowerCase().replace(/\s+/g, "-"),
+          slug,
           discos: []
         };
       }
@@ -31,6 +39,7 @@ module.exports = function(eleventyConfig) {
     return Object.values(map);
   });
 
+  // 📀 COLEÇÃO DISCOS
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
     return collectionApi.getAll()
       .filter(item => item.data.album)
