@@ -3,6 +3,7 @@ layout: layout.njk
 album: Solar
 artista: Mombojó
 date: 2026-04-24
+foto_artista: /ArtistaFotos/mombojo.jpg
 frase_impacto: "Em \"Solar\", Mombojó nos oferece um disco que vibra intensamente, tal qual o calor da capital pernambucana: uma jornada cheia de energia e introspecção, onde a claridade expõe a formosura e os detalhes da existência."
 data_lancamento: 24 de abril de 2026
 genero: psicodelia
