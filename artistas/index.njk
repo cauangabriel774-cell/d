@@ -1,1 +1,15 @@
+---
+layout: null
+---
 
+<h1>Artistas</h1>
+
+<ul>
+{% for artista in collections.artistas %}
+  <li>
+    <a href="/artistas/{{ artista.slug }}/">
+      {{ artista.nome }} ({{ artista.discos.length }} álbuns)
+    </a>
+  </li>
+{% endfor %}
+</ul>
