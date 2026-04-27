@@ -26,68 +26,173 @@ permalink: "/artistas/{{ artista.slug }}/index.html"
     <meta property="og:url" content="/artistas/{{ artista.slug }}/">
 
     <style>
-        body { margin:0; font-family:Inter,sans-serif; background:#fff; color:#111; }
+    body { margin: 0; font-family: Inter, sans-serif; background: #fff; color: #111; }
 
-        header { display:flex; justify-content:space-between; padding:20px 40px; border-bottom:1px solid #ddd; }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;  /* Alinha o conteúdo verticalmente */
+        padding: 22px 50px;   /* Padding original */
+        border-bottom: 1px solid var(--border-color); /* Cor de borda original */
+        background: white;    /* Fundo branco */
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
 
-        .logo { font-weight:700; font-size:24px; cursor:pointer; }
+    .logo {
+        font-family: 'Playfair Display', serif; /* Mantém a fonte específica para o logo */
+        font-size: 26px;  /* Tamanho da fonte do logo */
+        font-weight: 700; /* Peso da fonte */
+        cursor: pointer;
+        user-select: none;
+        text-decoration: none;
+        color: inherit;  /* Cor herdada */
+    }
 
-        .artist-banner {
-            height: 500px;
-           background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.7)),
-url('{{ artista.foto_artista }}');
-            background-size: cover;
-            background-position: center;
-            display:flex;
-            align-items:flex-end;
-        }
+    nav a {
+        margin-left: 28px;
+        text-decoration: none;
+        color: #222;
+        font-weight: 500;
+        font-size: 15px;
+        transition: 0.2s;
+    }
 
-        .artist-content { padding:40px; color:white; }
+    nav a:hover {
+        opacity: 0.6;
+    }
 
-        .artist-content h1 {
-            font-size:60px;
-            margin:0;
-        }
+    .search-container {
+        position: relative;
+        width: 300px;
+    }
 
-        .artist-content p {
-            font-size:18px;
-            opacity:0.9;
-        }
+    #global-search {
+        width: 100%;
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+        font-family: 'Inter', sans-serif;
+        outline: none;
+    }
 
-        .container { max-width:1100px; margin:60px auto; padding:0 20px; }
+    #search-results-box {
+        position: absolute;
+        top: 45px;
+        left: 0;
+        right: 0;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 9999;
+        display: none; /* Escondido por padrão */
+    }
 
-        h2 { border-left:4px solid #111; padding-left:10px; }
+    .search-item-result {
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #333;
+    }
 
-        .album-grid {
-            display:grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-            gap:20px;
-        }
+    .search-item-result:hover {
+        background: #f9f9f9;
+    }
 
-        .album-card {
-            text-decoration:none;
-            color:inherit;
-            background:#fff;
-            border-radius:8px;
-            overflow:hidden;
-            box-shadow:0 4px 15px rgba(0,0,0,0.08);
-            transition:0.3s;
-        }
+    .search-item-result img {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        object-fit: cover;
+    }
 
-        .album-card:hover {
-            transform: translateY(-5px);
-        }
+    .search-item-result div {
+        font-size: 13px;
+        line-height: 1.2;
+    }
 
-        .album-card img {
-            width:100%;
-            height:200px;
-            object-fit:cover;
-        }
+    .search-item-result strong {
+        display: block;
+        font-size: 14px;
+    }
 
-        .album-info { padding:10px; text-align:center; }
+    .artist-banner {
+        height: 500px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)),
+        url('{{ artista.foto_artista }}');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: flex-end;
+    }
 
-        .score { font-weight:bold; }
-    </style>
+    .artist-content {
+        padding: 40px;
+        color: white;
+    }
+
+    .artist-content h1 {
+        font-size: 60px;
+        margin: 0;
+    }
+
+    .artist-content p {
+        font-size: 18px;
+        opacity: 0.9;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    h2 {
+        border-left: 4px solid #111;
+        padding-left: 10px;
+    }
+
+    .album-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .album-card {
+        text-decoration: none;
+        color: inherit;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+    }
+
+    .album-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .album-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .album-info {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .score {
+        font-weight: bold;
+    }
+</style>
 </head>
 
 <body>
