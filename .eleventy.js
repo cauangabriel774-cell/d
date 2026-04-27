@@ -1,28 +1,21 @@
-module.exports = function(eleventyConfig) {
+eleventyConfig.addCollection("artistas", function(collectionApi) {
+  const discos = collectionApi.getAll().filter(item => item.data.artista);
 
-  // Copiar arquivos estáticos
-  eleventyConfig.addPassthroughCopy("admin");
-  eleventyConfig.addPassthroughCopy("Imagens");
-  eleventyConfig.addPassthroughCopy("ArtistaFotos");
+  const artistasMap = {};
 
-  // Filtro de data pt-BR
-  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
-    if (!dateObj) return "";
-    return new Date(dateObj).toLocaleDateString("pt-BR");
-  });
+  discos.forEach(disco => {
+    const nome = disco.data.artista;
 
-  // COLEÇÃO CORRETA (sem bug)
-  eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-    return collectionApi.getAll()
-      .filter(item => item.data.album)
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
-  });
-
-  return {
-    dir: {
-      input: ".",
-      output: "_site",
-      includes: "_includes"
+    if (!artistasMap[nome]) {
+      artistasMap[nome] = {
+        nome,
+        slug: nome.toLowerCase().replace(/\s+/g, '-'),
+        discos: []
+      };
     }
-  };
-};
+
+    artistasMap[nome].discos.push(disco);
+  });
+
+  return Object.values(artistasMap);
+});
