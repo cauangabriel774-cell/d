@@ -27,10 +27,12 @@ module.exports = function(eleventyConfig) {
 
       if (!map[nome]) {
         map[nome] = {
-          nome,
-          slug,
-          discos: []
-        };
+  nome,
+  slug,
+  foto_artista: null,
+  genero_principal: null,
+  discos: []
+};
       }
 
       map[nome].discos.push(disco);
