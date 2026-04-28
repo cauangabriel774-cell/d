@@ -1,6 +1,7 @@
 ---
 layout: layout.njk
 album: "Carranca"
+archive: true
 artista: "Urias"
 date: 2026-04-23
 foto_artista: /ArtistaFotos/urias.jpg
