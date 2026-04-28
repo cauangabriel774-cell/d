@@ -1,6 +1,6 @@
 ---
 layout: layout.njk
-date: 2026-04-27
+date: 2026-04-27T10:45:00
 album: Por favor, me perdoe. as más notícias finalmente chegaram
 artista: Crise
 foto_artista: /ArtistaFotos/crise.jpg
