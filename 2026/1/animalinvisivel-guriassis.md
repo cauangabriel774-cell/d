@@ -7,7 +7,7 @@ foto_artista: /ArtistaFotos/guri-assis.jpg
 frase_impacto: "O \"Animal Invisível\" é uma obra em que se utiliza do jazz-soul como instinto de percepção e como celebração da vida através do silêncio e de grooves enigmáticos."
 data_lancamento: 17 de abril de 2026
 genero: MPB
-duracao: 30min (9 faixas)
+duracao: 30MIN (9 faixas)
 nota: 83
 imagem: /Imagens/animalinvisivelguri.jpg
 introducao: |-
