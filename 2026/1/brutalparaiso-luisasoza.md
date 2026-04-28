@@ -7,7 +7,7 @@ foto_artista: /ArtistaFotos/luisa-sonza.jpg
 frase_impacto: "\"O álbum é, sem sombra de dúvidas, uma verdadeira jornada, com seus momentos de glória e também de decepção.\""
 data_lancamento: "7 de Abril de 2026"
 genero: "Pop"
-duracao: "1h 07min (23 faixas)"
+duracao: "1H 07MIN (23 faixas)"
 nota: 73
 imagem: "/Imagens/luisasonzacapabrutalparaiso.jpg"
 tags: [avaliação, nota, review, album, luisa sonza, 2026, lançamento, pop, brutal paraíso]
