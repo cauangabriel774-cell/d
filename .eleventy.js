@@ -41,7 +41,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
   return collectionApi.getAll()
     .filter(i => i.data.album)
-    .filter(i => !i.data.archive) // 👈 ESSENCIAL
+    .filter(i => !i.data.archive) 
     .sort((a, b) => {
       const dateA = new Date(a.data.date || 0);
       const dateB = new Date(b.data.date || 0);
@@ -52,7 +52,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("discosArquivados", function(collectionApi) {
   return collectionApi.getAll()
     .filter(i => i.data.album)
-    .filter(i => i.data.archive === true) // 👈 AGORA É ISSO
+    .filter(i => i.data.archive === true) 
     .sort((a, b) => {
       const dateA = new Date(a.data.date || 0);
       const dateB = new Date(b.data.date || 0);
