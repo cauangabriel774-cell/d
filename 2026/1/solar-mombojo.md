@@ -7,7 +7,7 @@ foto_artista: /ArtistaFotos/mombojo.jpg
 frase_impacto: "Em \"Solar\", Mombojó nos oferece um disco que vibra intensamente, tal qual o calor da capital pernambucana: uma jornada cheia de energia e introspecção, onde a claridade expõe a formosura e os detalhes da existência."
 data_lancamento: 24 de abril de 2026
 genero: psicodelia
-duracao: 30min (9 faixas)
+duracao: 30MIN (9 faixas)
 nota: 78
 imagem: /Imagens/MombojoSolar.png
 introducao: |-
