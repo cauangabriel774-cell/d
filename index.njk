@@ -1,11 +1,13 @@
 ---
-title: "DiscoAvaliadoBR • Acervo"
+title: "DiscoAvaliadoBR • Site de críticas de álbuns"
 ---
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/Imagens/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <title>{{ title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
@@ -13,7 +15,6 @@ title: "DiscoAvaliadoBR • Acervo"
     :root { --bg: #f8f6f2; --text: #111; }
     body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
     
-    /* HEADER COM BUSCA */
     header { 
         display: flex; 
         justify-content: space-between; 
@@ -169,7 +170,7 @@ title: "DiscoAvaliadoBR • Acervo"
 <header>
     <a href="/" class="logo">DiscoAvaliadoBR</a>
     <div class="search-wrapper">
-        <input type="text" id="top-search" placeholder="Pesquisar disco ou artista..." onkeyup="doSearch()">
+        <input type="text" id="top-search" placeholder="Buscar..." onkeyup="doSearch()">
         <div id="search-results"></div>
     </div>
     <nav><a href="/sobre">Sobre</a></nav>
