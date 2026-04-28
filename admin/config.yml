@@ -13,16 +13,17 @@ collections:
     slug: "{{album | slugify}}"
     extension: "md"
     format: "frontmatter"
+
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
-      - - { 
-    label: "Data da Postagem",
-    name: "date",
-    widget: "datetime",
-    format: "YYYY-MM-DDTHH:mm:ss",
-    date_format: "DD/MM/YYYY",
-    time_format: "HH:mm"
-  }
+
+      - label: "Data da Postagem"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+
       - { label: "Álbum", name: "album", widget: "string" }
       - { label: "Artista", name: "artista", widget: "string" }
       - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
@@ -46,6 +47,7 @@ collections:
     path: "{{artista | slugify}}/index.md"
     extension: "md"
     format: "frontmatter"
+
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "artista-layout.njk" }
       - { label: "Nome do Artista", name: "artista", widget: "string" }
