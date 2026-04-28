@@ -188,6 +188,18 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
         </a>
     {% endfor %}
 </div>
+
+<h2>Arquivo de Avaliações</h2>
+
+<div class="album-grid">
+  {% for disco in collections.discosArquivados %}
+    <a href="{{ disco.url }}" class="album-card">
+      <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
+      <h3>{{ disco.data.album }}</h3>
+      <p>{{ disco.data.artista }}</p>
+    </a>
+  {% endfor %}
+</div>
 </main>
 
 <script>
