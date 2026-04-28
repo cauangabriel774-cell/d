@@ -13,7 +13,7 @@ module.exports = function(eleventyConfig) {
 
   // 🔥 COLEÇÃO ARTISTAS
   eleventyConfig.addCollection("artistas", function(collectionApi) {
-    const discos = collectionApi.getFilteredByGlob("2026/1/*.md").filter(i => i.data.artista);
+    const discos = collectionApi.getAll().filter(i => i.data.artista);
     const map = {};
 
     discos.forEach(disco => {
@@ -42,16 +42,14 @@ module.exports = function(eleventyConfig) {
     return Object.values(map);
   });
 
-  // 📀 COLEÇÃO DISCOS (ordenando pelo frontmatter date ou date do arquivo)
+  // 📀 COLEÇÃO DISCOS (CORRIGIDA E SEGURA)
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-  return collectionApi.getFilteredByGlob("2026/1/*.md")
-    .filter(item => item.data.album)
-    .sort((a, b) => {
-      return new Date(b.data.date) - new Date(a.data.date);
-    });
-});
-        const dateB = b.data.date ? new Date(b.data.date) : new Date(b.date);
-        return dateB - dateA; // mais recente primeiro
+    return collectionApi.getFilteredByGlob("2026/1/*.md")
+      .filter(item => item.data.album)
+      .sort((a, b) => {
+        const dateA = new Date(a.data.date);
+        const dateB = new Date(b.data.date);
+        return dateB - dateA;
       });
   });
 
