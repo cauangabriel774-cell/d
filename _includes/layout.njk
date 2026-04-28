@@ -9,11 +9,11 @@ templateEngineOverride: njk, md
     <link rel="icon" href="/Imagens/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
-    <title>{{ album }} - {{ artista }} | Review e crítica do Álbum</title>
-    <meta name="description" content="Análise detalhada do álbum {{ album }} de {{ artista }}. Notas, destaques e críticas sobre a nova era da artista.">
+    <title>Crítica do {{ album }} - {{ artista }}</title>
+    <meta name="description" content="Crítica detalhada do álbum {{ album }} de {{ artista }}..">
 
-    <meta property="og:title" content="Review: {{ album }} - {{ artista }} • DiscoAvaliadoBR">
-    <meta property="og:description" content="Análise completa do álbum {{ album }} de {{ artista }}, faixa a faixa, com crítica e contexto emocional.">    
+    <meta property="og:title" content="Review: {{ album }} - {{ artista }} - DiscoAvaliadoBR">
+    <meta property="og:description" content="Crítica completa do álbum {{ album }} de {{ artista }}, faixa a faixa, com crítica e contexto.">    
     <meta property="og:image" content="https://discoavaliadobr.com.br{{ imagem }}">    
     <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">    
     <meta property="og:type" content="article">
@@ -23,7 +23,7 @@ templateEngineOverride: njk, md
     <meta property="og:locale" content="pt_BR">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Review: {{ album }} - {{ artista }} • DiscoAvaliadoBR">
+    <meta name="twitter:title" content="Review: {{ album }} - {{ artista }} - DiscoAvaliadoBR">
     <meta name="twitter:description" content="Análise completa do álbum {{ album }} do {{ artista }}.">
     <meta name="twitter:image" content="https://discoavaliadobr.com.br{{ imagem }}">
 
@@ -381,7 +381,7 @@ templateEngineOverride: njk, md
 </div>
 
 <div class="meta-info">
-    Por Gabriel Silva • 
+    Por Gabriel Silva - 
     <time datetime="{{ page.date.toISOString() }}">
         {{ date | htmlDateString if date else page.date | htmlDateString }}
     </time>
