@@ -8,7 +8,7 @@ archive: true
 frase_impacto: "\"Pirata\" nos leva por uma jornada sentimental turbulenta e verdadeira, com cada música atuando como uma maré que oscila entre a ruína e um novo começo.\""
 data_lancamento: "19 de outubro de 2021"
 genero: "Pop"
-duracao: "33min (11 faixas)"
+duracao: "33MIN (11 faixas)"
 nota: 80
 imagem: "/Imagens/JãoPirata.jpg"
 tags: [avaliação, nota, review, album, Jão, 2026, 2021, pop, Pirata]
