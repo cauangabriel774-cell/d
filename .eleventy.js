@@ -43,6 +43,16 @@ module.exports = function(eleventyConfig) {
   });
 
   // 📀 COLEÇÃO DISCOS (CORRIGIDA E SEGURA)
+  eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
+  return collectionApi.getAll()
+    .filter(item => item.data.album)
+    .sort((a, b) => {
+      const dateA = new Date(item.data?.date || item.date || 0);
+      const dateB = new Date(b.data?.date || b.date || 0);
+      return dateB - dateA;
+    });
+});
+  
  eleventyConfig.addCollection("discosArquivados", function(collectionApi) {
   return collectionApi.getAll()
     .filter(item => item.data.album)
