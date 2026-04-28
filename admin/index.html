@@ -17,7 +17,7 @@
         window.netlifyIdentity.on("init", user => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
-              // Só redireciona se o usuário não for detectado imediatamente
+              
               document.location.href = "/admin/";
             });
           }
