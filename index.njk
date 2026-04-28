@@ -203,7 +203,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
 </main>
 
 <script>
-    // Banco de dados completo para a busca (mostra TUDO que existir)
+    
     const database = [
         {% for item in collections.all %}
             {% if item.data.album %}
@@ -221,16 +221,16 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
         const searchQuery = document.getElementById("top-search").value.toLowerCase();
         const searchResults = document.getElementById("search-results");
 
-        // Se a pesquisa for muito curta, esconde os resultados
+        
         if (searchQuery.length < 3) {
             searchResults.style.display = 'none';
             return;
         }
 
-        // Limpar resultados antigos
+        
         searchResults.innerHTML = '';
 
-        // Filtrando os álbuns que correspondem ao termo de pesquisa
+        
         const filteredResults = database.filter(item => 
             item.title.toLowerCase().includes(searchQuery) || 
             item.artist.toLowerCase().includes(searchQuery)
@@ -253,7 +253,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
                 searchResults.appendChild(resultItem);
             });
         } else {
-            searchResults.style.display = 'none'; // Nenhum resultado encontrado
+            searchResults.style.display = 'none'; 
         }
     }
 
@@ -262,7 +262,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
         localStorage.setItem("cookiesAccepted", "true");
     }
 
-    // Exibe o banner de cookies se o usuário ainda não aceitou
+    
     window.addEventListener("load", function() {
         if (!localStorage.getItem("cookiesAccepted")) {
             document.getElementById("cookie-banner").style.display = "flex";
