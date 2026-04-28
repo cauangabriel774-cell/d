@@ -8,7 +8,7 @@ foto_artista: /ArtistaFotos/urias.jpg
 frase_impacto: "\"Carranca\", embarcamos numa busca profunda, marcada pela força e superação. Cada música surge como voz ativa, transformando e dando novo sentido à história, unindo o ontem e o hoje numa única essência."
 data_lancamento: "7 de outubro de 2025"
 genero: "MPB"
-duracao: "41min (14 faixas)"
+duracao: "41MIN (14 faixas)"
 nota: 90
 imagem: "/Imagens/UriasCarranca.jpg"
 introducao: |
