@@ -1,6 +1,6 @@
 ---
 layout: layout.njk
-date: 2026-04-28
+date: 2026-04-28T07:00:00
 album: TORÓ
 artista: Vitor Araújo
 foto_artista: /ArtistaFotos/vitor-araujo.jpg
