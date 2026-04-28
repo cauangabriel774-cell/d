@@ -7,8 +7,8 @@ date: 2026-04-02
 foto_artista: /ArtistaFotos/luisa-sonza.jpg
 frase_impacto: "\"Um retrato cru e ambicioso da vulnerabilidade pop contemporânea.\""
 data_lancamento: 29 de Agosto de 2023
-genero: Pop / Rock / MPB / Experimental
-duracao: 1h 12min (24 faixas)
+genero: Pop
+duracao: 1H 12MIN (24 faixas)
 nota: 70
 imagem: /Imagens/EscandaloIntimo.jpg
 tags: [avaliação, nota, review, album, luisa sonza, escândalo íntimo, 2023, experimental, pop br]
