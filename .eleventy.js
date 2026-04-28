@@ -43,15 +43,19 @@ module.exports = function(eleventyConfig) {
   });
 
   // 📀 COLEÇÃO DISCOS (CORRIGIDA E SEGURA)
-  eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("2026/1/*.md")
-      .filter(item => item.data.album)
-      .sort((a, b) => {
-        const dateA = new Date(a.data.date);
-        const dateB = new Date(b.data.date);
-        return dateB - dateA;
-      });
-  });
+ eleventyConfig.addCollection("discosArquivados", function(collectionApi) {
+  return collectionApi.getAll()
+    .filter(item => item.data.album)
+    .filter(item => {
+      const path = item.inputPath || "";
+      return path.includes("2021/2") || path.includes("2023/2") || path.includes("2025/2");
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.data.date || a.date || 0);
+      const dateB = new Date(b.data.date || b.date || 0);
+      return dateB - dateA;
+    });
+});
 
   // 🌟 Configuração de diretórios
   return {
