@@ -455,7 +455,7 @@ templateEngineOverride: njk, md
 </script>
 
 <script>
-    // Geramos o "banco de dados" via Eleventy
+    
     const searchData = [
         {% for item in collections.all %}
             {% if item.data.artista %}
@@ -502,7 +502,7 @@ templateEngineOverride: njk, md
         }
     }
 
-    // Fecha a busca se clicar fora
+    
     document.addEventListener('click', function(e) {
         const container = document.querySelector('.search-container');
         const resultsBox = document.getElementById('search-results-box');
