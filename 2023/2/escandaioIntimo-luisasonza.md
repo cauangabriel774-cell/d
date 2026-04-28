@@ -1,6 +1,7 @@
 ---
 layout: layout.njk
 album: Escândalo Íntimo
+archive: true
 artista: Luísa Sonza
 date: 2026-04-02
 foto_artista: /ArtistaFotos/luisa-sonza.jpg
