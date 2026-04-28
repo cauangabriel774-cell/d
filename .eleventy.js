@@ -53,18 +53,16 @@ module.exports = function(eleventyConfig) {
     return Object.values(map);
   });
 
-  // 📀 COLEÇÃO DISCOS
-  eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-    return collectionApi.getAll()
-      .filter(item => item.data.album)
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
-  });
+  // 📀 COLEÇÃO DISCOS (corrigida)
+eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
+  return collectionApi.getAll()
+    .filter(item => item.data.album)
+    .sort((a, b) => {
+      // usa frontmatter date se existir, senão usa data do arquivo
+      const dateA = a.data.date ? new Date(a.data.date) : a.date;
+      const dateB = b.data.date ? new Date(b.data.date) : b.date;
 
-  return {
-    dir: {
-      input: ".",
-      output: "_site",
-      includes: "_includes"
-    }
-  };
-};
+      // mais recente primeiro
+      return dateB - dateA;
+    });
+});
