@@ -2,7 +2,7 @@
 layout: layout.njk
 date: 2026-04-29T12:40:00
 album: IV
-artista: White Canyon & The 5th Dimension
+artista: White Canyon and The 5th Dimension
 foto_artista: /ArtistaFotos/white-canyon.jpg
 frase_impacto: Em "IV", White Canyon & The 5th Dimension tecem uma jornada
   alucinante que cruza raízes antigas e laços humanos, com passagens hipnóticas
