@@ -19,9 +19,9 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
         display: flex; 
         justify-content: space-between; 
         align-items: center; 
-        padding: 22px 50px;  /* Ajuste de padding */
+        padding: 22px 50px;  
         background: #fff; 
-        border-bottom: 1px solid var(--border-color); /* Ajuste da borda */
+        border-bottom: 1px solid var(--border-color); 
         position: sticky; 
         top: 0; 
         z-index: 9999; 
@@ -29,7 +29,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
 
     .logo { 
         font-family: 'Playfair Display', serif; 
-        font-size: 26px;  /* Ajuste do tamanho da fonte */
+        font-size: 26px;  
         font-weight: 700; 
         text-decoration: none; 
         color: var(--text); 
@@ -37,13 +37,13 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
     
     .search-wrapper { 
         position: relative; 
-        width: 300px;  /* Ajuste do tamanho do campo de busca */
+        width: 300px;  
     }
 
     #top-search {
         width: 100%; 
-        padding: 8px 15px; /* Ajuste de padding */
-        border-radius: 20px;  /* Ajuste do raio da borda */
+        padding: 8px 15px; 
+        border-radius: 20px;  
         border: 1px solid #ddd; 
         outline: none; 
         font-size: 14px;
@@ -55,14 +55,14 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
         left: 0; 
         right: 0;
         background: white; 
-        border-radius: 8px; /* Ajuste do raio da borda */
+        border-radius: 8px; 
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         max-height: 400px; 
         overflow-y: auto; 
         display: none;
     }
 
-    /* REMOVENDO O AZUL DOS LINKS */
+    
     a { 
         text-decoration: none; 
         color: inherit; 
@@ -83,7 +83,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
         margin-right: 12px; 
     }
 
-    /* GRID DE ÁLBUNS */
+    
     .container { 
         max-width: 1100px; 
         margin: 60px auto; 
@@ -108,7 +108,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
 
     .album-card img { 
         width: 100%; 
-        height: 200px;  /* Ajuste de altura */
+        height: 200px;  
         object-fit: cover; 
         border-radius: 10px; 
         box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
@@ -177,7 +177,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
 </header>
 
 <main class="container">
-   <h2>Lançamentos de 2026</h2>
+   <h2>Críticas de 2026</h2>
 
 <div class="album-grid">
   {% for disco in collections.meusDiscos %}
@@ -189,7 +189,7 @@ title: "DiscoAvaliadoBR • Site de críticas de álbuns"
   {% endfor %}
 </div>
 
-<h2>2025 e anteriores</h2>
+<h2>Críticas de 2025 e anteriores</h2>
 
 <div class="album-grid">
   {% for disco in collections.discosArquivados %}
