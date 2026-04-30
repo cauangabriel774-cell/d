@@ -3,6 +3,7 @@ layout: layout.njk
 date: 2026-04-30T09:12:00
 album: Equilibrium
 artista: Anitta
+foto_artista: /ArtistaFotos/anitta.jpg
 frase_impacto: Em "Equilibrium", Anitta embarca numa busca espiritual,
   entrelaçando tradições antigas e crescimento individual. A artista explora
   sonoridades que viajam do pop afrobeat ao ijexá envolvente, conduzindo quem
