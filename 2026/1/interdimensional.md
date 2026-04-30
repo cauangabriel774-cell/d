@@ -3,6 +3,7 @@ layout: layout.njk
 date: 2026-04-29T22:35:00
 album: Interdimensional
 artista: Guilherme Arantes
+foto_artista: /ArtistaFotos/guilherme-arantes.jpg
 frase_impacto: Em "Interdimensional", Guilherme Arantes guia quem ouve por uma
   jornada sensível e pessoal, onde o piano marcante e o timbre único se unem em
   texturas de MPB apaixonada, misturando o individual e o coletivo numa vivência
