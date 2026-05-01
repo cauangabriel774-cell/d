@@ -3,6 +3,7 @@ layout: layout.njk
 date: 2026-04-30T21:17:00
 album: Wilza
 artista: Wilza
+foto_artista: /ArtistaFotos/wilzabanda.jpg
 frase_impacto: No álbum "Wilza", a banda que leva o mesmo nome se aprofunda no
   estilo punk-groove para entrelaçar um deboche político com atmosferas
   psicodélicas, levando o ouvinte por uma experiência experimental em que o
