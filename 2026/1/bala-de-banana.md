@@ -3,6 +3,7 @@ layout: layout.njk
 date: 2026-05-01T13:30:00
 album: BALA DE BANANA
 artista: OTTOPAPI
+foto_artista: /ArtistaFotos/ottopapi.jpg
 frase_impacto: Em "BALA DE BANANA", OTTOPAPI traz de volta a irreverência do
   rock nacional dos anos 90, filtrada pelo olhar do indie atual, fazendo do
   turbilhão da juventude nas cidades um protesto adorável, irônico e
