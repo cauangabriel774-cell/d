@@ -3,6 +3,7 @@ layout: layout.njk
 date: 2026-05-03T11:13:00
 album: BRIO
 artista: RANCORE
+foto_artista: /ArtistaFotos/rancore.jpg
 frase_impacto: Em "BRIO", o RANCORE está de volta, trazendo um som punk rock
   melódico que equilibra fúria e ponderação, guiando-nos por uma busca de
   autoconhecimento e triunfo pessoal.
