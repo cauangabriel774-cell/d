@@ -3,6 +3,7 @@ layout: layout.njk
 date: 2026-05-03T14:58:00
 album: Adeus Atlântico
 artista: Bemti
+foto_artista: /ArtistaFotos/bemti.jpg
 frase_impacto: Em "Adeus Atlântico", Bemti nos leva a um passeio pela MPB atual
   e indie pop, criando um balanço entre a suavidade e o mergulho interior. As
   parcerias bem pensadas e as inovações discretas mostram um caminho de busca
