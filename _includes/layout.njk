@@ -18,7 +18,7 @@ templateEngineOverride: njk, md
     <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">    
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="DiscoAvaliadoBR">
-    <meta property="article:published_time" content="{{ page.date.toISOString() }}">
+    <meta property="article:published_time" content="{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}">    
     <meta property="article:author" content="Gabriel Silva">
     <meta property="og:locale" content="pt_BR">
 
@@ -381,8 +381,8 @@ templateEngineOverride: njk, md
 
 <div class="meta-info">
     Por Gabriel Silva - 
-    <time datetime="{{ page.date.toISOString() }}">
-        {{ date | htmlDateString if date else page.date | htmlDateString }}
+    <time datetime="{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}">
+        {{ data_postagem | htmlDateString if data_postagem else page.date | htmlDateString }}
     </time>
 </div>
 
@@ -449,7 +449,7 @@ templateEngineOverride: njk, md
     "@type": "Organization",
     "name": "DiscoAvaliadoBR"
   },
-  "datePublished": "{{ page.date.toISOString() }}"
+  "datePublished": "{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}"
 }
 </script>
 
