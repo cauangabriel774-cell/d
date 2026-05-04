@@ -38,27 +38,33 @@ module.exports = function(eleventyConfig) {
     return Object.values(map);
   });
 
-  
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-  return collectionApi.getAll()
-    .filter(i => i.data.album)
-    .filter(i => !i.data.archive) 
-    .sort((a, b) => {
-      
-      const dateA = new Date(a.data.data_postagem || a.date || 0);
-      const dateB = new Date(b.data.data_postagem || b.date || 0);
-      return dateB - dateA; 
-    });
+    return collectionApi.getAll()
+      .filter(i => i.data.album)
+      .filter(i => !i.data.archive) 
+      .sort((a, b) => {
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+        return dateB - dateA;
+      });
   });
 
-  
   eleventyConfig.addCollection("discosArquivados", function(collectionApi) {
-  return collectionApi.getAll()
-    .filter(i => i.data.album)
-    .filter(i => i.data.archive === true) 
-    .sort((a, b) => {
-      const dateA = new Date(a.data.data_postagem || a.date || 0);
-      const dateB = new Date(b.data.data_postagem || b.date || 0);
-      return dateB - dateA;
-    });
+    return collectionApi.getAll()
+      .filter(i => i.data.album)
+      .filter(i => i.data.archive === true) 
+      .sort((a, b) => {
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+        return dateB - dateA;
+      });
   });
+
+  return {
+    dir: {
+      input: ".",
+      output: "_site",
+      includes: "_includes"
+    }
+  };
+};
