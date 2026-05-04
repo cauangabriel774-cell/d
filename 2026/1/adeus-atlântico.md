@@ -1,6 +1,6 @@
 ---
 layout: layout.njk
-date: 2026-05-03T14:58:00
+data_postagem: 2026-05-03T14:58:00
 album: Adeus Atlântico
 artista: Bemti
 foto_artista: /ArtistaFotos/bemti.jpg
