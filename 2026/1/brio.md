@@ -1,6 +1,6 @@
 ---
 layout: layout.njk
-date: 2026-05-03T11:13:00
+data_postagem: 2026-05-03T11:13:00
 album: BRIO
 artista: RANCORE
 foto_artista: /ArtistaFotos/rancore.jpg
