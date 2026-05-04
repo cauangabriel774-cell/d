@@ -5,25 +5,23 @@ backend:
 media_folder: "Imagens"
 public_folder: "/Imagens"
 
-- name: "reviews_2026_1"
-    label: "Reviews 2026 (Jan-Jul)"
-    folder: "2026/1"
-    create: true
-    slug: "{{album | slugify}}"
-    extension: "md"
-    format: "frontmatter"
-
-    fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
-
-      - label: "Data da Postagem"
-        name: "data_postagem" 
-        widget: "datetime"
-        format: "YYYY-MM-DDTHH:mm:ss"
-        date_format: "DD/MM/YYYY"
-        time_format: "HH:mm"
-
-      - { label: "Álbum", name: "album", widget: "string" }
+collections:
+  - name: "reviews_2026_1"
+    label: "Reviews 2026 (Jan-Jul)"
+    folder: "2026/1"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
       - { label: "Artista", name: "artista", widget: "string" }
       - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
       - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
@@ -38,15 +36,11 @@ public_folder: "/Imagens"
   - name: "artistas"
     label: "Artistas"
     folder: "src/artistas"
-    filter: { field: "artista", value: ".*" }
-    nested:
-      depth: 2
     create: true
     slug: "{{slug}}"
     path: "{{artista | slugify}}/index.md"
     extension: "md"
     format: "frontmatter"
-
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "artista-layout.njk" }
       - { label: "Nome do Artista", name: "artista", widget: "string" }
