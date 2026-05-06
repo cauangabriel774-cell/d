@@ -3,6 +3,7 @@ layout: layout.njk
 data_postagem: 2026-05-06T12:18:00
 album: KUCZYNSKI
 artista: Vivian Kuczynski
+foto_artista: /ArtistaFotos/vivian-kuczynski.jpg
 frase_impacto: '"KUCZYNSKI" transforma o eletropop em uma trajetória de vida
   descontraída, demonstrando isso com batidas repetitivas do gênero synthpop.
   Porém, apenas com seus sintetizadores, Vivian Kuczynski consegue usufruir das
