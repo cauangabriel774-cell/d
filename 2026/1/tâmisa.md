@@ -3,7 +3,7 @@ layout: layout.njk
 data_postagem: 2026-05-08T16:15:00
 album: Tâmisa
 artista: Tietê
-foto_artista: /ArtistaFotos/tamisa.jpg
+foto_artista: /ArtistaFotos/tiete.jpg
 frase_impacto: “Tâmisa” pega a MPB dos anos oitenta, joga no jazz e no rock, e
   transforma tudo em algo urbano, íntimo e surpreendentemente vivo.
 data_lancamento: 27 de fevereiro de 2026
