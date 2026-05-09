@@ -34,56 +34,12 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
         text-decoration: none; 
         color: var(--text); 
     }
-    
-    .search-wrapper { 
-        position: relative; 
-        width: 300px;  
-    }
 
-    #top-search {
-        width: 100%; 
-        padding: 8px 15px; 
-        border-radius: 20px;  
-        border: 1px solid #ddd; 
-        outline: none; 
-        font-size: 14px;
-    }
-
-    #search-results {
-        position: absolute; 
-        top: 45px; 
-        left: 0; 
-        right: 0;
-        background: white; 
-        border-radius: 8px; 
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        max-height: 400px; 
-        overflow-y: auto; 
-        display: none;
-    }
-
-    
     a { 
         text-decoration: none; 
         color: inherit; 
     }
 
-    .result-item { 
-        display: flex; 
-        align-items: center; 
-        padding: 10px; 
-        border-bottom: 1px solid #eee; 
-    }
-
-    .result-item img { 
-        width: 40px; 
-        height: 40px; 
-        border-radius: 4px; 
-        object-fit: cover; 
-        margin-right: 12px; 
-    }
-
-    
     .container { 
         max-width: 1100px; 
         margin: 60px auto; 
@@ -132,46 +88,15 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
         font-size: 14px; 
     }
 
-.cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #111;
-            color: #fff;
-            padding: 18px 25px;
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 9999;
-            font-size: 14px;
-        }
-
-        .cookie-banner button {
-            background: #fff;
-            color: #111;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .cookie-banner button:hover {
-            transform: scale(1.05);
-        }
-
-footer {
-            margin-top: 100px;
-            padding: 60px 20px;
-            text-align: center;
-            background: white;
-            border-top: 1px solid var(--border-color);
-            color: #888;
-            font-size: 13px;
-        }
-
+    footer {
+        margin-top: 100px;
+        padding: 60px 20px;
+        text-align: center;
+        background: white;
+        border-top: 1px solid var(--border-color);
+        color: #888;
+        font-size: 13px;
+    }
 </style>
 </head>
 
@@ -179,37 +104,32 @@ footer {
 
 <header>
     <a href="/" class="logo">DiscoAvaliadoBR</a>
-    <div class="search-wrapper">
-        <input type="text" id="top-search" placeholder="Buscar..." onkeyup="doSearch()">
-        <div id="search-results"></div>
-    </div>
-    
 </header>
 
 <main class="container">
-   <h2>Críticas a álbuns de 2026</h2>
+    <h2>Críticas a álbuns de 2026</h2>
 
-<div class="album-grid">
-  {% for disco in collections.meusDiscos %}
-    <a href="{{ disco.url }}" class="album-card">
-      <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
-      <h3>{{ disco.data.album }}</h3>
-      <p>{{ disco.data.artista }}</p>
-    </a>
-  {% endfor %}
-</div>
+    <div class="album-grid">
+        {% for disco in collections.meusDiscos %}
+            <a href="{{ disco.url }}" class="album-card">
+                <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
+                <h3>{{ disco.data.album }}</h3>
+                <p>{{ disco.data.artista }}</p>
+            </a>
+        {% endfor %}
+    </div>
 
-<h2>Críticas a álbuns de 2025 e anteriores</h2>
+    <h2>Críticas a álbuns de 2025 e anteriores</h2>
 
-<div class="album-grid">
-  {% for disco in collections.discosArquivados %}
-    <a href="{{ disco.url }}" class="album-card">
-      <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
-      <h3>{{ disco.data.album }}</h3>
-      <p>{{ disco.data.artista }}</p>
-    </a>
-  {% endfor %}
-</div>
+    <div class="album-grid">
+        {% for disco in collections.discosArquivados %}
+            <a href="{{ disco.url }}" class="album-card">
+                <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
+                <h3>{{ disco.data.album }}</h3>
+                <p>{{ disco.data.artista }}</p>
+            </a>
+        {% endfor %}
+    </div>
 </main>
 
 <footer>
@@ -217,70 +137,5 @@ footer {
     Todos os direitos reservados.
 </footer>
 
-<script>
-    
-    const database = [
-        {% for item in collections.all %}
-            {% if item.data.album %}
-            {
-                title: "{{ item.data.album }}",
-                artist: "{{ item.data.artista }}",
-                url: "{{ item.url }}",
-                img: "{{ item.data.imagem }}"
-            },
-            {% endif %}
-        {% endfor %}
-    ];
-
-    function doSearch() {
-        const searchQuery = document.getElementById("top-search").value.toLowerCase();
-        const searchResults = document.getElementById("search-results");
-
-        
-        if (searchQuery.length < 3) {
-            searchResults.style.display = 'none';
-            return;
-        }
-
-        
-        searchResults.innerHTML = '';
-
-        
-        const filteredResults = database.filter(item => 
-            item.title.toLowerCase().includes(searchQuery) || 
-            item.artist.toLowerCase().includes(searchQuery)
-        );
-
-        if (filteredResults.length > 0) {
-            searchResults.style.display = 'block';
-            filteredResults.forEach(item => {
-                const resultItem = document.createElement('div');
-                resultItem.classList.add('result-item');
-                resultItem.innerHTML = `
-                    <a href="${item.url}">
-                        <img src="${item.img}" alt="${item.title}">
-                        <div>
-                            <h4>${item.title}</h4>
-                            <p>${item.artist}</p>
-                        </div>
-                    </a>
-                `;
-                searchResults.appendChild(resultItem);
-            });
-        } else {
-            searchResults.style.display = 'none'; 
-        }
-    }
-
- function acceptCookies() {
-        document.getElementById("cookie-banner").style.display = "none";
-        localStorage.setItem("cookiesAccepted", "true");
-    }
-
-    
-    window.addEventListener("load", function() {
-        if (!localStorage.getItem("cookiesAccepted")) {
-            document.getElementById("cookie-banner").style.display = "flex";
-        }
-    });
-</script>
+</body>
+</html>
