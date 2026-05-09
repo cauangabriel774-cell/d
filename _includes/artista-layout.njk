@@ -152,19 +152,6 @@
             border-top: 1px solid #eee;
         }
 
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #111;
-            color: #fff;
-            padding: 15px 25px;
-            display: none;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         @media (max-width: 768px) {
             .artist-banner { height: 400px; }
             .artist-text h1 { font-size: 38px; }
@@ -178,7 +165,7 @@
 <header>
     <div class="logo" onclick="window.location.href='/'">DiscoAvaliadoBR</div>
     <nav>
-    <a href="/">Início</a>        
+        <a href="/">Início</a>        
     </nav>
 </header>
 
@@ -199,7 +186,7 @@
         {% for post in collections.meusDiscos %}
             {% set lista = collections.meusDiscos | filter(attribute="data.artista", value=artista) %}
 
-{% for post in lista %}
+        {% for post in lista %}
             <a href="{{ post.url }}" class="album-link">
                 <div class="album-card">
                     <img src="{{ post.data.imagem }}" alt="{{ post.data.album }}">
@@ -216,27 +203,9 @@
 
 </main>
 
-<div id="cookie-banner" class="cookie-banner">
-    <div>Este site usa cookies para melhorar sua experiência.</div>
-    <button onclick="acceptCookies()">Aceitar</button>
-</div>
-
 <footer>
     DiscoAvaliadoBR © {{ "now" | date("yyyy") }} • Projeto independente
 </footer>
-
-<script>
-function acceptCookies() {
-    document.getElementById("cookie-banner").style.display = "none";
-    localStorage.setItem("cookiesAccepted", "true");
-}
-
-window.addEventListener("load", function() {
-    if (!localStorage.getItem("cookiesAccepted")) {
-        document.getElementById("cookie-banner").style.display = "flex";
-    }
-});
-</script>
 
 </body>
 </html>
