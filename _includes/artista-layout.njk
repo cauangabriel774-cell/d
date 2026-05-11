@@ -11,7 +11,6 @@
 
     <meta name="description" content="Veja análises e notas dos álbuns de {{ artista }} no DiscoAvaliadoBR.">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="profile">
     <meta property="og:title" content="{{ artista }} no DiscoAvaliadoBR">
     <meta property="og:description" content="Veja as notas e reviews dos álbuns de {{ artista }}">
@@ -42,6 +41,8 @@
             font-size: 26px;
             font-weight: 700;
             cursor: pointer;
+            text-decoration: none;
+            color: #111;
         }
 
         nav a {
@@ -96,6 +97,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 25px;
+            margin-bottom: 60px;
         }
 
         .album-link {
@@ -127,20 +129,35 @@
             text-align: center;
         }
 
+        .album-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            margin: 0 0 6px 0;
+        }
+
         .score {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
+            font-size: 14px;
         }
 
         .meta {
             font-size: 12px;
             color: #888;
+            margin-top: 4px;
         }
 
-        .bio-section {
-            margin-top: 100px;
-            padding: 60px 0;
-            border-top: 1px solid #eee;
+        .ep-badge {
+            display: inline-block;
+            background: #111;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
 
         footer {
@@ -163,9 +180,9 @@
 <body>
 
 <header>
-    <div class="logo" onclick="window.location.href='/'">DiscoAvaliadoBR</div>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
     <nav>
-        <a href="/">Início</a>        
+        <a href="/">Início</a>
     </nav>
 </header>
 
@@ -181,31 +198,47 @@
 <main class="container">
 
     <h2>Álbuns Avaliados</h2>
-
     <div class="album-grid">
-        {% for post in collections.meusDiscos %}
-            {% set lista = collections.meusDiscos | filter(attribute="data.artista", value=artista) %}
-
-        {% for post in lista %}
+        {% set albumsDoArtista = collections.meusDiscos | selectattr("data.artista", "equalto", artista) | list %}
+        {% for post in albumsDoArtista %}
             <a href="{{ post.url }}" class="album-link">
                 <div class="album-card">
                     <img src="{{ post.data.imagem }}" alt="{{ post.data.album }}">
                     <div class="album-info">
-                        <h3>{{ date | htmlDateString if date else page.date | htmlDateString }}</h3>
+                        <h3>{{ post.data.album }}</h3>
                         <div class="score">Ver review</div>
-                        <div class="meta">{{ post.data.date }} • {{ post.data.genero }}</div>
+                        <div class="meta">{{ post.data.data_lancamento }} • {{ post.data.genero }}</div>
                     </div>
                 </div>
             </a>
-            {% endif %}
         {% endfor %}
     </div>
+
+    {% set epsDoArtista = collections.meusEPs | selectattr("data.artista", "equalto", artista) | list %}
+    {% if epsDoArtista.length %}
+        <h2>EPs Avaliados</h2>
+        <div class="album-grid">
+            {% for ep in epsDoArtista %}
+                <a href="{{ ep.url }}" class="album-link">
+                    <div class="album-card">
+                        <img src="{{ ep.data.imagem }}" alt="{{ ep.data.album }}">
+                        <div class="album-info">
+                            <span class="ep-badge">EP</span>
+                            <h3>{{ ep.data.album }}</h3>
+                            <div class="score">Ver review</div>
+                            <div class="meta">{{ ep.data.data_lancamento }} • {{ ep.data.genero }}</div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 </main>
 
 <footer>
-    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira
-Todos os direitos reservados.
+    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
+    Todos os direitos reservados.
 </footer>
 
 </body>
