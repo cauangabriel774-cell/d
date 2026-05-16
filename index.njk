@@ -72,18 +72,6 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
         font-size: 13px; 
         color: #666; 
     }
-    .ep-badge {
-        display: inline-block;
-        background: #111;
-        color: #fff;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        padding: 2px 8px;
-        border-radius: 4px;
-        margin-bottom: 4px;
-        text-transform: uppercase;
-    }
     nav a { 
         font-weight: 600; 
         font-size: 14px; 
@@ -113,14 +101,9 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
                 <p>{{ disco.data.artista }}</p>
             </a>
         {% endfor %}
-    </div>
-
-    <h2>EPs Avaliados</h2>
-    <div class="album-grid">
         {% for ep in collections.meusEPs %}
             <a href="{{ ep.url }}" class="album-card">
                 <img src="{{ ep.data.imagem }}" alt="{{ ep.data.album }}">
-                <span class="ep-badge">EP</span>
                 <h3>{{ ep.data.album }}</h3>
                 <p>{{ ep.data.artista }}</p>
             </a>
