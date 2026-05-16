@@ -115,19 +115,6 @@ templateEngineOverride: njk, md
         .album-data p { margin: 5px 0; }
         .album-data strong { color: #000; }
 
-        .ep-badge {
-            display: inline-block;
-            background: #111;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            padding: 3px 10px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
         .score-circle {
             font-family: 'Playfair Display', serif;
             font-size: 72px;
@@ -288,7 +275,7 @@ templateEngineOverride: njk, md
         </div>
 
         <div class="album-data">
-            <span class="ep-badge">EP</span>
+            <p><strong>EP:</strong> {{ album }}</p>
             <p><strong>ARTISTA:</strong> {{ artista }}</p>
             <p><strong>EP:</strong> {{ album }}</p>
             <p><strong>LANÇAMENTO:</strong> {{ data_lancamento }}</p>
