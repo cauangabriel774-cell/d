@@ -31,6 +31,258 @@ collections:
       - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
       - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
 
+  - name: "reviews_2025_2"
+    label: "Reviews 2025 (Jul-Dez)"
+    folder: "2025/2"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2025_1"
+    label: "Reviews 2025 (Jan-Jun)"
+    folder: "2025/1"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2024_2"
+    label: "Reviews 2024 (Jul-Dez)"
+    folder: "2024/2"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2024_1"
+    label: "Reviews 2024 (Jan-Jun)"
+    folder: "2024/1"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2023_2"
+    label: "Reviews 2023 (Jul-Dez)"
+    folder: "2023/2"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2023_1"
+    label: "Reviews 2023 (Jan-Jun)"
+    folder: "2023/1"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2022_2"
+    label: "Reviews 2022 (Jul-Dez)"
+    folder: "2022/2"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2022_1"
+    label: "Reviews 2022 (Jan-Jun)"
+    folder: "2022/1"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
+  - name: "reviews_2021_2"
+    label: "Reviews 2021 (Jul-Dez)"
+    folder: "2021/2"
+    create: true
+    slug: "{{album | slugify}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layout.njk" }
+      - { label: "Arquivado", name: "archive", widget: "hidden", default: true }
+      - label: "Data da Postagem"
+        name: "data_postagem"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ss"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+      - { label: "Álbum", name: "album", widget: "string" }
+      - { label: "Artista", name: "artista", widget: "string" }
+      - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
+      - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
+      - { label: "Gênero", name: "genero", widget: "string" }
+      - { label: "Duração", name: "duracao", widget: "string" }
+      - { label: "Nota (0-100)", name: "nota", widget: "number" }
+      - { label: "Capa do Álbum", name: "imagem", widget: "image" }
+      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
+      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
+      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+
   - name: "eps"
     label: "EPs"
     folder: "eps"
