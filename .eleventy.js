@@ -58,6 +58,15 @@ module.exports = function(eleventyConfig) {
         return dateB - dateA;
       });
   });
+  eleventyConfig.addCollection("tudo2026", function(collectionApi) {
+    return collectionApi.getAll()
+      .filter(i => i.data.album && !i.data.archive)
+      .sort((a, b) => {
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+        return dateB - dateA;
+      });
+  });
   return {
     dir: {
       input: ".",
