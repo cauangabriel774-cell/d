@@ -120,7 +120,7 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
             {% endif %}
         {% endfor %}
     </div>
-    {% if collections.tudo2026.length > 15 %}
+    {% if collections.tudo2026 | length > 15 %}
         <a href="/todos/2026/" class="ver-todos">Ver todos os álbuns de 2026 →</a>
     {% endif %}
 
@@ -136,7 +136,7 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
             {% endif %}
         {% endfor %}
     </div>
-    {% if collections.discosArquivados.length > 15 %}
+    {% if collections.discosArquivados | length > 15 %}
         <a href="/todos/anteriores/" class="ver-todos">Ver todos os álbuns anteriores →</a>
     {% endif %}
 </main>
