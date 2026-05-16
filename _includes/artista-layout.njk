@@ -17,9 +17,15 @@
     <meta property="og:image" content="{{ foto_artista }}">
     <meta property="og:url" content="{{ page.url | url }}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --border-color: #e5e2d9;
+        }
+
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
@@ -31,9 +37,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            border-bottom: 1px solid #ddd;
+            padding: 22px 50px;
+            border-bottom: 1px solid var(--border-color);
             background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
@@ -41,16 +50,21 @@
             font-size: 26px;
             font-weight: 700;
             cursor: pointer;
+            user-select: none;
             text-decoration: none;
-            color: #111;
+            color: inherit;
         }
 
         nav a {
-            margin-left: 25px;
+            margin-left: 28px;
             text-decoration: none;
-            color: #111;
+            color: #222;
+            font-weight: 500;
             font-size: 15px;
+            transition: 0.2s;
         }
+
+        nav a:hover { opacity: 0.6; }
 
         .artist-banner {
             height: 600px;
@@ -173,6 +187,7 @@
             .artist-banner { height: 400px; }
             .artist-text h1 { font-size: 38px; }
             .artist-content { padding: 30px; }
+            header { padding: 15px 25px; }
         }
     </style>
 </head>
