@@ -13,7 +13,6 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
 <style>
     :root { --bg: #f8f6f2; --text: #111; }
     body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
-    
     header { 
         display: flex; 
         justify-content: space-between; 
@@ -94,18 +93,11 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
 <main class="container">
     <h2>Críticas a álbuns de 2026</h2>
     <div class="album-grid">
-        {% for disco in collections.meusDiscos %}
-            <a href="{{ disco.url }}" class="album-card">
-                <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
-                <h3>{{ disco.data.album }}</h3>
-                <p>{{ disco.data.artista }}</p>
-            </a>
-        {% endfor %}
-        {% for ep in collections.meusEPs %}
-            <a href="{{ ep.url }}" class="album-card">
-                <img src="{{ ep.data.imagem }}" alt="{{ ep.data.album }}">
-                <h3>{{ ep.data.album }}</h3>
-                <p>{{ ep.data.artista }}</p>
+        {% for item in collections.tudo2026 %}
+            <a href="{{ item.url }}" class="album-card">
+                <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
+                <h3>{{ item.data.album }}</h3>
+                <p>{{ item.data.artista }}</p>
             </a>
         {% endfor %}
     </div>
