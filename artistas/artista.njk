@@ -13,203 +13,170 @@ permalink: "/artistas/{{ artista.slug }}/index.html"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ artista.nome }} • Discografia e Críticas • DiscoAvaliadoBR</title>
+    <title>{{ artista.nome }} - Discografia e Críticas - DiscoAvaliadoBR</title>
     <meta name="description" content="Veja todas as avaliações dos álbuns de {{ artista.nome }}.">
 
     <meta property="og:type" content="profile">
     <meta property="og:title" content="{{ artista.nome }} no DiscoAvaliadoBR">
     <meta property="og:description" content="Veja as notas e reviews dos álbuns de {{ artista.nome }}">
-
-    {% set foto = artista.discos[0].data.imagem %}
-
-    <meta property="og:image" content="{{ foto }}">
+    <meta property="og:image" content="{{ artista.foto_artista }}">
     <meta property="og:url" content="/artistas/{{ artista.slug }}/">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-    body { margin: 0; font-family: Inter, sans-serif; background: #fff; color: #111; }
+        :root { --border-color: #e5e2d9; }
 
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;  /* Alinha o conteúdo verticalmente */
-        padding: 22px 50px;   /* Padding original */
-        border-bottom: 1px solid var(--border-color); /* Cor de borda original */
-        background: white;    /* Fundo branco */
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #fff; color: #111; }
 
-    .logo {
-        font-family: 'Playfair Display', serif; /* Mantém a fonte específica para o logo */
-        font-size: 26px;  /* Tamanho da fonte do logo */
-        font-weight: 700; /* Peso da fonte */
-        cursor: pointer;
-        user-select: none;
-        text-decoration: none;
-        color: inherit;  /* Cor herdada */
-    }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    nav a {
-        margin-left: 28px;
-        text-decoration: none;
-        color: #222;
-        font-weight: 500;
-        font-size: 15px;
-        transition: 0.2s;
-    }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+            text-decoration: none;
+            color: inherit;
+        }
 
-    nav a:hover {
-        opacity: 0.6;
-    }
+        nav a {
+            margin-left: 28px;
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.2s;
+        }
 
-    .search-container {
-        position: relative;
-        width: 300px;
-    }
+        nav a:hover { opacity: 0.6; }
 
-    #global-search {
-        width: 100%;
-        padding: 8px 15px;
-        border-radius: 20px;
-        border: 1px solid #ddd;
-        font-family: 'Inter', sans-serif;
-        outline: none;
-    }
+        .artist-banner {
+            height: 500px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.7)),
+                url('{{ artista.foto_artista }}');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+        }
 
-    #search-results-box {
-        position: absolute;
-        top: 45px;
-        left: 0;
-        right: 0;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        max-height: 400px;
-        overflow-y: auto;
-        z-index: 9999;
-        display: none; /* Escondido por padrão */
-    }
+        .artist-content {
+            padding: 60px;
+            color: white;
+        }
 
-    .search-item-result {
-        padding: 10px 15px;
-        border-bottom: 1px solid #eee;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: #333;
-    }
+        .artist-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            margin: 0;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+        }
 
-    .search-item-result:hover {
-        background: #f9f9f9;
-    }
+        .artist-content p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
 
-    .search-item-result img {
-        width: 40px;
-        height: 40px;
-        border-radius: 4px;
-        object-fit: cover;
-    }
+        .container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
 
-    .search-item-result div {
-        font-size: 13px;
-        line-height: 1.2;
-    }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 40px;
+            border-left: 5px solid #111;
+            padding-left: 15px;
+        }
 
-    .search-item-result strong {
-        display: block;
-        font-size: 14px;
-    }
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
 
-    .artist-banner {
-        height: 500px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)),
-        url('{{ artista.foto_artista }}');
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        align-items: flex-end;
-    }
+        .album-card {
+            text-decoration: none;
+            color: inherit;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: 0.25s;
+        }
 
-    .artist-content {
-        padding: 40px;
-        color: white;
-    }
+        .album-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+        }
 
-    .artist-content h1 {
-        font-size: 60px;
-        margin: 0;
-    }
+        .album-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
 
-    .artist-content p {
-        font-size: 18px;
-        opacity: 0.9;
-    }
+        .album-info {
+            padding: 12px;
+            text-align: center;
+        }
 
-    .container {
-        max-width: 1100px;
-        margin: 60px auto;
-        padding: 0 20px;
-    }
+        .album-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            margin: 0 0 6px 0;
+        }
 
-    h2 {
-        border-left: 4px solid #111;
-        padding-left: 10px;
-    }
+        .meta {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
 
-    .album-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-    }
+        footer {
+            margin-top: 80px;
+            padding: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
 
-    .album-card {
-        text-decoration: none;
-        color: inherit;
-        background: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        transition: 0.3s;
-    }
-
-    .album-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .album-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .album-info {
-        padding: 10px;
-        text-align: center;
-    }
-
-    .score {
-        font-weight: bold;
-    }
-</style>
+        @media (max-width: 768px) {
+            .artist-banner { height: 400px; }
+            .artist-content h1 { font-size: 38px; }
+            .artist-content { padding: 30px; }
+            header { padding: 15px 25px; }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
     <a href="/" class="logo">DiscoAvaliadoBR</a>
-
-    <div class="search-container">
-        <input type="text" id="global-search" placeholder="Buscar..." onkeyup="searchSite()">
-        <div id="search-results-box"></div>
-    </div>
-
     <nav>
-        <a href="/">Início</a>        
+        <a href="/">Início</a>
     </nav>
 </header>
-
 
 <div class="artist-banner">
     <div class="artist-content">
@@ -220,79 +187,25 @@ permalink: "/artistas/{{ artista.slug }}/index.html"
 
 <main class="container">
 
-<h2>Álbuns Avaliados</h2>
-
-<div class="album-grid">
-
-{% for disco in artista.discos | reverse %}
-    <a href="{{ disco.url }}" class="album-card">
-        <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
-        <div class="album-info">
-            <h3>{{ disco.data.album }}</h3>
-            <div>{{ disco.data.data_lancamento }}</div>
-        </div>
-    </a>
-{% endfor %}
-
-</div>
+    <h2>Álbuns Avaliados</h2>
+    <div class="album-grid">
+        {% for disco in artista.discos | reverse %}
+            <a href="{{ disco.url }}" class="album-card">
+                <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
+                <div class="album-info">
+                    <h3>{{ disco.data.album }}</h3>
+                    <div class="meta">{{ disco.data.data_lancamento }}</div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
 
 </main>
-<script>
-    
-    const searchData = [
-        {% for item in collections.all %}
-            {% if item.data.artista %}
-            {
-                title: "{{ item.data.album or item.data.artista }}",
-                subtitle: "{{ item.data.artista if item.data.album else 'Página do Artista' }}",
-                url: "{{ item.url }}",
-                img: "{{ item.data.imagem or item.data.foto_artista }}"
-            },
-            {% endif %}
-        {% endfor %}
-    ];
 
-    function searchSite() {
-        const input = document.getElementById('global-search');
-        const resultsBox = document.getElementById('search-results-box');
-        if (!input || !resultsBox) return;
+<footer>
+    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
+    Todos os direitos reservados.
+</footer>
 
-        const filter = input.value.toLowerCase();
-        
-        if (filter.length < 2) {
-            resultsBox.style.display = 'none';
-            return;
-        }
-
-        const filtered = searchData.filter(item => 
-            item.title.toLowerCase().includes(filter) || 
-            item.subtitle.toLowerCase().includes(filter)
-        ).slice(0, 10);
-
-        if (filtered.length > 0) {
-            resultsBox.innerHTML = filtered.map(item => `
-                <a href="${item.url}" class="search-item-result">
-                    <img src="${item.img || '/Imagens/default.png'}" alt="">
-                    <div>
-                        <strong>${item.title}</strong>
-                        <span>${item.subtitle}</span>
-                    </div>
-                </a>
-            `).join('');
-            resultsBox.style.display = 'block';
-        } else {
-            resultsBox.style.display = 'none';
-        }
-    }
-
-   
-    document.addEventListener('click', function(e) {
-        const container = document.querySelector('.search-container');
-        const resultsBox = document.getElementById('search-results-box');
-        if (container && !container.contains(e.target)) {
-            resultsBox.style.display = 'none';
-        }
-    });
-</script>
 </body>
 </html>
