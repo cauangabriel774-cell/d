@@ -9,7 +9,7 @@ data_lancamento: 14 de maio de 2026
 genero: Indie
 duracao: 39MIN (11 faixas)
 nota: 70
-imagem: https://hitsperdidos.com/wp-content/uploads/2026/05/Capa-do-album-22Cinema-Belico22-da-banda-sergipana-Cidade-Dormitorio-2026-por-Fabio-Aricawa-scaled.jpg
+imagem: /Imagens/cinemabelicocidade.jpg
 introducao: >-
   <p>O novo álbum dos Cidade Dormitório, denominado como <span
   class="highlight-album">"Cinema Bélico?"</span>, mergulha direto em um indie
