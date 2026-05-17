@@ -75,23 +75,6 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
         font-weight: 600; 
         font-size: 14px; 
     }
-    .ver-todos {
-        display: inline-block;
-        margin-top: 30px;
-        margin-bottom: 60px;
-        padding: 10px 28px;
-        border: 2px solid #111;
-        border-radius: 25px;
-        font-size: 14px;
-        font-weight: 600;
-        color: #111;
-        transition: 0.2s;
-        text-decoration: none;
-    }
-    .ver-todos:hover {
-        background: #111;
-        color: #fff;
-    }
     footer {
         margin-top: 100px;
         padding: 60px 20px;
@@ -120,9 +103,6 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
             {% endif %}
         {% endfor %}
     </div>
-    {% if collections.tudo2026 | length > 15 %}
-        <a href="/todos/2026/" class="ver-todos">Ver todos os álbuns de 2026 →</a>
-    {% endif %}
 
     <h2>Críticas a álbuns de 2025 e anteriores</h2>
     <div class="album-grid">
@@ -136,9 +116,6 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
             {% endif %}
         {% endfor %}
     </div>
-    {% if collections.discosArquivados | length > 15 %}
-        <a href="/todos/anteriores/" class="ver-todos">Ver todos os álbuns anteriores →</a>
-    {% endif %}
 </main>
 <footer>
     DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
