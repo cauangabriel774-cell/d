@@ -14,17 +14,17 @@ nota: 90
 imagem: /Imagens/funkgenerationanitta.jpg
 introducao: >-
   <p>Em 26 de abril de 2024, a cantora Anitta trouxe seu sexto álbum de estúdio,
-  <span=highlight-album>"Funk Generation"</span>. Nas palavras da própria
-  artista, o projeto “faz parte de quem eu sou”, refletindo sua forma de vida
-  dentro do gênero que a colocou onde ela está hoje. O caminho até o disco, no
-  entanto, foi marcado por problemas e mais problemas: uma primeira impressão
+  <span class="highlight-album">"Funk Generation"</span>. Nas palavras da
+  própria artista, o projeto “faz parte de quem eu sou”, refletindo sua forma de
+  vida dentro do gênero que a colocou onde ela está hoje. O caminho até o disco,
+  no entanto, foi marcado por problemas e mais problemas: uma primeira impressão
   negativa, singles que pareciam sem nexo, parcerias confusas e uma demonstração
   inicial do álbum que soava genérica e superficial, como se ela estivesse
   tentando criar um estereótipo do Brasil. “Só tem funk e futebol aqui”, foi o
   que disseram na época.
 
 
-  <p>Com uma sexta obra que muitos já davam como acabada antes mesmo do lançamento, Anitta conseguiu uma proeza: transformar todo esse caos em uma obra excelente. A seguir, apresento minha análise detalhada faixa a faixa e a visão geral do álbum <span=highlight-album>"Funk Generation"</span>.
+  <p>Com uma sexta obra que muitos já davam como acabada antes mesmo do lançamento, Anitta conseguiu uma proeza: transformar todo esse caos em uma obra excelente. A seguir, apresento minha análise detalhada faixa a faixa e a visão geral do álbum <span class="highlight-album">"Funk Generation"</span>.
 analise: >-
   <p>Iniciamos a obra <span=highlight-album>"Funk Generation"</span> com
   <span=highlight-song>"Lose Ya Breath"</span>, um funk ofegante que se
