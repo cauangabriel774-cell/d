@@ -1,7 +1,7 @@
 ---
 templateEngineOverride: njk, md
 ---
-{% set listaArtistas = artistas or (artista ? [artista] : []) %}
+{% set listaArtistas = artistas or [artista] %}
 
 <!DOCTYPE html>
 <html lang="pt-BR">
