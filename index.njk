@@ -75,6 +75,73 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
         font-weight: 600; 
         font-size: 14px; 
     }
+
+    /* MERECE OUVIR */
+    .merece-ouvir-header {
+        background: #c0392b;
+        color: #fff;
+        display: inline-block;
+        padding: 8px 24px;
+        border-radius: 6px;
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+    }
+
+    .merece-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 25px;
+        margin-bottom: 60px;
+    }
+
+    .merece-card {
+        text-align: center;
+        transition: 0.3s;
+        position: relative;
+    }
+
+    .merece-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .merece-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .merece-card h3 {
+        font-family: 'Playfair Display';
+        font-size: 17px;
+        margin: 12px 0 4px;
+        color: var(--text);
+    }
+
+    .merece-card p {
+        margin: 0;
+        font-size: 13px;
+        color: #666;
+    }
+
+    .nota-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #c0392b;
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 15px;
+        padding: 4px 10px;
+        border-radius: 6px;
+    }
+
     footer {
         margin-top: 100px;
         padding: 60px 20px;
@@ -96,6 +163,19 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
     <a href="/" class="logo">DiscoAvaliadoBR</a>
 </header>
 <main class="container">
+
+    <div class="merece-ouvir-header">Merece Ouvir</div>
+    <div class="merece-grid">
+        {% for item in collections.top2026 %}
+            <a href="{{ item.url }}" class="merece-card">
+                <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
+                <span class="nota-badge">{{ item.data.nota / 10 }}</span>
+                <h3>{{ item.data.album }}</h3>
+                <p>{{ item.data.artista | todosArtistas(item.data.artistas_extras) }}</p>
+            </a>
+        {% endfor %}
+    </div>
+
     <h2>Críticas recentes</h2>
     <div class="album-grid">
         {% for item in collections.todasReviews %}
@@ -103,9 +183,7 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
                 <a href="{{ item.url }}" class="album-card">
                     <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
                     <h3>{{ item.data.album }}</h3>
-                    <p>
-                        {{ item.data.artista }}{% if item.data.artistas_extras %}{% for extra in item.data.artistas_extras %}, {{ extra.nome }}{% endfor %}{% endif %}
-                    </p>
+                    <p>{{ item.data.artista | todosArtistas(item.data.artistas_extras) }}</p>
                 </a>
             {% endif %}
         {% endfor %}
