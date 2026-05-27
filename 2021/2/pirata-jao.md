@@ -2,7 +2,6 @@
 layout: layout.njk
 artista: "Jão"
 date: 2026-04-20
-foto_artista: /ArtistaFotos/jao.jpg
 album: "Pirata"
 archive: true
 frase_impacto: "\"Pirata\" nos leva por uma jornada sentimental turbulenta e verdadeira, com cada música atuando como uma maré que oscila entre a ruína e um novo começo.\""
