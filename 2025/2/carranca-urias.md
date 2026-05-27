@@ -4,7 +4,6 @@ album: "Carranca"
 archive: true
 artista: "Urias"
 date: 2026-04-23
-foto_artista: /ArtistaFotos/urias.jpg
 frase_impacto: "\"Carranca\", embarcamos numa busca profunda, marcada pela força e superação. Cada música surge como voz ativa, transformando e dando novo sentido à história, unindo o ontem e o hoje numa única essência."
 data_lancamento: "7 de outubro de 2025"
 genero: "MPB"
