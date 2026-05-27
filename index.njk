@@ -93,24 +93,15 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
 <main class="container">
     <h2>Críticas recentes</h2>
     <div class="album-grid">
-        {% for item in collections.tudo2026 %}
-            {% if loop.index <= 15 %}
-                <a href="{{ item.url }}" class="album-card">
-                    <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
-                    <h3>{{ item.data.album }}</h3>
-                    <p>{{ item.data.artista }}</p>
-                </a>
-            {% endif %}
-        {% endfor %}
-        {% for disco in collections.discosArquivados %}
-            {% if loop.index <= 15 %}
-                <a href="{{ disco.url }}" class="album-card">
-                    <img src="{{ disco.data.imagem }}" alt="{{ disco.data.album }}">
-                    <h3>{{ disco.data.album }}</h3>
-                    <p>{{ disco.data.artista }}</p>
-                </a>
-            {% endif %}
-        {% endfor %}
+       {% for item in collections.todasReviews %}
+    {% if loop.index <= 15 %}
+        <a href="{{ item.url }}" class="album-card">
+            <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
+            <h3>{{ item.data.album }}</h3>
+            <p>{{ item.data.artista }}</p>
+        </a>
+    {% endif %}
+{% endfor %}
     </div>
 </main>
 <footer>
