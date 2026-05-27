@@ -13,15 +13,23 @@ templateEngineOverride: njk, md
     
 <title>
     Crítica do álbum {{ album }} -
-    {% for nome in listaArtistas %}
-        {% if loop.last and not loop.first %}
-            e {{ nome }}
-        {% elif not loop.first %}
-            , {{ nome }}
-        {% else %}
+{% for nome in listaArtistas %}
+    {% if loop.first %}
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
             {{ nome }}
-        {% endif %}
-    {% endfor %}
+        </a>
+    {% elif loop.last %}
+        e
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
+    {% else %}
+        ,
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
+    {% endif %}
+{% endfor %}
 </title>
 
     <meta name="description" content="Crítica detalhada do álbum {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %} e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}.">
