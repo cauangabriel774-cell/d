@@ -32,7 +32,7 @@ templateEngineOverride: njk, md
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -229,7 +229,6 @@ templateEngineOverride: njk, md
 
         .tag:hover { background: var(--accent-color); color: #fff; }
 
-        /* Bloco artista + recentes */
         .bottom-section {
             margin-top: 60px;
             padding-top: 40px;
@@ -244,6 +243,15 @@ templateEngineOverride: njk, md
             text-align: center;
         }
 
+        .artista-bloco .album-nome {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 12px;
+            display: block;
+        }
+
         .artista-bloco img {
             width: 100%;
             max-width: 320px;
@@ -252,17 +260,17 @@ templateEngineOverride: njk, md
             margin-bottom: 16px;
         }
 
-        .artista-bloco a {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 700;
+        .artista-bloco a.artista-nome {
+            font-family: 'Lora', serif;
+            font-size: 24px;
+            font-weight: 600;
             color: #111;
             text-decoration: none;
             border-bottom: 2px solid transparent;
             transition: 0.3s;
         }
 
-        .artista-bloco a:hover {
+        .artista-bloco a.artista-nome:hover {
             border-bottom-color: #111;
         }
 
@@ -322,10 +330,16 @@ templateEngineOverride: njk, md
             margin-top: 100px;
             padding: 60px 20px;
             text-align: center;
-            background: white;
-            border-top: 1px solid var(--border-color);
-            color: #888;
-            font-size: 13px;
+            background: #111;
+            color: #fff;
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        footer strong {
+            font-size: 18px;
+            letter-spacing: 0.5px;
         }
 
         @media (max-width: 768px) {
@@ -410,9 +424,10 @@ templateEngineOverride: njk, md
 
         <div class="bottom-section">
             <div class="artista-bloco">
+                <span class="album-nome">{{ album }}</span>
                 <img src="{{ imagem }}" alt="{{ album }}">
                 <br>
-                <a href="/artistas/{{ artista | slugify }}/">{{ artista }}</a>
+                <a href="/artistas/{{ artista | slugify }}/" class="artista-nome">{{ artista }}</a>
             </div>
 
             <div class="recentes-bloco">
@@ -439,7 +454,8 @@ templateEngineOverride: njk, md
 </main>
 
 <footer>
-    DiscoAvaliadoBR © 2026 • Projeto independente de crítica musical brasileira<br>
+    <strong>DiscoAvaliadoBR</strong><br>
+    © 2026 • Projeto independente de crítica musical brasileira<br>
     Todos os direitos reservados.
 </footer>
 
