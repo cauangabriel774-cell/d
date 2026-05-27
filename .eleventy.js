@@ -89,7 +89,7 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getAll()
       .filter(i => i.data.album && !i.data.archive)
       .sort((a, b) => (b.data.nota || 0) - (a.data.nota || 0))
-      .slice(0, 5);
+      .slice(0, 6);
   });
   return {
     dir: {
