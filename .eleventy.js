@@ -2,85 +2,91 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("Imagens");
   eleventyConfig.addPassthroughCopy("ArtistaFotos");
+
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     if (!dateObj) return "";
     return new Date(dateObj).toLocaleDateString("pt-BR");
   });
+
+  eleventyConfig.addFilter("slugify", (str) => {
+    if (!str) return "";
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w-]/g, "");
+  });
+
+  
   eleventyConfig.addCollection("artistas", function(collectionApi) {
-    const discos = collectionApi.getAll().filter(i => i.data.artista);
+    const discos = collectionApi.getAll().filter(i => i.data.artistas || i.data.artista);
     const map = {};
+
     discos.forEach(disco => {
-      const nome = disco.data.artista;
-      const slug = nome
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/\s+/g, "-");
-      if (!map[nome]) {
-        map[nome] = {
-          nome,
-          slug,
-          foto_artista: disco.data.foto_artista || null,
-          genero_principal: disco.data.genero_principal || null,
-          discos: []
-        };
-      }
-      map[nome].discos.push(disco);
+      
+      const lista = disco.data.artistas
+        ? (Array.isArray(disco.data.artistas) ? disco.data.artistas : [disco.data.artistas])
+        : [disco.data.artista];
+
+      lista.forEach(nome => {
+        if (!nome) return;
+        const slug = nome
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^\w-]/g, "");
+
+        if (!map[nome]) {
+          map[nome] = {
+            nome,
+            slug,
+            foto_artista: disco.data.foto_artista || null,
+            genero_principal: disco.data.genero_principal || null,
+            discos: []
+          };
+        }
+        map[nome].discos.push(disco);
+      });
     });
+
     return Object.values(map);
   });
+
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.album && i.data.tipo !== "ep")
       .filter(i => !i.data.archive)
-      .sort((a, b) => {
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-        return dateB - dateA;
-      });
+      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
   });
+
   eleventyConfig.addCollection("discosArquivados", function(collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.album && i.data.tipo !== "ep")
       .filter(i => i.data.archive === true)
-      .sort((a, b) => {
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-        return dateB - dateA;
-      });
+      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
   });
+
   eleventyConfig.addCollection("meusEPs", function(collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.tipo === "ep")
-      .sort((a, b) => {
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-        return dateB - dateA;
-      });
+      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
   });
+
   eleventyConfig.addCollection("tudo2026", function(collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.album && !i.data.archive)
-      .sort((a, b) => {
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-        return dateB - dateA;
-      });
+      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
   });
+
   eleventyConfig.addCollection("todasReviews", function(collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.album)
-      .sort((a, b) => {
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-        return dateB - dateA;
-      });
+      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
   });
+
   return {
-    dir: {
-      input: ".",
-      output: "_site",
-      includes: "_includes"
-    }
+    dir: { input: ".", output: "_site", includes: "_includes" }
   };
 };
