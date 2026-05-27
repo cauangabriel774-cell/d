@@ -11,14 +11,20 @@ templateEngineOverride: njk, md
     <link rel="icon" href="/Imagens/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
-    <title>
-        Crítica do álbum {{ album }} -
-        {% for nome in listaArtistas %}
-            {{ nome }}{% if not loop.last %} & {% endif %}
-        {% endfor %}
-    </title>
+<title>
+    Crítica do álbum {{ album }} -
+    {% for nome in listaArtistas %}
+        {% if loop.last and not loop.first %}
+            e {{ nome }}
+        {% elif not loop.first %}
+            , {{ nome }}
+        {% else %}
+            {{ nome }}
+        {% endif %}
+    {% endfor %}
+</title>
 
-    <meta name="description" content="Crítica detalhada do álbum {{ album }} de {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}.">
+    <meta name="description" content="Crítica detalhada do álbum {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %} e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}.">
 
     <meta property="og:title" content="Review: {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR">
 
@@ -406,19 +412,23 @@ templateEngineOverride: njk, md
         </div>
 
         <div class="album-data">
+<p>
+    <strong>
+        ARTISTA{% if listaArtistas.length > 1 %}S{% endif %}:
+    </strong>
 
-            <p>
-                <strong>
-                    ARTISTA{% if listaArtistas.length > 1 %}S{% endif %}:
-                </strong>
+    {% for nome in listaArtistas %}
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
 
-                {% for nome in listaArtistas %}
-                    <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
-                        {{ nome }}
-                    </a>
-                    {% if not loop.last %} & {% endif %}
-                {% endfor %}
-            </p>
+        {% if loop.last and not loop.first %}
+            e
+        {% elif not loop.last %}
+            ,
+        {% endif %}
+    {% endfor %}
+</p>
 
             <p><strong>ÁLBUM:</strong> {{ album }}</p>
             <p><strong>LANÇAMENTO:</strong> {{ data_lancamento }}</p>
@@ -432,17 +442,21 @@ templateEngineOverride: njk, md
     </div>
 
     <article>
+<h1>
+    {{ album }} –
 
-        <h1>
-            {{ album }} –
+    {% for nome in listaArtistas %}
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
 
-            {% for nome in listaArtistas %}
-                <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
-                    {{ nome }}
-                </a>
-                {% if not loop.last %} & {% endif %}
-            {% endfor %}
-        </h1>
+        {% if loop.last and not loop.first %}
+            e
+        {% elif not loop.last %}
+            ,
+        {% endif %}
+    {% endfor %}
+</h1>
 
         <span class="subtitle">"{{ frase_impacto }}"</span>
 
