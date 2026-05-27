@@ -147,9 +147,7 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
             <a href="{{ item.url }}" class="merece-card">
                 <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
                 <h3>{{ item.data.album }}</h3>
-                <p>
-                    {{ item.data.artista }}{% if item.data.artistas_extras %}{% for extra in item.data.artistas_extras %}, {{ extra.nome }}{% endfor %}{% endif %}
-                </p>
+                <p>{{ item.data.artista }}</p>
             </a>
         {% endfor %}
     </div>
@@ -161,9 +159,7 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
                 <a href="{{ item.url }}" class="album-card">
                     <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
                     <h3>{{ item.data.album }}</h3>
-                    <p>
-                        {{ item.data.artista }}{% if item.data.artistas_extras %}{% for extra in item.data.artistas_extras %}, {{ extra.nome }}{% endfor %}{% endif %}
-                    </p>
+                    <p>{{ item.data.artista }}</p>
                 </a>
             {% endif %}
         {% endfor %}
