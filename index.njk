@@ -151,7 +151,9 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
                     {% if item.data.artista %}
                         {{ item.data.artista }}
                     {% elif item.data.artistas %}
-                        {% for nome in item.data.artistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}
+                        {% for nome in item.data.artistas %}
+                            {% if loop.last and not loop.first %}e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}
+                        {% endfor %}
                     {% endif %}
                 </p>
             </a>
@@ -169,7 +171,9 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
                         {% if item.data.artista %}
                             {{ item.data.artista }}
                         {% elif item.data.artistas %}
-                            {% for nome in item.data.artistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}
+                            {% for nome in item.data.artistas %}
+                                {% if loop.last and not loop.first %}e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}
+                            {% endfor %}
                         {% endif %}
                     </p>
                 </a>
