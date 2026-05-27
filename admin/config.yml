@@ -1,8 +1,10 @@
 backend:
   name: git-gateway
   branch: master
+
 media_folder: "Imagens"
 public_folder: "/Imagens"
+
 collections:
   - name: "reviews_2026_1"
     label: "Reviews 2026 (Jan-Jul)"
@@ -20,16 +22,17 @@ collections:
         date_format: "DD/MM/YYYY"
         time_format: "HH:mm"
       - { label: "Álbum", name: "album", widget: "string" }
-      - { label: "Artista", name: "artista", widget: "string" }
+      - label: "Artistas"
+        name: "artistas"
+        widget: "list"
+        field: { label: "Artista", name: "artista", widget: "string" }
       - { label: "Frase de Impacto", name: "frase_impacto", widget: "string" }
       - { label: "Data de Lançamento (Ano)", name: "data_lancamento", widget: "string" }
       - { label: "Gênero", name: "genero", widget: "string" }
       - { label: "Duração", name: "duracao", widget: "string" }
       - { label: "Nota (0-100)", name: "nota", widget: "number" }
       - { label: "Capa do Álbum", name: "imagem", widget: "image" }
-      - { label: "1. Contexto e Expectativa", name: "introducao", widget: "markdown" }
-      - { label: "2. Análise Faixa a Faixa", name: "analise", widget: "markdown" }
-      - { label: "3. Conclusão e Veredito", name: "conclusao", widget: "markdown" }
+      - { label: "Review", name: "conteudo", widget: "markdown" }
 
   - name: "reviews_2025_2"
     label: "Reviews 2025 (Jul-Dez)"
