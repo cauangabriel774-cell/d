@@ -453,17 +453,21 @@ templateEngineOverride: njk, md
 <h1>
     {{ album }} –
 
-    {% for nome in listaArtistas %}
-        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
-            {{ nome }}
-        </a>
-
-        {% if loop.last and not loop.first %}
+{% for nome in listaArtistas %}
+    {% if not loop.first %}
+        {% if loop.last %}
             e
-        {% elif not loop.last %}
+        {% else %}
             ,
         {% endif %}
-    {% endfor %}
+    {% endif %}
+
+    <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+        {{ nome }}
+    </a>
+{% endfor %}
+
+
 </h1>
 
         <span class="subtitle">"{{ frase_impacto }}"</span>
