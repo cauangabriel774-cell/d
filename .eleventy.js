@@ -20,7 +20,7 @@ module.exports = function (eleventyConfig) {
       .replace(/[^\w-]/g, "");
   });
 
-  // helper interno (evita repetição e bugs de data)
+  
   const getDate = (item) =>
     new Date(item.data.data_postagem || item.date || 0).getTime();
 
@@ -31,7 +31,7 @@ module.exports = function (eleventyConfig) {
     return Array.isArray(lista) ? lista : [lista];
   };
 
-  // ARTISTAS
+  
   eleventyConfig.addCollection("artistas", function (collectionApi) {
 
     const discos = collectionApi.getAll()
@@ -73,7 +73,7 @@ module.exports = function (eleventyConfig) {
     return Object.values(map);
   });
 
-  // DISCOS
+  
   eleventyConfig.addCollection("meusDiscos", function (collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.album && i.data.tipo !== "ep" && !i.data.archive)
@@ -102,6 +102,14 @@ module.exports = function (eleventyConfig) {
     return collectionApi.getAll()
       .filter(i => i.data.album)
       .sort(sortByDate);
+  });
+
+  
+  eleventyConfig.addCollection("top2026", function (collectionApi) {
+    return collectionApi.getAll()
+      .filter(i => i.data.album && !i.data.archive)
+      .sort((a, b) => (b.data.nota || 0) - (a.data.nota || 0))
+      .slice(0, 5);
   });
 
   return {
