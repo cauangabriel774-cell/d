@@ -91,7 +91,7 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
     <a href="/" class="logo">DiscoAvaliadoBR</a>
 </header>
 <main class="container">
-    <h2>Críticas a álbuns de 2026</h2>
+    <h2>Críticas recentes</h2>
     <div class="album-grid">
         {% for item in collections.tudo2026 %}
             {% if loop.index <= 15 %}
@@ -102,10 +102,6 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns"
                 </a>
             {% endif %}
         {% endfor %}
-    </div>
-
-    <h2>Críticas a álbuns de 2025 e anteriores</h2>
-    <div class="album-grid">
         {% for disco in collections.discosArquivados %}
             {% if loop.index <= 15 %}
                 <a href="{{ disco.url }}" class="album-card">
