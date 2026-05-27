@@ -1,4 +1,4 @@
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("Imagens");
@@ -6,7 +6,6 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     if (!dateObj) return "";
-
     return new Date(dateObj).toLocaleDateString("pt-BR");
   });
 
@@ -21,24 +20,32 @@ module.exports = function(eleventyConfig) {
       .replace(/[^\w-]/g, "");
   });
 
-  // Artistas únicos (suporta collabs)
-  eleventyConfig.addCollection("artistas", function(collectionApi) {
+  // helper interno (evita repetição e bugs de data)
+  const getDate = (item) =>
+    new Date(item.data.data_postagem || item.date || 0).getTime();
+
+  const sortByDate = (a, b) => getDate(b) - getDate(a);
+
+  const normalizeArtistList = (lista) => {
+    if (!lista) return [];
+    return Array.isArray(lista) ? lista : [lista];
+  };
+
+  // ARTISTAS
+  eleventyConfig.addCollection("artistas", function (collectionApi) {
 
     const discos = collectionApi.getAll()
-      .filter(i => i.data.artistas || i.data.artista);
+      .filter(i => i.data.album && (i.data.artistas || i.data.artista));
 
     const map = {};
 
     discos.forEach(disco => {
 
-      const lista = disco.data.artistas
-        ? (Array.isArray(disco.data.artistas)
-            ? disco.data.artistas
-            : [disco.data.artistas])
-        : [disco.data.artista];
+      const lista = normalizeArtistList(
+        disco.data.artistas || disco.data.artista
+      );
 
       lista.forEach(nome => {
-
         if (!nome) return;
 
         const slug = nome
@@ -59,90 +66,42 @@ module.exports = function(eleventyConfig) {
         }
 
         map[nome].discos.push(disco);
-
       });
 
     });
 
     return Object.values(map);
-
   });
 
-  eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
-
+  // DISCOS
+  eleventyConfig.addCollection("meusDiscos", function (collectionApi) {
     return collectionApi.getAll()
-      .filter(i => i.data.album && i.data.tipo !== "ep")
-      .filter(i => !i.data.archive)
-      .sort((a, b) => {
-
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-
-        return dateB - dateA;
-
-      });
-
+      .filter(i => i.data.album && i.data.tipo !== "ep" && !i.data.archive)
+      .sort(sortByDate);
   });
 
-  eleventyConfig.addCollection("discosArquivados", function(collectionApi) {
-
+  eleventyConfig.addCollection("discosArquivados", function (collectionApi) {
     return collectionApi.getAll()
-      .filter(i => i.data.album && i.data.tipo !== "ep")
-      .filter(i => i.data.archive === true)
-      .sort((a, b) => {
-
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-
-        return dateB - dateA;
-
-      });
-
+      .filter(i => i.data.album && i.data.tipo !== "ep" && i.data.archive === true)
+      .sort(sortByDate);
   });
 
-  eleventyConfig.addCollection("meusEPs", function(collectionApi) {
-
+  eleventyConfig.addCollection("meusEPs", function (collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.tipo === "ep")
-      .sort((a, b) => {
-
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-
-        return dateB - dateA;
-
-      });
-
+      .sort(sortByDate);
   });
 
-  eleventyConfig.addCollection("tudo2026", function(collectionApi) {
-
+  eleventyConfig.addCollection("tudo2026", function (collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.album && !i.data.archive)
-      .sort((a, b) => {
-
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-
-        return dateB - dateA;
-
-      });
-
+      .sort(sortByDate);
   });
 
-  eleventyConfig.addCollection("todasReviews", function(collectionApi) {
-
+  eleventyConfig.addCollection("todasReviews", function (collectionApi) {
     return collectionApi.getAll()
       .filter(i => i.data.album)
-      .sort((a, b) => {
-
-        const dateA = new Date(a.data.data_postagem || a.date || 0);
-        const dateB = new Date(b.data.data_postagem || b.date || 0);
-
-        return dateB - dateA;
-
-      });
-
+      .sort(sortByDate);
   });
 
   return {
@@ -152,5 +111,4 @@ module.exports = function(eleventyConfig) {
       includes: "_includes"
     }
   };
-
 };
