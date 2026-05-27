@@ -24,8 +24,7 @@ permalink: "/artistas/{{ artista.slug }}/index.html"
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root { --border-color: #e5e2d9; }
 
@@ -152,12 +151,19 @@ permalink: "/artistas/{{ artista.slug }}/index.html"
         }
 
         footer {
-            margin-top: 80px;
-            padding: 40px;
+            margin-top: 100px;
+            padding: 60px 20px;
             text-align: center;
-            font-size: 13px;
-            color: #777;
-            border-top: 1px solid #eee;
+            background: #111;
+            color: #fff;
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        footer strong {
+            font-size: 18px;
+            letter-spacing: 0.5px;
         }
 
         @media (max-width: 768px) {
