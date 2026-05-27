@@ -20,191 +20,200 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --border-color: #e5e2d9;
-        }
+  <style>
+    :root {
+        --border-color: #e5e2d9;
+    }
 
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: #fff;
-            color: #111;
-        }
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #fff;
+        color: #111;
+    }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 22px 50px;
-            border-bottom: 1px solid var(--border-color);
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 50px;
+        border-bottom: 1px solid var(--border-color);
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            font-weight: 700;
-            cursor: pointer;
-            user-select: none;
-            text-decoration: none;
-            color: inherit;
-        }
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        font-weight: 700;
+        cursor: pointer;
+        user-select: none;
+        text-decoration: none;
+        color: inherit;
+    }
 
-        nav a {
-            margin-left: 28px;
-            text-decoration: none;
-            color: #222;
-            font-weight: 500;
-            font-size: 15px;
-            transition: 0.2s;
-        }
+    nav a {
+        margin-left: 28px;
+        text-decoration: none;
+        color: #222;
+        font-weight: 500;
+        font-size: 15px;
+        transition: 0.2s;
+    }
 
-        nav a:hover { opacity: 0.6; }
+    nav a:hover {
+        opacity: 0.6;
+    }
 
+    /* BANNER DO ARTISTA */
+    .artist-banner {
+        height: 600px;
+        background: #fff;
+        display: flex;
+        align-items: flex-end;
+        border-bottom: 1px solid #eee;
+    }
+
+    .artist-content {
+        padding: 60px;
+        color: #111;
+    }
+
+    .artist-text h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 64px;
+        margin: 0;
+        color: #111;
+        text-shadow: none;
+    }
+
+    .artist-text p {
+        margin-top: 10px;
+        font-size: 20px;
+        color: #111;
+        opacity: 1;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        margin-bottom: 40px;
+        border-left: 5px solid #111;
+        padding-left: 15px;
+    }
+
+    .album-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 25px;
+        margin-bottom: 60px;
+    }
+
+    .album-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .album-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: 0.25s;
+        border: 1px solid #eee;
+    }
+
+    .album-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .album-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .album-info {
+        padding: 12px;
+        text-align: center;
+    }
+
+    .album-info h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 15px;
+        margin: 0 0 6px 0;
+        color: #111;
+    }
+
+    .score {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 14px;
+        color: #111;
+    }
+
+    .meta {
+        font-size: 12px;
+        color: #666;
+        margin-top: 4px;
+    }
+
+    .ep-badge {
+        display: inline-block;
+        background: #111;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+    }
+
+    footer {
+        margin-top: 100px;
+        padding: 60px 20px;
+        text-align: center;
+        background: #111;
+        color: #fff;
+        font-family: 'Lora', serif;
+        font-size: 16px;
+        line-height: 2;
+    }
+
+    footer strong {
+        font-size: 18px;
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
         .artist-banner {
-    height: 600px;
-    background: #fff;
-    display: flex;
-    align-items: flex-end;
-}
-
-        .artist-content {
-            padding: 60px;
-            color: white;
+            height: 400px;
         }
 
         .artist-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 64px;
-            margin: 0;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+            font-size: 38px;
         }
 
-        .artist-text p {
-            margin-top: 10px;
-            font-size: 20px;
-            opacity: 0.9;
+        .artist-content {
+            padding: 30px;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 0 20px;
+        header {
+            padding: 15px 25px;
         }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            margin-bottom: 40px;
-            border-left: 5px solid #111;
-            padding-left: 15px;
-        }
-
-        .album-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
-        .album-link {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .album-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: 0.25s;
-        }
-
-        .album-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-        }
-
-        .album-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .album-info {
-            padding: 12px;
-            text-align: center;
-        }
-
-        .album-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 15px;
-            margin: 0 0 6px 0;
-        }
-
-        .score {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .meta {
-            font-size: 12px;
-            color: #888;
-            margin-top: 4px;
-        }
-
-        .ep-badge {
-            display: inline-block;
-            background: #111;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
-        footer {
-            margin-top: 100px;
-            padding: 60px 20px;
-            text-align: center;
-            background: #111;
-            color: #fff;
-            font-family: 'Lora', serif;
-            font-size: 16px;
-            line-height: 2;
-        }
-
-        footer {
-            margin-top: 100px;
-            padding: 60px 20px;
-            text-align: center;
-            background: #111;
-            color: #fff;
-            font-family: 'Lora', serif;
-            font-size: 16px;
-            line-height: 2;
-        }
-
-        footer strong {
-            font-size: 18px;
-            letter-spacing: 0.5px;
-        }
-
-        @media (max-width: 768px) {
-            .artist-banner { height: 400px; }
-            .artist-text h1 { font-size: 38px; }
-            .artist-content { padding: 30px; }
-            header { padding: 15px 25px; }
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
