@@ -1,15 +1,18 @@
 module.exports = function(eleventyConfig) {
+
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("Imagens");
   eleventyConfig.addPassthroughCopy("ArtistaFotos");
 
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     if (!dateObj) return "";
+
     return new Date(dateObj).toLocaleDateString("pt-BR");
   });
 
   eleventyConfig.addFilter("slugify", (str) => {
     if (!str) return "";
+
     return str
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -18,19 +21,26 @@ module.exports = function(eleventyConfig) {
       .replace(/[^\w-]/g, "");
   });
 
-  
+  // Artistas únicos (suporta collabs)
   eleventyConfig.addCollection("artistas", function(collectionApi) {
-    const discos = collectionApi.getAll().filter(i => i.data.artistas || i.data.artista);
+
+    const discos = collectionApi.getAll()
+      .filter(i => i.data.artistas || i.data.artista);
+
     const map = {};
 
     discos.forEach(disco => {
-      
+
       const lista = disco.data.artistas
-        ? (Array.isArray(disco.data.artistas) ? disco.data.artistas : [disco.data.artistas])
+        ? (Array.isArray(disco.data.artistas)
+            ? disco.data.artistas
+            : [disco.data.artistas])
         : [disco.data.artista];
 
       lista.forEach(nome => {
+
         if (!nome) return;
+
         const slug = nome
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
@@ -47,46 +57,100 @@ module.exports = function(eleventyConfig) {
             discos: []
           };
         }
+
         map[nome].discos.push(disco);
+
       });
+
     });
 
     return Object.values(map);
+
   });
 
   eleventyConfig.addCollection("meusDiscos", function(collectionApi) {
+
     return collectionApi.getAll()
       .filter(i => i.data.album && i.data.tipo !== "ep")
       .filter(i => !i.data.archive)
-      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
+      .sort((a, b) => {
+
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+
+        return dateB - dateA;
+
+      });
+
   });
 
   eleventyConfig.addCollection("discosArquivados", function(collectionApi) {
+
     return collectionApi.getAll()
       .filter(i => i.data.album && i.data.tipo !== "ep")
       .filter(i => i.data.archive === true)
-      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
+      .sort((a, b) => {
+
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+
+        return dateB - dateA;
+
+      });
+
   });
 
   eleventyConfig.addCollection("meusEPs", function(collectionApi) {
+
     return collectionApi.getAll()
       .filter(i => i.data.tipo === "ep")
-      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
+      .sort((a, b) => {
+
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+
+        return dateB - dateA;
+
+      });
+
   });
 
   eleventyConfig.addCollection("tudo2026", function(collectionApi) {
+
     return collectionApi.getAll()
       .filter(i => i.data.album && !i.data.archive)
-      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
+      .sort((a, b) => {
+
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+
+        return dateB - dateA;
+
+      });
+
   });
 
   eleventyConfig.addCollection("todasReviews", function(collectionApi) {
+
     return collectionApi.getAll()
       .filter(i => i.data.album)
-      .sort((a, b) => new Date(b.data.data_postagem || b.date || 0) - new Date(a.data.data_postagem || a.date || 0));
+      .sort((a, b) => {
+
+        const dateA = new Date(a.data.data_postagem || a.date || 0);
+        const dateB = new Date(b.data.data_postagem || b.date || 0);
+
+        return dateB - dateA;
+
+      });
+
   });
 
   return {
-    dir: { input: ".", output: "_site", includes: "_includes" }
+    dir: {
+      input: ".",
+      output: "_site",
+      includes: "_includes"
+    }
   };
+
 };
