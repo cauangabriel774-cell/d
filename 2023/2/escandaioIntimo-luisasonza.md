@@ -4,7 +4,6 @@ album: Escândalo Íntimo
 archive: true
 artista: Luísa Sonza
 date: 2026-04-02
-foto_artista: /ArtistaFotos/luisa-sonza.jpg
 frase_impacto: "\"Um retrato cru e ambicioso da vulnerabilidade pop contemporânea.\""
 data_lancamento: 29 de Agosto de 2023
 genero: Pop
