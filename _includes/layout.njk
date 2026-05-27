@@ -523,7 +523,13 @@ templateEngineOverride: njk, md
 
                     {% for item in collections.todasReviews %}
                         {% if loop.index <= 5 %}
-                            {% set artistasRecentes = item.data.artistas or (item.data.artista ? [item.data.artista] : []) %}
+                            {% if item.data.artistas %}
+    {% set artistasRecentes = item.data.artistas %}
+{% elif item.data.artista %}
+    {% set artistasRecentes = [item.data.artista] %}
+{% else %}
+    {% set artistasRecentes = [] %}
+{% endif %}
 
                             <li>
                                 <a href="{{ item.url }}">
