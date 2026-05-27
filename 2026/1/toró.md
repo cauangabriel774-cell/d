@@ -3,7 +3,6 @@ layout: layout.njk
 date: 2026-04-28T07:00:00
 album: TORÓ
 artista: Vitor Araújo
-foto_artista: /ArtistaFotos/vitor-araujo.jpg
 frase_impacto: Em "TORÓ", Vitor Araújo e a Metropole Orkest tecem uma jornada
   musical entre fúria e serenidade, na qual o maracatu, o piano e cantos
   viscerais conduzem o público por um percurso imersivo e quase sagrado.
