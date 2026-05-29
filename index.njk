@@ -11,7 +11,7 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
     <title>{{ title }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 <style>
-    :root { --bg: #f8f6f2; --text: #111; }
+    :root { --bg: #f8f6f2; --text: #111; --border-color: #e5e2d9; }
     body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
     header { 
         display: flex; 
@@ -71,29 +71,30 @@ title: "DiscoAvaliadoBR - Site de críticas de álbuns brasileiros"
         font-size: 13px; 
         color: #666; 
     }
-   nav a { 
-    margin-left: 28px;
-    text-decoration: none;
-    color: #222;
-    font-weight: 500;
-    font-size: 15px;
-    transition: 0.2s;
-}
-nav a:hover { opacity: 0.6; }
-
-    .merece-ouvir-header {
-        background: #c0392b;
-        color: #111;
-        display: inline-block;
-        padding: 6px 20px;
-        border-radius: 6px;
-        font-family: 'Playfair Display', serif;
-        font-size: 18px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        margin-bottom: 25px;
-        text-transform: uppercase;
+    nav a { 
+        margin-left: 28px;
+        text-decoration: none;
+        color: #222;
+        font-weight: 500;
+        font-size: 15px;
+        transition: 0.2s;
     }
+    nav a:hover { opacity: 0.6; }
+
+    .merece-titulo {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        font-weight: 700;
+        color: #111;
+        margin-bottom: 6px;
+    }
+
+    .merece-subtitulo {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 30px;
+    }
+
     .merece-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -153,7 +154,8 @@ nav a:hover { opacity: 0.6; }
 
 <main class="container">
 
-    <div class="merece-ouvir-header">Merece Ouvir</div>
+    <div class="merece-titulo">Merece Ouvir</div>
+    <div class="merece-subtitulo">Discos de 2026 que merecem sua atenção</div>
     <div class="merece-grid">
         {% for item in collections.top2026 %}
             <a href="{{ item.url }}" class="merece-card">
