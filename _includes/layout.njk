@@ -11,11 +11,33 @@ templateEngineOverride: njk, md
     <link rel="icon" href="/Imagens/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
-    <title>Crítica do álbum {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}</title>
+<title>
+    Crítica do álbum {{ album }} -
+{% for nome in listaArtistas %}
+    {% if loop.first %}
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
+    {% elif loop.last %}
+        e
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
+    {% else %}
+        ,
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
+    {% endif %}
+{% endfor %}
+</title>
 
     <meta name="description" content="Crítica detalhada do álbum {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %} e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}.">
+
     <meta property="og:title" content="Review: {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR">
+
     <meta property="og:description" content="Crítica completa do álbum {{ album }} de {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}, faixa a faixa, com crítica e contexto.">
+
     <meta property="og:image" content="https://discoavaliadobr.com.br{{ imagem }}">    
     <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">    
     <meta property="og:type" content="article">
@@ -23,21 +45,28 @@ templateEngineOverride: njk, md
     <meta property="article:published_time" content="{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}">    
     <meta property="article:author" content="Gabriel Silva">
     <meta property="og:locale" content="pt_BR">
+
     <meta name="twitter:card" content="summary_large_image">
+
     <meta name="twitter:title" content="Review: {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR">
+
     <meta name="twitter:description" content="Análise completa do álbum {{ album }} de {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}.">
+
     <meta name="twitter:image" content="https://discoavaliadobr.com.br{{ imagem }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="canonical" href="https://discoavaliadobr.com.br{{ page.url }}">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --primary-bg: #f8f6f2;
             --accent-color: #111;
+            --score-high: #111;
             --border-color: #e5e2d9;
             --text-color: #222;
         }
@@ -67,6 +96,8 @@ templateEngineOverride: njk, md
             font-family: 'Playfair Display', serif;
             font-size: 26px;
             font-weight: 700;
+            cursor: pointer;
+            user-select: none;
             text-decoration: none;
             color: inherit;
         }
@@ -112,49 +143,14 @@ templateEngineOverride: njk, md
         .album-data p { margin: 5px 0; }
         .album-data strong { color: #000; }
 
-        /* ESTILO DA NOTA INSPIRADO NA PITCHFORK */
-        .score-bloco {
-            text-align: center;
-            min-width: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .score-numero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 0.9;
-        }
-
-        .score-numero .score-val {
+        .score-circle {
             font-family: 'Playfair Display', serif;
-            font-size: 96px; /* Tamanho gigante impactante */
+            font-size: 190px;
             font-weight: 700;
-            font-style: italic; /* Estilo itálico marcante */
-            color: var(--accent-color);
-        }
-
-        .score-numero .score-dez {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: #777;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        .score-rotulo {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-top: 12px;
-            padding: 2px 8px;
-            border-radius: 3px;
+            color: var(--score-high);
+            border-bottom: 5px solid var(--score-high);
+            line-height: 1;
+            padding-bottom: 5px;
         }
 
         h1 {
@@ -195,6 +191,22 @@ templateEngineOverride: njk, md
             font-size: 18px;
             text-align: justify;
             hyphens: auto;
+        }
+
+        .highlight-album {
+            color: #111;
+            font-weight: 600;
+            background: #e3e0d8;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .highlight-song {
+            color: #111;
+            font-weight: 600;
+            background: #eeebe6;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         .share-buttons {
@@ -240,9 +252,13 @@ templateEngineOverride: njk, md
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: 0.3s;
+            cursor: default;
         }
 
-        .tag:hover { background: var(--accent-color); color: #fff; }
+        .tag:hover {
+            background: var(--accent-color);
+            color: #fff;
+        }
 
         .bottom-section {
             margin-top: 60px;
@@ -254,7 +270,9 @@ templateEngineOverride: njk, md
             align-items: start;
         }
 
-        .artista-bloco { text-align: center; }
+        .artista-bloco {
+            text-align: center;
+        }
 
         .artista-bloco .album-nome {
             font-family: 'Playfair Display', serif;
@@ -283,7 +301,9 @@ templateEngineOverride: njk, md
             transition: 0.3s;
         }
 
-        .artista-bloco a.artista-nome:hover { border-bottom-color: #111; }
+        .artista-bloco a.artista-nome:hover {
+            border-bottom-color: #111;
+        }
 
         .recentes-bloco h3 {
             font-family: 'Playfair Display', serif;
@@ -303,7 +323,9 @@ templateEngineOverride: njk, md
             padding: 12px 0;
         }
 
-        .recentes-lista li:last-child { border-bottom: none; }
+        .recentes-lista li:last-child {
+            border-bottom: none;
+        }
 
         .recentes-lista a {
             display: flex;
@@ -346,15 +368,33 @@ templateEngineOverride: njk, md
             line-height: 2;
         }
 
-        footer strong { font-size: 18px; letter-spacing: 0.5px; }
+        footer strong {
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
 
         @media (max-width: 768px) {
-            .review-header { grid-template-columns: 1fr; text-align: center; gap: 20px; }
-            .album-cover { max-width: 200px; margin: 0 auto; }
+            .review-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .album-cover {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
             h1 { font-size: 34px; }
+
+            .score-circle { font-size: 60px; }
+
             header { padding: 15px 25px; }
-            .bottom-section { grid-template-columns: 1fr; gap: 40px; }
-            .score-numero .score-val { font-size: 80px; }
+
+            .bottom-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
         }
     </style>
 </head>
@@ -373,57 +413,90 @@ templateEngineOverride: njk, md
 <main class="container">
 
     <div class="review-header">
+
         <div class="album-cover">
-            <img src="{{ imagem }}" alt="Análise e Review do álbum {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %} e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}">
+            <img
+                src="{{ imagem }}"
+                alt="Análise e Review do álbum {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %} e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}">
         </div>
 
         <div class="album-data">
-            <p>
-                <strong>ARTISTA{% if listaArtistas | length > 1 %}S{% endif %}:</strong>
-                {% for nome in listaArtistas %}
-                    <a href="/artistas/{{ nome | slugify }}/" class="artist-link">{{ nome }}</a>{% if not loop.last %}{% if loop.revindex == 1 %} e{% else %},{% endif %}{% endif %}
-                {% endfor %}
-            </p>
+<p>
+    <strong>
+        ARTISTA{% if listaArtistas.length > 1 %}S{% endif %}:
+    </strong>
+
+    {% for nome in listaArtistas %}
+        <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+            {{ nome }}
+        </a>
+
+        {% if loop.last and not loop.first %}
+            e
+        {% elif not loop.last %}
+            ,
+        {% endif %}
+    {% endfor %}
+</p>
+
             <p><strong>ÁLBUM:</strong> {{ album }}</p>
             <p><strong>LANÇAMENTO:</strong> {{ data_lancamento }}</p>
             <p><strong>GÊNERO:</strong> {{ genero }}</p>
             <p><strong>DURAÇÃO:</strong> {{ duracao }}</p>
         </div>
 
-        <div class="score-bloco" id="score-bloco" data-nota="{{ nota or 0 }}">
-            <div class="score-numero">
-                <span class="score-val">{{ nota / 10 if nota else "0.0" }}</span>
-                <span class="score-dez">NÍVEL / 10</span>
-            </div>
-            <div class="score-rotulo" id="score-rotulo"></div>
+        <div class="score-circle">
+            {{ nota / 10 if nota else "0.0" }}
         </div>
     </div>
 
     <article>
-        <h1>
-            {{ album }} –
-            {% for nome in listaArtistas %}
-                {% if not loop.first %}{% if loop.last %} e {% else %}, {% endif %}{% endif %}
-                <a href="/artistas/{{ nome | slugify }}/" class="artist-link">{{ nome }}</a>
-            </gfor %}
-        </h1>
+<h1>
+    {{ album }} –
+
+{% for nome in listaArtistas %}
+    {% if not loop.first %}
+        {% if loop.last %}
+            e
+        {% else %}
+            ,
+        {% endif %}
+    {% endif %}
+
+    <a href="/artistas/{{ nome | slugify }}/" class="artist-link">
+        {{ nome }}
+    </a>
+{% endfor %}
+
+
+</h1>
 
         <span class="subtitle">"{{ frase_impacto }}"</span>
 
         <div class="share-buttons">
-            <a href="#" id="share-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" id="share-wa" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://discoavaliadobr.com.br{{ page.url }}" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="https://twitter.com/intent/tweet?url=https://discoavaliadobr.com.br{{ page.url }}" target="_blank">
+                <i class="fab fa-x-twitter"></i>
+            </a>
         </div>
 
         <div class="meta-info">
             Por Gabriel Silva -
+
             <time datetime="{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}">
                 {{ data_postagem | htmlDateString if data_postagem else page.date | htmlDateString }}
             </time>
         </div>
 
         <div class="review-content">
+
             {% if conteudo %}
                 {{ conteudo | safe }}
             {% else %}
@@ -431,6 +504,7 @@ templateEngineOverride: njk, md
                 <p>{{ analise | safe }}</p>
                 <p>{{ conclusao | safe }}</p>
             {% endif %}
+
         </div>
 
         <div class="tags-container">
@@ -438,41 +512,59 @@ templateEngineOverride: njk, md
             <span class="tag">crítica</span>
             <span class="tag">album</span>
             <span class="tag">{{ page.date.getFullYear() }}</span>
+
             {% for nome in listaArtistas %}
                 <span class="tag">{{ nome }}</span>
             {% endfor %}
+
             <span class="tag">{{ album }}</span>
             <span class="tag">{{ genero }}</span>
         </div>
 
         <div class="bottom-section">
+
             <div class="artista-bloco">
+
                 <span class="album-nome">{{ album }}</span>
+
                 <img src="{{ imagem }}" alt="{{ album }}">
+
                 <br>
+
                 {% for nome in listaArtistas %}
-                    <a href="/artistas/{{ nome | slugify }}/" class="artista-nome">{{ nome }}</a>
-                    {% if not loop.last %}<span> & </span>{% endif %}
+                    <a href="/artistas/{{ nome | slugify }}/" class="artista-nome">
+                        {{ nome }}
+                    </a>
+
+                    {% if not loop.last %}
+                        <span> & </span>
+                    {% endif %}
                 {% endfor %}
             </div>
 
             <div class="recentes-bloco">
+
                 <h3>Avaliações recentes</h3>
+
                 <ul class="recentes-lista">
+
                     {% for item in collections.todasReviews %}
                         {% if loop.index <= 5 %}
                             {% if item.data.artistas %}
-                                {% set artistasRecentes = item.data.artistas %}
-                            {% elif item.data.artista %}
-                                {% set artistasRecentes = [item.data.artista] %}
-                            {% else %}
-                                {% set artistasRecentes = [] %}
-                            {% endif %}
+    {% set artistasRecentes = item.data.artistas %}
+{% elif item.data.artista %}
+    {% set artistasRecentes = [item.data.artista] %}
+{% else %}
+    {% set artistasRecentes = [] %}
+{% endif %}
+
                             <li>
                                 <a href="{{ item.url }}">
                                     <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
+
                                     <div class="info">
                                         <strong>{{ item.data.album }}</strong>
+
                                         <span>
                                             {% for nome in artistasRecentes %}
                                                 {{ nome }}{% if not loop.last %} & {% endif %}
@@ -483,6 +575,7 @@ templateEngineOverride: njk, md
                             </li>
                         {% endif %}
                     {% endfor %}
+
                 </ul>
             </div>
         </div>
@@ -500,23 +593,10 @@ templateEngineOverride: njk, md
     window.addEventListener('load', function() {
         const shareText = encodeURIComponent(document.title + " " + window.location.href);
         const waBtn = document.getElementById('share-wa');
-        if (waBtn) waBtn.href = "https://wa.me/?text=" + shareText;
 
-        const bloco = document.getElementById('score-bloco');
-        const rotulo = document.getElementById('score-rotulo');
-        const nota = parseInt(bloco.dataset.nota) || 0;
-
-        let cor, label;
-        if (nota >= 95)      { cor = '#2ecc71'; label = 'Obra-Prima'; }
-        else if (nota >= 85) { cor = '#27ae60'; label = 'Excelente'; }
-        else if (nota >= 75) { cor = '#f39c12'; label = 'Muito Bom'; }
-        else if (nota >= 60) { cor = '#e67e22'; label = 'Bom'; }
-        else if (nota >= 40) { cor = '#e74c3c'; label = 'Regular'; }
-        else                 { cor = '#c0392b'; label = 'Fraco'; }
-
-        rotulo.style.color = cor;
-        rotulo.style.border = "1px solid " + cor; // Dá uma bordinha fina estilo selo
-        rotulo.textContent = label;
+        if (waBtn) {
+            waBtn.href = "https://wa.me/?text=" + shareText;
+        }
     });
 </script>
 
@@ -525,23 +605,38 @@ templateEngineOverride: njk, md
   "@context": "https://schema.org",
   "@type": "Review",
   "image": "https://discoavaliadobr.com.br{{ imagem }}",
+
   "itemReviewed": {
     "@type": "MusicAlbum",
     "name": "{{ album }}",
+
     "byArtist": [
       {% for nome in listaArtistas %}
-      { "@type": "Person", "name": "{{ nome }}" }{% if not loop.last %},{% endif %}
+      {
+        "@type": "Person",
+        "name": "{{ nome }}"
+      }{% if not loop.last %},{% endif %}
       {% endfor %}
     ]
   },
-  "author": { "@type": "Person", "name": "Gabriel Silva" },
+
+  "author": {
+    "@type": "Person",
+    "name": "Gabriel Silva"
+  },
+
   "reviewRating": {
     "@type": "Rating",
     "ratingValue": "{{ nota / 10 if nota else 0 }}",
     "bestRating": "10",
     "worstRating": "0"
   },
-  "publisher": { "@type": "Organization", "name": "DiscoAvaliadoBR" },
+
+  "publisher": {
+    "@type": "Organization",
+    "name": "DiscoAvaliadoBR"
+  },
+
   "datePublished": "{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}"
 }
 </script>
