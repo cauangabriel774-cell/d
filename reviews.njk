@@ -12,7 +12,7 @@ permalink: "reviews/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber +
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/Imagens/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <title>Todas as críticas - DiscoAvaliadoBR</title>
+    <title>Reviews - DiscoAvaliadoBR</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 <style>
     :root { --bg: #f8f6f2; --text: #111; --border-color: #e5e2d9; }
@@ -131,11 +131,12 @@ permalink: "reviews/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber +
     <a href="/" class="logo">DiscoAvaliadoBR</a>
     <nav>
         <a href="/">Início</a>
+        <a href="/reviews/">Reviews</a>
         <a href="/sobre/">Sobre</a>
     </nav>
 </header>
 <main class="container">
-    <h1>Todas as críticas</h1>
+    <h1>Reviews</h1>
     <p class="subtitulo">
         Página {{ pagination.pageNumber + 1 }} de {{ pagination.pages | length }}
         • {{ collections.todasReviews | length }} reviews no total
@@ -165,11 +166,10 @@ permalink: "reviews/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber +
         {% endif %}
 
         {% for pageEntry in pagination.pages %}
-            {% set pageNum = loop.index %}
             {% if loop.index == pagination.pageNumber + 1 %}
-                <span>{{ pageNum }}</span>
+                <span>{{ loop.index }}</span>
             {% else %}
-                <a href="{{ pagination.hrefs[loop.index0] }}">{{ pageNum }}</a>
+                <a href="{{ pagination.hrefs[loop.index0] }}">{{ loop.index }}</a>
             {% endif %}
         {% endfor %}
 
