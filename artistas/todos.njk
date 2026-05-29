@@ -1,0 +1,187 @@
+---
+pagination:
+  data: collections.todasReviews
+  size: 30
+  alias: discos
+permalink: "todos/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber + 1 }}/{% endif %}"
+---
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/Imagens/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <title>Todas as críticas - DiscoAvaliadoBR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<style>
+    :root { --bg: #f8f6f2; --text: #111; --border-color: #e5e2d9; }
+    body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 50px;
+        background: #fff;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+    }
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        font-weight: 700;
+        text-decoration: none;
+        color: var(--text);
+    }
+    nav a {
+        margin-left: 28px;
+        text-decoration: none;
+        color: #222;
+        font-weight: 500;
+        font-size: 15px;
+        transition: 0.2s;
+    }
+    nav a:hover { opacity: 0.6; }
+    a { text-decoration: none; color: inherit; }
+    .container {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 25px;
+    }
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    .subtitulo {
+        color: #888;
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+    .album-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 25px;
+    }
+    .album-card {
+        text-align: center;
+        transition: 0.3s;
+        margin-bottom: 20px;
+    }
+    .album-card:hover { transform: translateY(-5px); }
+    .album-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    .album-card h3 {
+        font-family: 'Playfair Display';
+        font-size: 17px;
+        margin: 12px 0 4px;
+        color: var(--text);
+    }
+    .album-card p {
+        margin: 0;
+        font-size: 13px;
+        color: #666;
+    }
+    .paginacao {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 60px;
+        flex-wrap: wrap;
+    }
+    .paginacao a, .paginacao span {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        border: 2px solid #111;
+        transition: 0.2s;
+    }
+    .paginacao a:hover { background: #111; color: #fff; }
+    .paginacao span {
+        background: #111;
+        color: #fff;
+    }
+    footer {
+        margin-top: 100px;
+        padding: 60px 20px;
+        text-align: center;
+        background: #111;
+        color: #fff;
+        font-family: 'Lora', serif;
+        font-size: 16px;
+        line-height: 2;
+    }
+    footer strong { font-size: 18px; letter-spacing: 0.5px; }
+    @media (max-width: 768px) {
+        header { padding: 15px 25px; }
+    }
+</style>
+</head>
+<body>
+<header>
+    <a href="/" class="logo">DiscoAvaliadoBR</a>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/sobre/">Sobre</a>
+    </nav>
+</header>
+<main class="container">
+    <h1>Todas as críticas</h1>
+    <p class="subtitulo">
+        Página {{ pagination.pageNumber + 1 }} de {{ pagination.pages | length }}
+        • {{ collections.todasReviews | length }} reviews no total
+    </p>
+
+    <div class="album-grid">
+        {% for item in discos %}
+            <a href="{{ item.url }}" class="album-card">
+                <img src="{{ item.data.imagem }}" alt="{{ item.data.album }}">
+                <h3>{{ item.data.album }}</h3>
+                <p>
+                    {% if item.data.artista %}
+                        {{ item.data.artista }}
+                    {% elif item.data.artistas %}
+                        {% for nome in item.data.artistas %}
+                            {% if loop.last and not loop.first %}e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </p>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="paginacao">
+        {% if pagination.href.previous %}
+            <a href="{{ pagination.href.previous }}">← Anterior</a>
+        {% endif %}
+
+        {% for pageEntry in pagination.pages %}
+            {% set pageNum = loop.index %}
+            {% if loop.index == pagination.pageNumber + 1 %}
+                <span>{{ pageNum }}</span>
+            {% else %}
+                <a href="{{ pagination.hrefs[loop.index0] }}">{{ pageNum }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if pagination.href.next %}
+            <a href="{{ pagination.href.next }}">Próxima →</a>
+        {% endif %}
+    </div>
+</main>
+<footer>
+    <strong>DiscoAvaliadoBR</strong><br>
+    © 2026 • Projeto independente de crítica musical brasileira<br>
+    Todos os direitos reservados.
+</footer>
+</body>
+</html>
