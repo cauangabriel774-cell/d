@@ -11,7 +11,7 @@ templateEngineOverride: njk, md
     <link rel="icon" href="/Imagens/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
-<title>Crítica do álbum {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}</title>
+    <title>Crítica do álbum {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}</title>
 
     <meta name="description" content="Crítica detalhada do álbum {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %} e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}.">
     <meta property="og:title" content="Review: {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR">
@@ -32,7 +32,7 @@ templateEngineOverride: njk, md
     <link rel="canonical" href="https://discoavaliadobr.com.br{{ page.url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -67,8 +67,6 @@ templateEngineOverride: njk, md
             font-family: 'Playfair Display', serif;
             font-size: 26px;
             font-weight: 700;
-            cursor: pointer;
-            user-select: none;
             text-decoration: none;
             color: inherit;
         }
@@ -114,46 +112,39 @@ templateEngineOverride: njk, md
         .album-data p { margin: 5px 0; }
         .album-data strong { color: #000; }
 
-        /* NOTA */
+        /* ESTILO DA NOTA INSPIRADO NA PITCHFORK */
         .score-bloco {
             text-align: center;
-            min-width: 100px;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .score-numero {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            color: #111;
-            line-height: 1;
             display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 4px;
+            flex-direction: column;
+            align-items: center;
+            line-height: 0.9;
         }
 
         .score-numero .score-val {
-            font-size: 80px;
+            font-family: 'Playfair Display', serif;
+            font-size: 96px; /* Tamanho gigante impactante */
+            font-weight: 700;
+            font-style: italic; /* Estilo itálico marcante */
+            color: var(--accent-color);
         }
 
         .score-numero .score-dez {
-            font-size: 22px;
-            color: #888;
-            font-weight: 500;
-        }
-
-        .score-barra-bg {
-            width: 100%;
-            height: 6px;
-            background: #e0ddd7;
-            border-radius: 10px;
-            margin: 10px 0 8px;
-            overflow: hidden;
-        }
-
-        .score-barra-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.8s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #777;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
         }
 
         .score-rotulo {
@@ -161,6 +152,9 @@ templateEngineOverride: njk, md
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
+            margin-top: 12px;
+            padding: 2px 8px;
+            border-radius: 3px;
         }
 
         h1 {
@@ -201,22 +195,6 @@ templateEngineOverride: njk, md
             font-size: 18px;
             text-align: justify;
             hyphens: auto;
-        }
-
-        .highlight-album {
-            color: #111;
-            font-weight: 600;
-            background: #e3e0d8;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .highlight-song {
-            color: #111;
-            font-weight: 600;
-            background: #eeebe6;
-            padding: 2px 6px;
-            border-radius: 4px;
         }
 
         .share-buttons {
@@ -262,7 +240,6 @@ templateEngineOverride: njk, md
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: 0.3s;
-            cursor: default;
         }
 
         .tag:hover { background: var(--accent-color); color: #fff; }
@@ -377,7 +354,7 @@ templateEngineOverride: njk, md
             h1 { font-size: 34px; }
             header { padding: 15px 25px; }
             .bottom-section { grid-template-columns: 1fr; gap: 40px; }
-            .score-numero .score-val { font-size: 60px; }
+            .score-numero .score-val { font-size: 80px; }
         }
     </style>
 </head>
@@ -416,10 +393,7 @@ templateEngineOverride: njk, md
         <div class="score-bloco" id="score-bloco" data-nota="{{ nota or 0 }}">
             <div class="score-numero">
                 <span class="score-val">{{ nota / 10 if nota else "0.0" }}</span>
-                <span class="score-dez">/10</span>
-            </div>
-            <div class="score-barra-bg">
-                <div class="score-barra-fill" id="score-fill"></div>
+                <span class="score-dez">NÍVEL / 10</span>
             </div>
             <div class="score-rotulo" id="score-rotulo"></div>
         </div>
@@ -431,7 +405,7 @@ templateEngineOverride: njk, md
             {% for nome in listaArtistas %}
                 {% if not loop.first %}{% if loop.last %} e {% else %}, {% endif %}{% endif %}
                 <a href="/artistas/{{ nome | slugify }}/" class="artist-link">{{ nome }}</a>
-            {% endfor %}
+            </gfor %}
         </h1>
 
         <span class="subtitle">"{{ frase_impacto }}"</span>
@@ -529,10 +503,8 @@ templateEngineOverride: njk, md
         if (waBtn) waBtn.href = "https://wa.me/?text=" + shareText;
 
         const bloco = document.getElementById('score-bloco');
-        const fill = document.getElementById('score-fill');
         const rotulo = document.getElementById('score-rotulo');
         const nota = parseInt(bloco.dataset.nota) || 0;
-        const pct = nota + '%';
 
         let cor, label;
         if (nota >= 95)      { cor = '#2ecc71'; label = 'Obra-Prima'; }
@@ -542,9 +514,8 @@ templateEngineOverride: njk, md
         else if (nota >= 40) { cor = '#e74c3c'; label = 'Regular'; }
         else                 { cor = '#c0392b'; label = 'Fraco'; }
 
-        fill.style.width = pct;
-        fill.style.background = cor;
         rotulo.style.color = cor;
+        rotulo.style.border = "1px solid " + cor; // Dá uma bordinha fina estilo selo
         rotulo.textContent = label;
     });
 </script>
