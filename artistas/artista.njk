@@ -16,14 +16,15 @@ permalink: "/artistas/{{ artista.slug }}/index.html"
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
     <title>{{ artista.nome }} - Discografia e Críticas - DiscoAvaliadoBR</title>
-    <meta name="description" content="Veja todas as avaliações dos álbuns de {{ artista.nome }}.">
+<meta name="description" content="Veja todas as críticas e avaliações dos álbuns de {{ artista.nome }} no DiscoAvaliadoBR. {{ artista.discos.length }} álbuns avaliados no gênero {{ artista.genero_principal }}.">
 
-    <meta property="og:type" content="profile">
-    <meta property="og:title" content="{{ artista.nome }} no DiscoAvaliadoBR">
-    <meta property="og:description" content="Veja as notas e reviews dos álbuns de {{ artista.nome }}">
-    <meta property="og:image" content="{{ artista.foto_artista }}">
-    <meta property="og:url" content="/artistas/{{ artista.slug }}/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="{{ artista.nome }} no DiscoAvaliadoBR">
+<meta property="og:description" content="Veja as notas e reviews dos álbuns de {{ artista.nome }} no DiscoAvaliadoBR.">
+<meta property="og:image" content="https://discoavaliadobr.com.br{{ artista.foto_artista }}">
+<meta property="og:url" content="https://discoavaliadobr.com.br/artistas/{{ artista.slug }}/">
 
+<link rel="canonical" href="https://discoavaliadobr.com.br/artistas/{{ artista.slug }}/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
