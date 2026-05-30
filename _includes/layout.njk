@@ -28,6 +28,8 @@ templateEngineOverride: njk, md
     <meta name="twitter:description" content="Análise completa do álbum {{ album }} de {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}.">
     <meta name="twitter:image" content="https://discoavaliadobr.com.br{{ imagem }}">
 
+    <link rel="alternate" type="application/rss+xml" title="DiscoAvaliadoBR" href="https://discoavaliadobr.com.br/feed.xml">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="canonical" href="https://discoavaliadobr.com.br{{ page.url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
