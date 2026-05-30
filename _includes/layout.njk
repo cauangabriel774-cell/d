@@ -14,7 +14,7 @@ templateEngineOverride: njk, md
     <title>Crítica do álbum {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR</title>
 
     <meta name="description" content="Crítica detalhada do álbum {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %}e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}.">
-    <meta property="og:title" content="Review: {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR">
+    <meta property="og:title" content="{{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} | Crítica DiscoAvaliadoBR">
     <meta property="og:description" content="Crítica completa do álbum {{ album }} de {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}, faixa a faixa, com crítica e contexto.">
     <meta property="og:image" content="https://discoavaliadobr.com.br{{ imagem }}">
     <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">
