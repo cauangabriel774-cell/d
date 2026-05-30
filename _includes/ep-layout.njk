@@ -1,6 +1,8 @@
 ---
 templateEngineOverride: njk, md
 ---
+{% set listaArtistas = artistas or [artista] %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,32 +10,31 @@ templateEngineOverride: njk, md
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/Imagens/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
-    <title>Crítica do EP {{ album }} - {{ artista }}</title>
-    <meta name="description" content="Crítica detalhada do EP {{ album }} de {{ artista }}.">
 
-    <meta property="og:title" content="Review: {{ album }} (EP) - {{ artista }} - DiscoAvaliadoBR">
-    <meta property="og:description" content="Crítica completa do EP {{ album }} de {{ artista }}, faixa a faixa, com crítica e contexto.">    
-    <meta property="og:image" content="https://discoavaliadobr.com.br{{ imagem }}">    
-    <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">    
+    <title>Crítica do EP {{ album }} - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR</title>
+
+    <meta name="description" content="Crítica detalhada do EP {{ album }} de {% for nome in listaArtistas %}{% if loop.last and not loop.first %}e {{ nome }}{% elif not loop.first %}, {{ nome }}{% else %}{{ nome }}{% endif %}{% endfor %}.">
+    <meta property="og:title" content="Review: {{ album }} (EP) - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR">
+    <meta property="og:description" content="Crítica completa do EP {{ album }} de {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}, faixa a faixa, com crítica e contexto.">
+    <meta property="og:image" content="https://discoavaliadobr.com.br{{ imagem }}">
+    <meta property="og:url" content="https://discoavaliadobr.com.br{{ page.url }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="DiscoAvaliadoBR">
-    <meta property="article:published_time" content="{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}">    
+    <meta property="article:published_time" content="{{ data_postagem.toISOString() if data_postagem else page.date.toISOString() }}">
     <meta property="article:author" content="Gabriel Silva">
     <meta property="og:locale" content="pt_BR">
-
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Review: {{ album }} (EP) - {{ artista }} - DiscoAvaliadoBR">
-    <meta name="twitter:description" content="Análise completa do EP {{ album }} de {{ artista }}.">
+    <meta name="twitter:title" content="Review: {{ album }} (EP) - {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %} - DiscoAvaliadoBR">
+    <meta name="twitter:description" content="Análise completa do EP {{ album }} de {% for nome in listaArtistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}.">
     <meta name="twitter:image" content="https://discoavaliadobr.com.br{{ imagem }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="canonical" href="https://discoavaliadobr.com.br{{ page.url }}">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
         :root {
             --primary-bg: #f8f6f2;
             --accent-color: #111;
