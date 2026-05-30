@@ -1,0 +1,27 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DiscoAvaliadoBR</title>
+    <link>https://discoavaliadobr.com.br</link>
+    <description>Críticas independentes de álbuns brasileiros</description>
+    <language>pt-BR</language>
+    <atom:link href="https://discoavaliadobr.com.br/feed.xml" rel="self" type="application/rss+xml"/>
+
+    {% for item in collections.todasReviews %}
+      {% if loop.index <= 20 %}
+      <item>
+        <title>{{ item.data.album }} - {% if item.data.artistas %}{% for nome in item.data.artistas %}{{ nome }}{% if not loop.last %} & {% endif %}{% endfor %}{% else %}{{ item.data.artista }}{% endif %}</title>
+        <link>https://discoavaliadobr.com.br{{ item.url }}</link>
+        <guid>https://discoavaliadobr.com.br{{ item.url }}</guid>
+        <pubDate>{{ item.data.data_postagem or item.date }}</pubDate>
+        <description>Nota: {{ item.data.nota / 10 if item.data.nota else "—" }}/10 — {{ item.data.frase_impacto }}</description>
+      </item>
+      {% endif %}
+    {% endfor %}
+
+  </channel>
+</rss>
