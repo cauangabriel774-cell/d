@@ -9,7 +9,7 @@ artistas:
 frase_impacto: Em Bossa Sempre Nova, Luísa Sonza entrega vocais envolventes e
   grooves clássicos dos anos 60, mesmo quando o álbum flerta com o caos de suas
   próprias experimentações.
-data_lancamento: 16 de janeiro de 2026
+data_lancamento: 13 de janeiro de 2026
 genero: Bossa nova
 duracao: 44MIN (15 faixas)
 nota: 67
