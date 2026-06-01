@@ -14,8 +14,8 @@ duracao: 42MIN (11 faixas)
 nota: 90
 imagem: /Imagens/fabiano-do-nascimento-and-vittor.jpg
 conteudo: >-
-  Após seu disco <span class="highlight-album">The Room (2024)</span>, ao lado
-  de Sam Gendel, e <span class="highlight-album">Cavejaz (2025)</span>, que
+  <p>Após seu disco <span class="highlight-album">The Room (2024)</span>, ao
+  lado de Sam Gendel, e <span class="highlight-album">Cavejaz (2025)</span>, que
   ampliou sua visibilidade internacional, Fabiano transforma sentimentos
   profundos em memórias coletivas em seu novo trabalho <span
   class="highlight-album">Vila (2026)</span>, com a participação de Vittor
